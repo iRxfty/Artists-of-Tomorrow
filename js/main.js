@@ -1,7 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Add animation classes to elements
-    animateElements();
+    // Navigation Toggle Functionality
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('mainNav');
     
+    if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('expanded');
+            navToggle.classList.toggle('active');
+            
+            // Accessibility
+            const expanded = mainNav.classList.contains('expanded');
+            navToggle.setAttribute('aria-expanded', expanded);
+        });
+        
+        // Add accessibility attributes
+        navToggle.setAttribute('aria-label', 'Toggle navigation menu');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-controls', 'mainNav');
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (mainNav && mainNav.classList.contains('expanded') && 
+            !event.target.closest('nav') && 
+            !event.target.closest('.nav-toggle')) {
+            mainNav.classList.remove('expanded');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
     // Registration form handling
     const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
@@ -35,53 +63,4 @@ document.addEventListener('DOMContentLoaded', function() {
             contactForm.reset();
         });
     }
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Enhance footer links with hover effect
-    document.querySelectorAll('.footer-links ul li a').forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.paddingLeft = '20px';
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            this.style.paddingLeft = '15px';
-        });
-    });
 });
-
-// Function to add animation classes to elements
-function animateElements() {
-    // Animate section headings
-    const headings = document.querySelectorAll('h2');
-    headings.forEach((heading, index) => {
-        heading.classList.add('animate-fade-up');
-        heading.style.animationDelay = (0.2 * index) + 's';
-    });
-    
-    // Animate cards
-    const cards = document.querySelectorAll('.card, .prize-card, .prize, .contact-method, .judge-card');
-    cards.forEach((card, index) => {
-        card.classList.add('animate-fade-in');
-        card.style.animationDelay = (0.1 * index) + 's';
-    });
-    
-    // Animate steps
-    const steps = document.querySelectorAll('.step');
-    steps.forEach((step, index) => {
-        step.classList.add('animate-slide-in');
-        step.style.animationDelay = (0.2 * index) + 's';
-    });
-}
