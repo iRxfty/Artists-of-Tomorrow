@@ -668,3 +668,42 @@ input, select, textarea {
         margin-bottom: 15px;
     }
 }
+
+/* Social media links */
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--light-gray);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+/* Support section updates */
+.support .social-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.support .social-buttons a {
+    margin: 10px;
+}
