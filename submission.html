@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Art | Artists of Tomorrow</title>
+    <meta name="description" content="Submit your artwork for the Artists of Tomorrow competition">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="Artists of Tomorrow Logo">
+                    <span>Artists of Tomorrow</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="competition.html">Competition</a></li>
+                    <li><a href="submission.html" class="active">Submit Your Art</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Submit Your Art</h1>
+        </div>
+    </section>
+
+    <section class="submission-steps">
+        <div class="container">
+            <h2>Submission Process</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Create Your Artwork</h3>
+                    <p>Select one of the four prompts and create your artwork on the paper provided by your school. Remember to use only pencil as specified in the rules.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Complete Your Writing Supplement</h3>
+                    <p>Write your supplement (maximum 250 words) on the back of your artwork paper. You may write in Hindi or English.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Register Online</h3>
+                    <p>Fill out the form below to receive your unique submission number.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Label Your Artwork</h3>
+                    <p>Write your submission number, name, date, and grade level on the back of your artwork.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Scan and Upload</h3>
+                    <p>Scan both sides of your artwork and upload the files using the form below.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Submit Physical Artwork</h3>
+                    <p>Give your physical artwork to your school representative, who will mail it to our judging panel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="submission-form">
+        <div class="container">
+            <h2>Registration Form</h2>
+            <p>Please complete this form to register for the competition and receive your unique submission number.</p>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" min="12" max="18" required>
+                </div>
+                <div class="form-group">
+                    <label for="grade">Grade Level</label>
+                    <select id="grade" name="grade" required>
+                        <option value="">Select your grade</option>
+                        <option value="6">6th Grade</option>
+                        <option value="7">7th Grade</option>
+                        <option value="8">8th Grade</option>
+                        <option value="9">9th Grade</option>
+                        <option value="10">10th Grade</option>
+                        <option value="11">11th Grade</option>
+                        <option value="12">12th Grade</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="school">School Name</label>
+                    <input type="text" id="school" name="school" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="prompt">Selected Prompt</label>
+                    <select id="prompt" name="prompt" required>
+                        <option value="">Select the prompt you're responding to</option>
+                        <option value="dinner">Dinner Table</option>
+                        <option value="movement">Movement</option>
+                        <option value="courage">Courage</option>
+                        <option value="happiness">Happiness</option>
+                    </select>
+                </div>
+                <div class="form-group consent">
+                    <input type="checkbox" id="consentResearch" name="consentResearch" required>
+                    <label for="consentResearch">I consent to the usage of my art for research/analysis purposes regarding societal/mental patterns of self-expression.</label>
+                </div>
+                <div class="form-group consent">
+                    <input type="checkbox" id="consentRules" name="consentRules" required>
+                    <label for="consentRules">I have read and agree to the competition rules and guidelines.</label>
+                </div>
+                <button type="submit" class="cta-button">Register & Get Submission Number</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="upload-form hidden" id="uploadSection">
+        <div class="container">
+            <h2>Artwork Upload</h2>
+            <p>After receiving your submission number and completing your artwork, please upload scans of both sides of your artwork here.</p>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="submissionNumber">Submission Number</label>
+                    <input type="text" id="submissionNumber" name="submissionNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="artworkFront">Front of Artwork (Scan)</label>
+                    <input type="file" id="artworkFront" name="artworkFront" accept="image/png, image/jpeg, image/jpg, application/pdf" required>
+                </div>
+                <div class="form-group">
+                    <label for="artworkBack">Back of Artwork with Writing (Scan)</label>
+                    <input type="file" id="artworkBack" name="artworkBack" accept="image/png, image/jpeg, image/jpg, application/pdf" required>
+                </div>
+                <button type="submit" class="cta-button">Submit Artwork</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="Artists of Tomorrow Logo">
+                    <span>Artists of Tomorrow</span>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="competition.html">Competition</a></li>
+                        <li><a href="submission.html">Submit Your Art</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@artistsoftomorrow.org</p>
+                    <p>Website: <a href="https://artistsoftomorrow.org">artistsoftomorrow.org</a></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Artists of Tomorrow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
