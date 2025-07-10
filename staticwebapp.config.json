@@ -1,6 +1,25 @@
 {
-    "navigationFallback": {
-      "rewrite": "index.html",
-      "exclude": ["*.{png,jpg,gif,svg}", "*.css"]
+  "navigationFallback": {
+    "rewrite": "index.html"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "serve": "/index.html",
+      "statusCode": 200
+    },
+    {
+      "route": "/*",
+      "serve": "/*",
+      "statusCode": 200
     }
+  ],
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://kit.fontawesome.com; img-src 'self' data: https:; connect-src 'self'"
+  },
+  "mimeTypes": {
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "text/javascript"
+  }
 }
