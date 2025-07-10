@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Artwork | Artists of Tomorrow</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>Artists of Tomorrow</h1></a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="competition.html">Competition</a></li>
+                    <li><a href="judges.html">Judges</a></li>
+                    <li><a href="submission.html" class="active cta-button">Submit Artwork</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Submit Your Artwork</h1>
+        </div>
+    </section>
+
+    <section class="submission-process">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Submission Process</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="submission-steps">
+                <div class="submission-step">
+                    <div class="step-number">01</div>
+                    <h3>Create Your Artwork</h3>
+                    <p>Choose one of the four prompts and create your artwork using only the paper and pencil provided by your school.</p>
+                </div>
+                
+                <div class="submission-step">
+                    <div class="step-number">02</div>
+                    <h3>Write Your Supplement</h3>
+                    <p>On the back of your artwork, write a supplement (max 250 words) in Hindi or English that explains your piece.</p>
+                </div>
+                
+                <div class="submission-step">
+                    <div class="step-number">03</div>
+                    <h3>Complete Form Below</h3>
+                    <p>Fill out the submission form below to receive your unique identification number.</p>
+                </div>
+                
+                <div class="submission-step">
+                    <div class="step-number">04</div>
+                    <h3>Mark Your Artwork</h3>
+                    <p>Write your identification number, name, date, and grade level on the back of your artwork.</p>
+                </div>
+                
+                <div class="submission-step">
+                    <div class="step-number">05</div>
+                    <h3>Scan & Upload</h3>
+                    <p>Scan both sides of your artwork and upload the files through the form below.</p>
+                </div>
+                
+                <div class="submission-step">
+                    <div class="step-number">06</div>
+                    <h3>Submit Physical Copy</h3>
+                    <p>Submit your physical artwork to your school coordinator who will mail it to our judges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="submission-form">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Submission Form</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <form id="artSubmission" class="submission">
+                <div class="form-group">
+                    <label for="fullName">Full Name*</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age*</label>
+                        <input type="number" id="age" name="age" min="12" max="18" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="grade">Grade Level*</label>
+                        <select id="grade" name="grade" required>
+                            <option value="">Select your grade</option>
+                            <option value="6">6th Grade</option>
+                            <option value="7">7th Grade</option>
+                            <option value="8">8th Grade</option>
+                            <option value="9">9th Grade</option>
+                            <option value="10">10th Grade</option>
+                            <option value="11">11th Grade</option>
+                            <option value="12">12th Grade</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="school">School Name*</label>
+                    <input type="text" id="school" name="school" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number*</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prompt">Selected Prompt*</label>
+                    <select id="prompt" name="prompt" required>
+                        <option value="">Select a prompt</option>
+                        <option value="prompt1">Prompt 1: Family Dinner</option>
+                        <option value="prompt2">Prompt 2: Movement</option>
+                        <option value="prompt3">Prompt 3: Courage</option>
+                        <option value="prompt4">Prompt 4: Happiness</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artworkFront">Front of Artwork (Scan)*</label>
+                    <input type="file" id="artworkFront" name="artworkFront" accept="image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artworkBack">Back of Artwork with Writing (Scan)*</label>
+                    <input type="file" id="artworkBack" name="artworkBack" accept="image/*" required>
+                </div>
+                
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I consent to the usage of my art for research/analysis purposes regarding societal/mental patterns of self-expression.*</label>
+                </div>
+                
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="original" name="original" required>
+                    <label for="original">I confirm that this is my original work and no AI or plagiarism is involved.*</label>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="btn primary-btn">Submit Artwork</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="submission-help">
+        <div class="container">
+            <div class="help-content">
+                <h3>Need Help?</h3>
+                <p>If you're experiencing any issues with the submission process, please contact us at <a href="mailto:support@artistsoftomorrow.org">support@artistsoftomorrow.org</a> or speak with your school coordinator.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Artists of Tomorrow</h2>
+                    <p>Empowering young artists globally</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="competition.html">Competition</a></li>
+                        <li><a href="judges.html">Judges</a></li>
+                        <li><a href="rubric.html">Rubric</a></li>
+                        <li><a href="submission.html">Submit Artwork</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@artistsoftomorrow.org</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Artists of Tomorrow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
