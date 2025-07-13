@@ -1,7 +1,7 @@
-/* Base Styles with Professional Custom Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Enhanced Base Styles with Premium Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
     --primary-color: #4D7EA8;
@@ -14,13 +14,12 @@
     --white: #FFFFFF;
     --gray: #666666;
     --light-gray: #DDDDDD;
-    --rupee-color: #d4977b;
-    --gold: #FFD700;
-    --silver: #C0C0C0;
-    --bronze: #CD7F32;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
-    --font-accent: 'Poppins', sans-serif;
+    --gold: #ffd452;
+    --silver: #c6c6c6;
+    --bronze: #cd8c52;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --font-accent: 'DM Sans', sans-serif;
     --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-medium: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-fast: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -74,7 +73,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     position: relative;
     padding-bottom: 16px;
     margin-bottom: 30px;
@@ -94,6 +93,10 @@ h2:after {
 h2.text-center:after {
     left: 50%;
     transform: translateX(-50%);
+}
+
+h2:hover:after {
+    width: 80px;
 }
 
 h3 {
@@ -131,7 +134,6 @@ img {
 section {
     padding: 80px 0;
     position: relative;
-    animation: fadeIn 1s ease;
 }
 
 @keyframes fadeIn {
@@ -205,7 +207,7 @@ header .container {
     width: 100%;
     background-color: var(--primary-color);
     border-radius: 3px;
-    transition: all var(--transition-medium);
+    transition: all 0.3s ease;
 }
 
 nav.collapsed {
@@ -293,7 +295,7 @@ nav ul li a.active:after {
     font-weight: 400;
     color: var(--white);
     animation: slideInUp 1s ease;
-    font-family: var(--font-accent);
+    font-family: var(--font-body);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -519,7 +521,7 @@ nav ul li a.active:after {
     line-height: 1.7;
 }
 
-/* Prizes Section - Redesigned to match reference image */
+/* Prizes Section - Improved styling */
 .prizes {
     background-color: var(--light-color);
     text-align: center;
@@ -543,7 +545,7 @@ nav ul li a.active:after {
     text-align: center;
     color: #333;
     margin-bottom: 70px;
-    font-size: 3rem;
+    font-size: 3.2rem;
     position: relative;
 }
 
@@ -609,42 +611,41 @@ nav ul li a.active:after {
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
-/* Styling to match reference image */
+/* Improved prize card styling */
 .prize-card.first {
-    background: #FFD700;
+    background: var(--gold);
 }
 
 .prize-card.second {
-    background: #C0C0C0;
+    background: var(--silver);
 }
 
 .prize-card.third {
-    background: #CD7F32;
+    background: var(--bronze);
 }
 
 .prize-rank {
-    font-size: 2.2rem;
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 5px;
-    font-family: var(--font-accent);
-    letter-spacing: 0.02em;
+    font-family: var(--font-heading);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 .prize-amount {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: var(--rupee-color); /* This matches the brown/coral color from the reference image */
+    color: rgba(255, 255, 255, 0.9); /* Changed from brown to white with transparency */
     font-family: var(--font-accent);
-    letter-spacing: 0.01em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .honorable-mention {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-top: 35px;
     background: var(--white);
-    padding: 14px 30px;
+    padding: 16px 32px;
     border-radius: 30px;
     display: inline-block;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -653,7 +654,6 @@ nav ul li a.active:after {
     position: relative;
     z-index: 2;
     font-family: var(--font-accent);
-    letter-spacing: 0.02em;
 }
 
 .honorable-mention:hover {
@@ -1223,7 +1223,7 @@ footer::before {
 
 .prize .prize-amount {
     font-weight: 600;
-    color: var(--rupee-color);
+    color: var(--secondary-color);
     position: relative;
     z-index: 1;
     font-size: 1.5rem;
@@ -1521,61 +1521,6 @@ footer::before {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* Privacy Page */
-.privacy-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.privacy-content h2 {
-    color: var(--primary-color);
-    margin-top: 40px;
-    position: relative;
-    display: inline-block;
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-}
-
-.privacy-content h2::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--secondary-color);
-    transition: width var(--transition-medium);
-}
-
-.privacy-content h2:hover::after {
-    width: 100%;
-}
-
-.privacy-content p, 
-.privacy-content li {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-.privacy-content ul {
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-bottom: 25px;
-}
-
-.privacy-content ul li {
-    position: relative;
-    padding-left: 5px;
-    margin-bottom: 12px;
-    transition: transform var(--transition-medium);
-}
-
-.privacy-content ul li:hover {
-    transform: translateX(5px);
-}
-
 /* Social media links */
 .social-links {
     margin-top: 20px;
@@ -1629,16 +1574,6 @@ footer::before {
 
 .social-links a:hover .social-icon {
     transform: scale(1.2);
-}
-
-/* TikTok icon special styling */
-.tiktok-icon {
-    fill: var(--light-gray);
-    transition: fill var(--transition-medium);
-}
-
-.social-links a:hover .tiktok-icon {
-    fill: var(--secondary-color);
 }
 
 /* Responsive Design */
@@ -1811,7 +1746,7 @@ footer::before {
     }
     
     .prize-rank {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
     }
     
     .prize-amount {
@@ -1856,72 +1791,4 @@ footer::before {
     .page-header h1 {
         font-size: 2.5rem;
     }
-}
-
-/* Animation helper classes */
-.fade-in {
-    animation: fadeIn 1s ease;
-}
-
-.slide-in-left {
-    animation: slideInLeft 1s ease;
-}
-
-.slide-in-right {
-    animation: slideInRight 1s ease;
-}
-
-.slide-in-up {
-    animation: slideInUp 1s ease;
-}
-
-.slide-in-down {
-    animation: slideInDown 1s ease;
-}
-
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* Improved current-prompt section */
-.current-prompt {
-    background-color: rgba(77, 126, 168, 0.05);
-    padding: 60px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.current-prompt::before {
-    content: '';
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, rgba(224, 141, 121, 0.1), transparent 70%);
-    border-radius: 50%;
-    top: -50px;
-    left: -50px;
-    animation: floatBubble 10s infinite alternate ease-in-out;
-}
-
-.current-prompt::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(141, 180, 142, 0.1), transparent 70%);
-    border-radius: 50%;
-    bottom: -30px;
-    right: 10%;
-    animation: floatBubble 15s infinite alternate-reverse ease-in-out;
-}
-
-@keyframes floatBubble {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(30px, 30px); }
 }
