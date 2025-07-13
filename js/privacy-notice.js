@@ -46,4 +46,3 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add hover effect to the accept button
         const acceptBtn = document.getElementById('acceptPrivacy');
         if (acceptBtn) {
-            
