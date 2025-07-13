@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Add scroll event for header styling
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
     // Navigation Toggle Functionality
     const navToggle = document.getElementById('navToggle');
     const mainNav = document.getElementById('mainNav');
@@ -63,4 +73,89 @@ document.addEventListener('DOMContentLoaded', function() {
             contactForm.reset();
         });
     }
+    
+    // Add animation classes to elements when they become visible
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.card, .prize-card, .step, .judge-card, .prize, .contact-method');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            
+            // Check if element is in viewport
+            if (elementTop < window.innerHeight && elementBottom > 0) {
+                // Add animation class if element is visible
+                if (!element.classList.contains('animated')) {
+                    element.classList.add('animated');
+                    element.style.animation = 'fadeIn 0.8s ease forwards';
+                }
+            }
+        });
+    };
+    
+    // Run on scroll and on load
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Run once on page load
+    
+    // Add hover effect to elements
+    const addHoverEffects = function() {
+        // Add particle effect to buttons on hover
+        const buttons = document.querySelectorAll('.cta-button, .secondary-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseover', function(e) {
+                createParticles(e, this);
+            });
+        });
+    };
+    
+    // Create particle effect
+    function createParticles(e, element) {
+        const x = e.clientX - element.getBoundingClientRect().left;
+        const y = e.clientY - element.getBoundingClientRect().top;
+        
+        for (let i = 0; i < 3; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'particle';
+            particle.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: 5px;
+                height: 5px;
+                background-color: rgba(255,255,255,0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            
+            // Random direction and speed
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 2 + 1;
+            const dx = Math.cos(angle) * speed;
+            const dy = Math.sin(angle) * speed;
+            
+            element.appendChild(particle);
+            
+            // Animate and remove
+            let opacity = 1;
+            const animate = () => {
+                if (opacity <= 0) {
+                    particle.remove();
+                    return;
+                }
+                
+                particle.style.left = `${parseFloat(particle.style.left) + dx}px`;
+                particle.style.top = `${parseFloat(particle.style.top) + dy}px`;
+                opacity -= 0.05;
+                particle.style.opacity = opacity;
+                
+                requestAnimationFrame(animate);
+            };
+            
+            requestAnimationFrame(animate);
+        }
+    }
+    
+    addHoverEffects();
 });
