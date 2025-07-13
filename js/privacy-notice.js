@@ -45,16 +45,5 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add hover effect to the accept button
         const acceptBtn = document.getElementById('acceptPrivacy');
-        acceptBtn.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = '#d47b65';
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        });
-        
-        acceptBtn.addEventListener('mouseleave', function() {
-            this.style.backgroundColor = '#E08D79';
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
-        });
-    }
-});
+        if (acceptBtn) {
+            
