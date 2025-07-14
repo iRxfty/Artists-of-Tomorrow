@@ -146,36 +146,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId !== '#') {
-                e.preventDefault();
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-    
-    // Preload animations
-    const preloadAnimations = function() {
-        // Add a class to body when page is fully loaded
-        window.addEventListener('load', function() {
-            document.body.classList.add('page-loaded');
-            
-            // Animate main sections with a staggered delay
-            const sections = document.querySelectorAll('section');
-            sections.forEach((section, index) => {
-                setTimeout(() => {
-                    section.classList.add('fade-in');
-                }, index * 200);
-            });
-        });
-    };
-    
-    preloadAnimations();
-});
+            const targetId = this.getAttribute('href
