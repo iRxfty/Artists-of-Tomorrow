@@ -1,31 +1,35 @@
-/* Enhanced Base Styles with Premium Fonts */
+/* Enhanced Base Styles with Color Scheme to Match Logo */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
-    --primary-color: #4D7EA8;
-    --primary-dark: #3a6080;
-    --secondary-color: #E08D79;
-    --secondary-hover: #d47b65;
-    --accent-color: #8DB48E;
-    --dark-color: #333333;
-    --light-color: #F4F4F4;
+    /* Color scheme based on logo.svg */
+    --primary-color: #C4B5ED;     /* Lavender purple from logo text */
+    --primary-dark: #A796DC;      /* Darker shade of lavender */
+    --secondary-color: #E59D83;   /* Coral/salmon from logo mountain */
+    --secondary-hover: #D38A70;   /* Slightly darker salmon */
+    --accent-color: #7AB8CC;      /* Light blue from logo mountain */
+    --accent-secondary: #DBC1E1;  /* Light purple from logo mountain */
+    --accent-yellow: #FCF0A0;     /* Pale yellow from logo sun */
+    --background-color: #FFF0EB;  /* Light peach background from logo */
+    --dark-color: #333333;        /* Dark text */
+    --light-color: #FFF8F5;       /* Lighter peach for sections */
     --white: #FFFFFF;
     --gray: #666666;
     --light-gray: #DDDDDD;
-    --gold: #ffd452;
-    --silver: #c6c6c6;
-    --bronze: #cd8c52;
+    --gold: #FFD452;              /* Gold for 1st place */
+    --silver: #C6C6C6;            /* Silver for 2nd place */
+    --blue: #7AB8CC;              /* Blue from logo for 3rd place */
     --font-heading: 'Cormorant Garamond', serif;
     --font-body: 'Nunito Sans', sans-serif;
     --font-accent: 'DM Sans', sans-serif;
     --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-medium: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-fast: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    --box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    --box-shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
-    --box-shadow-strong: 0 10px 30px rgba(0,0,0,0.2);
+    --box-shadow: 0 10px 30px rgba(196, 181, 237, 0.1);
+    --box-shadow-hover: 0 15px 40px rgba(196, 181, 237, 0.15);
+    --box-shadow-strong: 0 10px 30px rgba(196, 181, 237, 0.2);
 }
 
 * {
@@ -494,11 +498,11 @@ nav ul li a.active:after {
 }
 
 .card:nth-child(1) {
-    border-top-color: #FFD700;
+    border-top-color: var(--gold);
 }
 
 .card:nth-child(2) {
-    border-top-color: #8DB48E;
+    border-top-color: var(--accent-secondary);
 }
 
 .card:nth-child(3) {
@@ -506,7 +510,7 @@ nav ul li a.active:after {
 }
 
 .card:nth-child(4) {
-    border-top-color: #9370DB;
+    border-top-color: var(--accent-color);
 }
 
 .card h3 {
@@ -562,14 +566,13 @@ nav ul li a.active:after {
     width: 80px;
 }
 
+/* Updated prize cards to rectangular design */
 .prize-cards {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 100px; /* Much larger gap for mobile view */
-    margin: 30px 0;
-    position: relative;
-    z-index: 2;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
 }
 
 .prize-card {
@@ -577,86 +580,57 @@ nav ul li a.active:after {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    border-radius: 50%;
-    color: var(--white);
-    width: 220px;
-    height: 220px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    padding: 30px 20px;
+    color: var(--primary-dark);
+    width: 280px;
+    height: 200px;
+    background-color: white !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top: 5px solid;
+    border-radius: 12px;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     position: relative;
-    overflow: visible; /* Changed from hidden to visible to allow text overflow */
 }
 
-.prize-card::after {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    top: -25%;
-    left: -25%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    z-index: 0; /* Move behind content */
-}
-
-.prize-card:hover::after {
-    opacity: 1;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.95); opacity: 0.5; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-    100% { transform: scale(0.95); opacity: 0.5; }
-}
-
-.prize-card:hover {
-    transform: translateY(-10px) rotate(3deg);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* Improved prize card styling */
 .prize-card.first {
-    background: var(--gold);
+    border-top-color: var(--gold);
 }
 
 .prize-card.second {
-    background: var(--silver);
+    border-top-color: var(--silver);
 }
 
 .prize-card.third {
-    background: var(--bronze);
+    border-top-color: var(--blue); /* Changed from bronze to blue */
+}
+
+.prize-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
 .prize-rank {
-    font-size: 3.2rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-family: var(--font-heading);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 2;
+    color: var(--primary-dark);
+    text-shadow: none;
 }
 
 .prize-amount {
     font-size: 1.6rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
-    font-family: var(--font-accent);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+    color: var(--secondary-color); /* Changed to salmon color */
     position: relative;
     z-index: 2;
-    /* Ensure text doesn't get cut off */
     width: 100%;
     text-align: center;
     padding: 0 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    word-break: keep-all;
-    white-space: nowrap;
 }
 
 /* Indian Rupee symbol styling */
@@ -665,18 +639,16 @@ nav ul li a.active:after {
     font-weight: 700;
     margin-right: 3px;
     font-size: 1.05em;
-    position: relative;
-    top: 0;
-    vertical-align: baseline;
+    color: var(--secondary-color); /* Match the amount */
 }
 
-/* Indian Rupees label */
+/* Indian Rupees label - fixed visibility */
 .currency-label {
     display: block;
-    font-size: 0.7em;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    margin-top: 5px;
+    font-size: 0.8em;
+    color: var(--primary-dark); /* Changed to darker color for better visibility */
+    font-weight: 600; /* Made bolder */
+    margin-top: 8px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -703,7 +675,7 @@ nav ul li a.active:after {
 
 /* Footer */
 footer {
-    background-color: var(--dark-color);
+    background-color: var(--primary-dark);
     color: var(--white);
     padding: 60px 0 20px;
     position: relative;
@@ -838,6 +810,38 @@ footer::before {
 
 .footer-contact a:hover {
     color: var(--secondary-color);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    color: var(--light-gray);
+    transition: all var(--transition-medium);
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    opacity: 0.8;
+    transition: all var(--transition-medium);
+}
+
+.social-links a:hover .social-icon {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .copyright {
@@ -1177,11 +1181,11 @@ footer::before {
 }
 
 .rubric tr:hover td {
-    background-color: rgba(77, 126, 168, 0.1);
+    background-color: rgba(196, 181, 237, 0.1);
 }
 
 .rubric tr:nth-child(even) {
-    background-color: rgba(77, 126, 168, 0.05);
+    background-color: rgba(196, 181, 237, 0.05);
 }
 
 .prizes-detailed {
@@ -1250,7 +1254,7 @@ footer::before {
 }
 
 .prize:nth-child(3) {
-    border-top: 5px solid var(--bronze);
+    border-top: 5px solid var(--blue);
 }
 
 .prize:nth-child(4) {
@@ -1273,6 +1277,9 @@ footer::before {
     z-index: 1;
     font-size: 1.5rem;
     font-family: var(--font-accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Submission Page */
@@ -1281,7 +1288,7 @@ footer::before {
 }
 
 .prompt-box {
-    background: linear-gradient(135deg, rgba(77, 126, 168, 0.05), rgba(141, 180, 142, 0.05));
+    background: linear-gradient(135deg, rgba(196, 181, 237, 0.05), rgba(141, 180, 142, 0.05));
     padding: 35px;
     border-radius: 16px;
     margin: 30px auto;
@@ -1388,7 +1395,7 @@ footer::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(77, 126, 168, 0.05), transparent);
+    background: linear-gradient(45deg, transparent, rgba(196, 181, 237, 0.05), transparent);
     transform: rotate(45deg);
     animation: formShimmer 3s infinite linear;
 }
@@ -1418,6 +1425,79 @@ footer::before {
     position: relative;
     z-index: 1;
     font-family: var(--font-body);
+}
+
+/* Contact Page */
+.contact-info {
+    text-align: center;
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.contact-method {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    width: 300px;
+    text-align: center;
+}
+
+.contact-method:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.contact-method h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-family: var(--font-heading);
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support {
+    text-align: center;
+    background-color: var(--light-color);
+}
+
+/* Privacy Page */
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.privacy-content h2 {
+    color: var(--primary-color);
+    margin-top: 40px;
+}
+
+.privacy-content h2:first-child {
+    margin-top: 0;
+}
+
+.privacy-content ul {
+    margin-bottom: 30px;
+}
+
+.privacy-content p em {
+    color: var(--gray);
+    font-style: italic;
+    display: block;
+    margin-top: 40px;
+    text-align: center;
 }
 
 /* Responsive Design */
@@ -1524,11 +1604,7 @@ footer::before {
     .prize-cards {
         flex-direction: column;
         align-items: center;
-        gap: 130px; /* Extra large gap for mobile to avoid text overlap */
-    }
-    
-    .prize-card {
-        margin-bottom: 0; /* Use gap instead */
+        gap: 60px; /* Extra large gap for mobile to avoid text overlap */
     }
     
     .prize-list {
@@ -1556,6 +1632,16 @@ footer::before {
     .footer-logo img {
         width: 35px;
         height: 35px;
+    }
+
+    .contact-methods {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-method {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
@@ -1605,8 +1691,9 @@ footer::before {
     
     /* Fix for mobile prize cards */
     .prize-card {
-        width: 200px; /* Slightly larger */
-        height: 200px; /* Slightly larger */
+        width: 280px;
+        height: auto;
+        padding-bottom: 20px;
     }
     
     .prize-rank {
@@ -1615,8 +1702,12 @@ footer::before {
     
     .prize-amount {
         font-size: 1.5rem;
-        margin-top: 5px; /* Add a bit more spacing */
-        word-spacing: -2px; /* Help fit text */
+        margin-top: 5px;
+    }
+    
+    .currency-label {
+        margin-top: 10px;
+        font-size: 0.9em;
     }
     
     .prizes {
@@ -1634,16 +1725,6 @@ footer::before {
     .social-buttons {
         flex-direction: column;
         align-items: center;
-    }
-    
-    .contact-methods {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .contact-method {
-        width: 100%;
-        max-width: 300px;
     }
     
     .hero h1 {
@@ -1680,5 +1761,9 @@ footer::before {
     
     .footer-logo span {
         font-size: 1.1rem;
+    }
+    
+    .social-links {
+        gap: 8px;
     }
 }
