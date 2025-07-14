@@ -153,6 +153,7 @@ header {
     top: 0;
     z-index: 1000;
     transition: all var(--transition-medium);
+    padding: 10px 0;
 }
 
 header.scrolled {
@@ -164,9 +165,10 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 0 15px;
 }
 
+/* Updated Logo Styles for 1080px x 1080px logo */
 .logo a {
     display: flex;
     align-items: center;
@@ -175,9 +177,12 @@ header .container {
 }
 
 .logo img {
+    width: 50px;
     height: 50px;
+    object-fit: contain;
     margin-right: 15px;
     transition: transform var(--transition-medium);
+    border-radius: 3px;
 }
 
 .logo:hover img {
@@ -521,11 +526,11 @@ nav ul li a.active:after {
     line-height: 1.7;
 }
 
-/* Prizes Section - Improved styling */
+/* Prizes Section - Improved styling for mobile */
 .prizes {
     background-color: var(--light-color);
     text-align: center;
-    padding: 100px 0;
+    padding: 60px 0;
     position: relative;
     overflow: hidden;
 }
@@ -544,7 +549,7 @@ nav ul li a.active:after {
 .prizes h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     font-size: 3.2rem;
     position: relative;
 }
@@ -561,8 +566,8 @@ nav ul li a.active:after {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
-    margin: 40px 0;
+    gap: 60px; /* Increased gap for mobile */
+    margin: 30px 0;
     position: relative;
     z-index: 2;
 }
@@ -581,6 +586,7 @@ nav ul li a.active:after {
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     position: relative;
     overflow: hidden;
+    margin-bottom: 20px; /* Added margin for mobile */
 }
 
 .prize-card::after {
@@ -625,19 +631,22 @@ nav ul li a.active:after {
 }
 
 .prize-rank {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Increased for better spacing */
     font-family: var(--font-heading);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 .prize-amount {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9); /* Changed from brown to white with transparency */
+    color: rgba(255, 255, 255, 0.95); /* Changed from brown to white with transparency */
     font-family: var(--font-accent);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+    width: 100%; /* Ensure text doesn't get cut off */
+    padding: 0 10px;
+    line-height: 1.3;
 }
 
 .honorable-mention {
@@ -693,6 +702,7 @@ footer::before {
     margin-bottom: 30px;
 }
 
+/* Updated Footer Logo for 1080px x 1080px logo */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -700,9 +710,12 @@ footer::before {
 }
 
 .footer-logo img {
+    width: 40px;
     height: 40px;
+    object-fit: contain;
     margin-right: 15px;
     transition: transform var(--transition-medium);
+    border-radius: 3px;
 }
 
 .footer-logo:hover img {
@@ -1676,15 +1689,30 @@ footer::before {
         font-size: 1.4rem;
     }
     
+    /* Updated prize cards for mobile view */
     .prize-cards {
         flex-direction: column;
         align-items: center;
+        gap: 50px; /* Increased spacing for mobile */
     }
     
     .prize-card {
-        margin-bottom: 20px;
-        width: 180px;
-        height: 180px;
+        margin-bottom: 0; /* Use gap for spacing */
+        width: 220px;
+        height: 220px;
+    }
+    
+    .prize-rank {
+        font-size: 3rem;
+    }
+    
+    .prize-amount {
+        font-size: 1.6rem;
+        padding: 0 15px; /* Ensure text doesn't get cut off */
+    }
+    
+    .honorable-mention {
+        margin-top: 40px;
     }
     
     .prize-list {
@@ -1700,6 +1728,18 @@ footer::before {
     
     section {
         padding: 60px 0;
+    }
+    
+    /* Updated logo styles for mobile */
+    .logo img {
+        width: 45px;
+        height: 45px;
+        margin-right: 10px;
+    }
+    
+    .footer-logo img {
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -1729,6 +1769,13 @@ footer::before {
     nav ul li:hover::after {
         width: 100%;
     }
+    
+    /* Restore horizontal layout for prize cards on desktop */
+    .prize-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1740,17 +1787,19 @@ footer::before {
         min-width: 100%;
     }
     
+    /* Smaller prize cards on mobile */
     .prize-card {
-        width: 160px;
-        height: 160px;
+        width: 180px;
+        height: 180px;
     }
     
     .prize-rank {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+        margin-bottom: 8px;
     }
     
     .prize-amount {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
     
     .step {
@@ -1790,5 +1839,25 @@ footer::before {
     
     .page-header h1 {
         font-size: 2.5rem;
+    }
+    
+    /* Further reduce logo size on smallest screens */
+    .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+    }
+    
+    .logo span {
+        font-size: 1.3rem;
+    }
+    
+    .footer-logo img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .footer-logo span {
+        font-size: 1.1rem;
     }
 }
