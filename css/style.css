@@ -168,7 +168,7 @@ header .container {
     padding: 0 15px;
 }
 
-/* Updated Logo Styles for 1080px x 1080px logo */
+/* Updated Logo Styles for 1080px x 1080px logo - CIRCULAR */
 .logo a {
     display: flex;
     align-items: center;
@@ -179,10 +179,10 @@ header .container {
 .logo img {
     width: 50px;
     height: 50px;
-    object-fit: contain;
+    object-fit: cover;
     margin-right: 15px;
     transition: transform var(--transition-medium);
-    border-radius: 3px;
+    border-radius: 50%; /* Make logo circular */
 }
 
 .logo:hover img {
@@ -526,11 +526,11 @@ nav ul li a.active:after {
     line-height: 1.7;
 }
 
-/* Prizes Section - Improved styling for mobile */
+/* Prizes Section - FIXED FOR MOBILE */
 .prizes {
     background-color: var(--light-color);
     text-align: center;
-    padding: 60px 0;
+    padding: 60px 0 80px; /* Increased bottom padding */
     position: relative;
     overflow: hidden;
 }
@@ -564,9 +564,9 @@ nav ul li a.active:after {
 
 .prize-cards {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 60px; /* Increased gap for mobile */
+    flex-direction: column;
+    align-items: center;
+    gap: 100px; /* Much larger gap for mobile view */
     margin: 30px 0;
     position: relative;
     z-index: 2;
@@ -585,8 +585,7 @@ nav ul li a.active:after {
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     position: relative;
-    overflow: hidden;
-    margin-bottom: 20px; /* Added margin for mobile */
+    overflow: visible; /* Changed from hidden to visible to allow text overflow */
 }
 
 .prize-card::after {
@@ -599,6 +598,7 @@ nav ul li a.active:after {
     background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
     opacity: 0;
     transition: opacity var(--transition-medium);
+    z-index: 0; /* Move behind content */
 }
 
 .prize-card:hover::after {
@@ -633,26 +633,36 @@ nav ul li a.active:after {
 .prize-rank {
     font-size: 3.2rem;
     font-weight: 700;
-    margin-bottom: 10px; /* Increased for better spacing */
+    margin-bottom: 10px;
     font-family: var(--font-heading);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
 }
 
 .prize-amount {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.95); /* Changed from brown to white with transparency */
+    color: rgba(255, 255, 255, 0.95);
     font-family: var(--font-accent);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-    width: 100%; /* Ensure text doesn't get cut off */
+    position: relative;
+    z-index: 2;
+    /* Ensure text doesn't get cut off */
+    width: 100%;
+    text-align: center;
     padding: 0 10px;
-    line-height: 1.3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .honorable-mention {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-top: 35px;
+    margin-top: 50px; /* Increased margin-top to ensure proper spacing */
     background: var(--white);
     padding: 16px 32px;
     border-radius: 30px;
@@ -702,7 +712,7 @@ footer::before {
     margin-bottom: 30px;
 }
 
-/* Updated Footer Logo for 1080px x 1080px logo */
+/* Updated Footer Logo for 1080px x 1080px logo - CIRCULAR */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -712,10 +722,10 @@ footer::before {
 .footer-logo img {
     width: 40px;
     height: 40px;
-    object-fit: contain;
+    object-fit: cover;
     margin-right: 15px;
     transition: transform var(--transition-medium);
-    border-radius: 3px;
+    border-radius: 50%; /* Make logo circular */
 }
 
 .footer-logo:hover img {
@@ -1388,207 +1398,6 @@ footer::before {
     font-family: var(--font-body);
 }
 
-/* Contact Page */
-.contact-info {
-    text-align: center;
-}
-
-.contact-methods {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
-}
-
-.contact-method {
-    min-width: 250px;
-    background-color: var(--white);
-    padding: 35px 30px;
-    border-radius: 16px;
-    box-shadow: var(--box-shadow);
-    transition: all var(--transition-medium);
-    animation: contactMethodAppear 0.5s ease backwards;
-}
-
-.contact-method:nth-child(1) { animation-delay: 0.2s; }
-.contact-method:nth-child(2) { animation-delay: 0.4s; }
-
-@keyframes contactMethodAppear {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.contact-method:hover {
-    transform: translateY(-10px) rotate(1deg);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.contact-method h3 {
-    color: var(--primary-color);
-    position: relative;
-    display: inline-block;
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-.contact-method h3::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--secondary-color);
-    transition: width var(--transition-medium);
-}
-
-.contact-method:hover h3::after {
-    width: 100%;
-}
-
-.contact-method p {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.6;
-}
-
-.contact-form {
-    background-color: var(--light-color);
-    position: relative;
-    overflow: hidden;
-    padding: 80px 0;
-}
-
-.contact-form::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.8), transparent);
-    opacity: 0.4;
-    animation: rotateBgSlow 60s linear infinite;
-}
-
-@keyframes rotateBgSlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.contact-form form {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--white);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: var(--box-shadow);
-    position: relative;
-    z-index: 1;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-}
-
-.contact-form form:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.support {
-    text-align: center;
-    padding: 80px 0;
-}
-
-.support h2 {
-    margin-bottom: 30px;
-    font-size: 2.8rem;
-}
-
-.support p {
-    max-width: 700px;
-    margin: 0 auto 40px;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.support .social-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.support .social-buttons a {
-    margin: 10px;
-    animation: buttonPop 0.5s ease backwards;
-}
-
-.support .social-buttons a:nth-child(1) { animation-delay: 0.2s; }
-.support .social-buttons a:nth-child(2) { animation-delay: 0.4s; }
-.support .social-buttons a:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes buttonPop {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* Social media links */
-.social-links {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    color: var(--light-gray);
-    transition: all var(--transition-medium);
-    padding: 10px 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-    font-family: var(--font-accent);
-    font-size: 0.95rem;
-}
-
-.social-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: left 0.7s ease;
-}
-
-.social-links a:hover::before {
-    left: 100%;
-}
-
-.social-links a:hover {
-    color: var(--secondary-color);
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-}
-
-.social-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    transition: transform var(--transition-medium);
-}
-
-.social-links a:hover .social-icon {
-    transform: scale(1.2);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-toggle {
@@ -1693,26 +1502,11 @@ footer::before {
     .prize-cards {
         flex-direction: column;
         align-items: center;
-        gap: 50px; /* Increased spacing for mobile */
+        gap: 130px; /* Extra large gap for mobile to avoid text overlap */
     }
     
     .prize-card {
-        margin-bottom: 0; /* Use gap for spacing */
-        width: 220px;
-        height: 220px;
-    }
-    
-    .prize-rank {
-        font-size: 3rem;
-    }
-    
-    .prize-amount {
-        font-size: 1.6rem;
-        padding: 0 15px; /* Ensure text doesn't get cut off */
-    }
-    
-    .honorable-mention {
-        margin-top: 40px;
+        margin-bottom: 0; /* Use gap instead */
     }
     
     .prize-list {
@@ -1787,19 +1581,24 @@ footer::before {
         min-width: 100%;
     }
     
-    /* Smaller prize cards on mobile */
+    /* Fix for mobile prize cards */
     .prize-card {
-        width: 180px;
-        height: 180px;
+        width: 200px; /* Slightly larger */
+        height: 200px; /* Slightly larger */
     }
     
     .prize-rank {
         font-size: 2.8rem;
-        margin-bottom: 8px;
     }
     
     .prize-amount {
         font-size: 1.5rem;
+        margin-top: 5px; /* Add a bit more spacing */
+        word-spacing: -2px; /* Help fit text */
+    }
+    
+    .prizes {
+        padding-bottom: 100px; /* Extra padding at bottom */
     }
     
     .step {
