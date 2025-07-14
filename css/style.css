@@ -1,35 +1,55 @@
-/* Enhanced Base Styles with Color Scheme to Match Logo */
+/* Enhanced Base Styles with Balanced Color Scheme from Logo */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
-    /* Color scheme based on logo.svg */
-    --primary-color: #C4B5ED;     /* Lavender purple from logo text */
-    --primary-dark: #A796DC;      /* Darker shade of lavender */
-    --secondary-color: #E59D83;   /* Coral/salmon from logo mountain */
-    --secondary-hover: #D38A70;   /* Slightly darker salmon */
-    --accent-color: #7AB8CC;      /* Light blue from logo mountain */
-    --accent-secondary: #DBC1E1;  /* Light purple from logo mountain */
-    --accent-yellow: #FCF0A0;     /* Pale yellow from logo sun */
-    --background-color: #FFF0EB;  /* Light peach background from logo */
-    --dark-color: #333333;        /* Dark text */
-    --light-color: #FFF8F5;       /* Lighter peach for sections */
+    /* Balanced color palette from logo */
+    --purple: #C4B5ED;          /* Lavender purple from logo text */
+    --purple-dark: #A796DC;     /* Darker shade of lavender */
+    --salmon: #E59D83;          /* Coral/salmon from left mountain */
+    --salmon-dark: #D38A70;     /* Darker coral for hover states */
+    --blue: #7AB8CC;            /* Light blue from right mountain */
+    --blue-dark: #5A98C5;       /* Slightly darker blue */
+    --pink: #DBC1E1;            /* Light pink/lavender from middle mountain */
+    --yellow: #FCF0A0;          /* Pale yellow from logo sun */
+    --peach: #FFF0EB;           /* Light peach background from logo */
+    --peach-light: #FFF8F5;     /* Lighter peach for sections */
+    
+    /* Functional color assignments */
+    --primary-color: var(--salmon);        /* Main color - changed to salmon */
+    --primary-dark: var(--salmon-dark);    /* Darker variation of primary */
+    --secondary-color: var(--blue);        /* Secondary color - changed to blue */
+    --secondary-hover: var(--blue-dark);   /* Darker blue for hover */
+    --accent-color: var(--purple);         /* Accent color - purple now as accent */
+    --accent-secondary: var(--pink);       /* Secondary accent - pink */
+    --highlight-color: var(--yellow);      /* Highlight color - yellow */
+    --background-color: var(--peach);      /* Main background color */
+    --light-color: var(--peach-light);     /* Lighter background for sections */
+    
+    /* Standard colors */
+    --dark-color: #333333;
     --white: #FFFFFF;
     --gray: #666666;
     --light-gray: #DDDDDD;
-    --gold: #FFD452;              /* Gold for 1st place */
-    --silver: #C6C6C6;            /* Silver for 2nd place */
-    --blue: #7AB8CC;              /* Blue from logo for 3rd place */
+    
+    /* Award colors */
+    --gold: #FFD452;
+    --silver: #C6C6C6;
+    --bronze: var(--salmon);  /* Using salmon color for bronze */
+    
+    /* Fonts */
     --font-heading: 'Cormorant Garamond', serif;
     --font-body: 'Nunito Sans', sans-serif;
     --font-accent: 'DM Sans', sans-serif;
+    
+    /* Transitions and effects */
     --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-medium: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-fast: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    --box-shadow: 0 10px 30px rgba(196, 181, 237, 0.1);
-    --box-shadow-hover: 0 15px 40px rgba(196, 181, 237, 0.15);
-    --box-shadow-strong: 0 10px 30px rgba(196, 181, 237, 0.2);
+    --box-shadow: 0 10px 30px rgba(229, 157, 131, 0.1);
+    --box-shadow-hover: 0 15px 40px rgba(229, 157, 131, 0.15);
+    --box-shadow-strong: 0 10px 30px rgba(229, 157, 131, 0.2);
 }
 
 * {
@@ -47,7 +67,7 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--dark-color);
-    background-color: var(--white);
+    background-color: var(--background-color);
     overflow-x: hidden;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
@@ -90,7 +110,7 @@ h2:after {
     bottom: 0;
     width: 60px;
     height: 3px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transition: width var(--transition-medium);
 }
 
@@ -105,7 +125,7 @@ h2:hover:after {
 
 h3 {
     font-size: 1.75rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: 500;
 }
 
@@ -115,14 +135,14 @@ p {
 }
 
 a {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     text-decoration: none;
     transition: all var(--transition-medium);
     position: relative;
 }
 
 a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 ul, ol {
@@ -152,7 +172,7 @@ section {
 /* Header Styles */
 header {
     background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(229, 157, 131, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -162,7 +182,7 @@ header {
 
 header.scrolled {
     background-color: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(229, 157, 131, 0.12);
 }
 
 header .container {
@@ -186,7 +206,7 @@ header .container {
     object-fit: cover;
     margin-right: 15px;
     transition: transform var(--transition-medium);
-    border-radius: 50%; /* Make logo circular */
+    border-radius: 50%;
 }
 
 .logo:hover img {
@@ -197,6 +217,7 @@ header .container {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 600;
+    color: var(--accent-color);
 }
 
 /* Mobile Navigation Styles */
@@ -242,6 +263,7 @@ nav ul li a {
     font-family: var(--font-accent);
     font-size: 0.95rem;
     letter-spacing: 0.02em;
+    color: var(--dark-color);
 }
 
 nav ul li a:after {
@@ -251,8 +273,12 @@ nav ul li a:after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transition: width var(--transition-medium);
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
 }
 
 nav ul li a:hover:after,
@@ -262,8 +288,8 @@ nav ul li a.active:after {
 
 /* Hero Section */
 .hero {
-    background-color: var(--primary-color);
-    background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background-color: var(--accent-color);
+    background-image: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
     color: var(--white);
     text-align: center;
     padding: 140px 0 120px;
@@ -344,9 +370,9 @@ nav ul li a.active:after {
 }
 
 .cta-button {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--white);
-    box-shadow: 0 6px 18px rgba(224, 141, 121, 0.25);
+    box-shadow: 0 6px 18px rgba(229, 157, 131, 0.25);
 }
 
 .cta-button:before {
@@ -366,24 +392,24 @@ nav ul li a.active:after {
 }
 
 .cta-button:hover {
-    background-color: var(--secondary-hover);
+    background-color: var(--primary-dark);
     color: var(--white);
     transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(224, 141, 121, 0.4);
+    box-shadow: 0 10px 24px rgba(229, 157, 131, 0.4);
 }
 
 .secondary-button {
     background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .secondary-button:hover {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(77, 126, 168, 0.2);
+    box-shadow: 0 8px 20px rgba(122, 184, 204, 0.2);
 }
 
 /* Mission Section */
@@ -464,7 +490,7 @@ nav ul li a.active:after {
     min-width: 280px;
     max-width: 350px;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    border-top: 5px solid var(--primary-color);
+    border-top: 5px solid;
     position: relative;
     overflow: hidden;
 }
@@ -498,7 +524,7 @@ nav ul li a.active:after {
 }
 
 .card:nth-child(1) {
-    border-top-color: var(--gold);
+    border-top-color: var(--highlight-color);
 }
 
 .card:nth-child(2) {
@@ -506,15 +532,15 @@ nav ul li a.active:after {
 }
 
 .card:nth-child(3) {
-    border-top-color: var(--secondary-color);
+    border-top-color: var(--primary-color);
 }
 
 .card:nth-child(4) {
-    border-top-color: var(--accent-color);
+    border-top-color: var(--secondary-color);
 }
 
 .card h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 18px;
     position: relative;
     z-index: 1;
@@ -530,11 +556,11 @@ nav ul li a.active:after {
     line-height: 1.7;
 }
 
-/* Prizes Section - FIXED FOR MOBILE */
+/* Prizes Section - Updated with balanced colors */
 .prizes {
     background-color: var(--light-color);
     text-align: center;
-    padding: 60px 0 80px; /* Increased bottom padding */
+    padding: 60px 0 80px;
     position: relative;
     overflow: hidden;
 }
@@ -546,8 +572,8 @@ nav ul li a.active:after {
     height: 100%;
     top: 0;
     left: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(141, 180, 142, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(224, 141, 121, 0.05) 0%, transparent 40%);
+    background: radial-gradient(circle at 20% 30%, rgba(122, 184, 204, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(229, 157, 131, 0.05) 0%, transparent 40%);
 }
 
 .prizes h2 {
@@ -561,12 +587,12 @@ nav ul li a.active:after {
 .prizes h2:after {
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     height: 4px;
     width: 80px;
 }
 
-/* Updated prize cards to rectangular design */
+/* Updated prize cards to rectangular design with balanced colors */
 .prize-cards {
     display: flex;
     flex-direction: row;
@@ -581,7 +607,7 @@ nav ul li a.active:after {
     justify-content: center;
     align-items: center;
     padding: 30px 20px;
-    color: var(--primary-dark);
+    color: var(--dark-color);
     width: 280px;
     height: 200px;
     background-color: white !important;
@@ -601,7 +627,7 @@ nav ul li a.active:after {
 }
 
 .prize-card.third {
-    border-top-color: var(--blue); /* Changed from bronze to blue */
+    border-top-color: var(--blue);
 }
 
 .prize-card:hover {
@@ -614,14 +640,14 @@ nav ul li a.active:after {
     font-weight: 700;
     margin-bottom: 15px;
     font-family: var(--font-heading);
-    color: var(--primary-dark);
+    color: var(--dark-color);
     text-shadow: none;
 }
 
 .prize-amount {
     font-size: 1.6rem;
     font-weight: 600;
-    color: var(--secondary-color); /* Changed to salmon color */
+    color: var(--primary-color);
     position: relative;
     z-index: 2;
     width: 100%;
@@ -639,15 +665,15 @@ nav ul li a.active:after {
     font-weight: 700;
     margin-right: 3px;
     font-size: 1.05em;
-    color: var(--secondary-color); /* Match the amount */
+    color: var(--primary-color);
 }
 
 /* Indian Rupees label - fixed visibility */
 .currency-label {
     display: block;
     font-size: 0.8em;
-    color: var(--primary-dark); /* Changed to darker color for better visibility */
-    font-weight: 600; /* Made bolder */
+    color: var(--secondary-color);
+    font-weight: 600;
     margin-top: 8px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -656,7 +682,7 @@ nav ul li a.active:after {
 .honorable-mention {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-top: 50px; /* Increased margin-top to ensure proper spacing */
+    margin-top: 50px;
     background: var(--white);
     padding: 16px 32px;
     border-radius: 30px;
@@ -667,15 +693,17 @@ nav ul li a.active:after {
     position: relative;
     z-index: 2;
     font-family: var(--font-accent);
+    color: var(--secondary-color);
 }
 
 .honorable-mention:hover {
     transform: rotate(0deg) scale(1.05);
+    color: var(--primary-color);
 }
 
 /* Footer */
 footer {
-    background-color: var(--primary-dark);
+    background-color: var(--accent-color);
     color: var(--white);
     padding: 60px 0 20px;
     position: relative;
@@ -688,7 +716,7 @@ footer::before {
     left: 0;
     width: 100%;
     height: 6px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+    background: linear-gradient(90deg, var(--salmon), var(--blue), var(--pink), var(--yellow));
     background-size: 300% 100%;
     animation: gradient 10s ease infinite;
 }
@@ -706,7 +734,7 @@ footer::before {
     margin-bottom: 30px;
 }
 
-/* Updated Footer Logo for 1080px x 1080px logo - CIRCULAR */
+/* Updated Footer Logo for circular logo */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -719,7 +747,7 @@ footer::before {
     object-fit: cover;
     margin-right: 15px;
     transition: transform var(--transition-medium);
-    border-radius: 50%; /* Make logo circular */
+    border-radius: 50%;
 }
 
 .footer-logo:hover img {
@@ -753,7 +781,7 @@ footer::before {
     bottom: -5px;
     width: 0;
     height: 2px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transition: width var(--transition-medium);
 }
 
@@ -772,7 +800,7 @@ footer::before {
 }
 
 .footer-links ul li a {
-    color: var(--light-gray);
+    color: var(--light-color);
     position: relative;
     padding-left: 15px;
     transition: all var(--transition-medium);
@@ -788,7 +816,7 @@ footer::before {
 }
 
 .footer-links ul li a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     padding-left: 20px;
 }
 
@@ -798,18 +826,18 @@ footer::before {
 
 .footer-contact p {
     margin-bottom: 12px;
-    color: var(--light-gray);
+    color: var(--light-color);
     font-family: var(--font-body);
     font-size: 0.95rem;
 }
 
 .footer-contact a {
-    color: var(--light-gray);
+    color: var(--light-color);
     transition: color var(--transition-medium);
 }
 
 .footer-contact a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .social-links {
@@ -822,12 +850,12 @@ footer::before {
 .social-links a {
     display: flex;
     align-items: center;
-    color: var(--light-gray);
+    color: var(--light-color);
     transition: all var(--transition-medium);
 }
 
 .social-links a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     transform: translateX(5px);
 }
 
@@ -848,15 +876,15 @@ footer::before {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 20px;
     text-align: center;
-    color: var(--light-gray);
+    color: var(--light-color);
     font-size: 0.9rem;
     font-family: var(--font-body);
 }
 
 /* Page Header */
 .page-header {
-    background-color: var(--primary-color);
-    background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background-color: var(--secondary-color);
+    background-image: linear-gradient(135deg, var(--secondary-color) 0%, var(--blue-dark) 100%);
     color: var(--white);
     text-align: center;
     padding: 80px 0;
@@ -897,135 +925,6 @@ footer::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* About Page */
-.about-mission,
-.about-vision {
-    text-align: center;
-}
-
-.about-mission h2,
-.about-vision h2 {
-    text-align: center;
-    font-size: 2.8rem;
-}
-
-.about-mission h2:after,
-.about-vision h2:after {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.about-vision ul {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
-    list-style-type: none;
-}
-
-.about-vision ul li {
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 15px;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: fadeInList 0.5s ease forwards;
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-}
-
-.about-vision ul li:nth-child(1) { animation-delay: 0.2s; }
-.about-vision ul li:nth-child(2) { animation-delay: 0.4s; }
-.about-vision ul li:nth-child(3) { animation-delay: 0.6s; }
-.about-vision ul li:nth-child(4) { animation-delay: 0.8s; }
-.about-vision ul li:nth-child(5) { animation-delay: 1s; }
-
-@keyframes fadeInList {
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.about-vision ul li:before {
-    content: "✓";
-    color: var(--accent-color);
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.judges-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.judge-card {
-    width: 280px;
-    text-align: center;
-    background: var(--white);
-    padding: 30px 20px;
-    border-radius: 16px;
-    box-shadow: var(--box-shadow);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    animation: cardAppear 0.5s ease backwards;
-}
-
-.judge-card:nth-child(1) { animation-delay: 0.2s; }
-.judge-card:nth-child(2) { animation-delay: 0.4s; }
-.judge-card:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes cardAppear {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.judge-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.judge-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 0 auto 25px;
-    overflow: hidden;
-    border: 5px solid var(--light-color);
-    transition: transform var(--transition-medium), border-color var(--transition-medium);
-}
-
-.judge-card:hover .judge-photo {
-    transform: scale(1.1);
-    border-color: var(--secondary-color);
-}
-
-.judge-photo.placeholder {
-    background-color: var(--light-gray);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.judge-photo.placeholder::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
-}
-
 /* Competition Page */
 .prompts-full {
     max-width: 800px;
@@ -1040,6 +939,7 @@ footer::before {
     box-shadow: var(--box-shadow);
     transform: translateY(0);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border-left: 5px solid var(--primary-color);
 }
 
 .prompt-detailed:hover {
@@ -1048,7 +948,7 @@ footer::before {
 }
 
 .prompt-detailed h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     position: relative;
     display: inline-block;
     font-size: 2rem;
@@ -1062,7 +962,7 @@ footer::before {
     left: 0;
     width: 40%;
     height: 2px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transition: width var(--transition-medium);
 }
 
@@ -1100,7 +1000,7 @@ footer::before {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: white;
     width: 28px;
     height: 28px;
@@ -1117,14 +1017,14 @@ footer::before {
 .rules ol li:hover::before,
 .judging ol li:hover::before {
     transform: scale(1.15);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 .rules h3,
 .judging h3 {
     margin-top: 50px;
     margin-bottom: 25px;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     text-align: center;
     position: relative;
     display: inline-block;
@@ -1140,7 +1040,7 @@ footer::before {
     left: 0;
     width: 60px;
     height: 3px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transition: width var(--transition-medium);
 }
 
@@ -1173,7 +1073,7 @@ footer::before {
 }
 
 .rubric th {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
     font-family: var(--font-accent);
     font-weight: 600;
@@ -1181,11 +1081,11 @@ footer::before {
 }
 
 .rubric tr:hover td {
-    background-color: rgba(196, 181, 237, 0.1);
+    background-color: rgba(122, 184, 204, 0.1);
 }
 
 .rubric tr:nth-child(even) {
-    background-color: rgba(196, 181, 237, 0.05);
+    background-color: rgba(229, 157, 131, 0.05);
 }
 
 .prizes-detailed {
@@ -1262,7 +1162,7 @@ footer::before {
 }
 
 .prize h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 15px;
     position: relative;
     z-index: 1;
@@ -1272,7 +1172,7 @@ footer::before {
 
 .prize .prize-amount {
     font-weight: 600;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     position: relative;
     z-index: 1;
     font-size: 1.5rem;
@@ -1282,13 +1182,18 @@ footer::before {
     align-items: center;
 }
 
+.prize .currency-label {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
 /* Submission Page */
 .current-prompt {
     text-align: center;
 }
 
 .prompt-box {
-    background: linear-gradient(135deg, rgba(196, 181, 237, 0.05), rgba(141, 180, 142, 0.05));
+    background: linear-gradient(135deg, rgba(122, 184, 204, 0.05), rgba(229, 157, 131, 0.05));
     padding: 35px;
     border-radius: 16px;
     margin: 30px auto;
@@ -1304,7 +1209,7 @@ footer::before {
 }
 
 .prompt-box h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 18px;
     font-size: 1.8rem;
     font-family: var(--font-heading);
@@ -1343,7 +1248,7 @@ footer::before {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
     font-weight: 600;
     margin-right: 20px;
@@ -1355,7 +1260,7 @@ footer::before {
 
 .step:hover .step-number {
     transform: scale(1.1);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 .step-content {
@@ -1364,7 +1269,7 @@ footer::before {
 
 .step-content h3 {
     margin-bottom: 12px;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-family: var(--font-heading);
     font-size: 1.6rem;
 }
@@ -1395,7 +1300,7 @@ footer::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(196, 181, 237, 0.05), transparent);
+    background: linear-gradient(45deg, transparent, rgba(122, 184, 204, 0.05), transparent);
     transform: rotate(45deg);
     animation: formShimmer 3s infinite linear;
 }
@@ -1455,7 +1360,7 @@ footer::before {
 }
 
 .contact-method h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 15px;
     font-family: var(--font-heading);
 }
@@ -1480,7 +1385,7 @@ footer::before {
 }
 
 .privacy-content h2 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-top: 40px;
 }
 
@@ -1663,7 +1568,7 @@ footer::before {
         left: 0;
         width: 0;
         height: 1px;
-        background-color: var(--secondary-color);
+        background-color: var(--primary-color);
         transition: width var(--transition-medium);
         opacity: 0.7;
     }
