@@ -659,6 +659,28 @@ nav ul li a.active:after {
     white-space: nowrap;
 }
 
+/* Indian Rupee symbol styling */
+.rupee-symbol {
+    display: inline-block;
+    font-weight: 700;
+    margin-right: 3px;
+    font-size: 1.05em;
+    position: relative;
+    top: 0;
+    vertical-align: baseline;
+}
+
+/* Indian Rupees label */
+.currency-label {
+    display: block;
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 .honorable-mention {
     font-size: 1.3rem;
     font-weight: 600;
