@@ -1721,20 +1721,20 @@ footer::before {
 }
 
 .gofundme-container {
-    /* Set dimensions to be 20px larger than the iframe (10px padding on each side) */
-    max-width: 510px; /* iframe width (500px) + 10px */
-    height: 550px;    /* iframe height (550px)
-    margin: 10px auto;
+    /* Container is 20px wider and taller than the iframe for 10px padding */
+    max-width: 520px; /* iframe max-width (500px) + 20px */
+    height: 570px;    /* iframe height (550px) + 20px */
+    margin: 10px auto; /* Centers the container on the page */
     background-color: white;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     overflow: hidden;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     
-    /* Use flexbox to center the iframe within the container */
+    /* Use flexbox to center the iframe within this container */
     display: flex;
-    justify-content: center; /* Horizontally centers the widget */
-    align-items: center;     /* Vertically centers the widget */
+    justify-content: center;
+    align-items: center;
 }
 
 .gofundme-container:hover {
