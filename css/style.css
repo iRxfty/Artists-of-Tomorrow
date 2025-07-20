@@ -1722,8 +1722,8 @@ footer::before {
 
 .gofundme-container {
     /* Set dimensions to be 20px larger than the iframe (10px padding on each side) */
-    max-width: 520px; /* iframe width (500px) + 20px */
-    height: 570px;    /* iframe height (550px) + 20px */
+    max-width: 510px; /* iframe width (500px) + 10px */
+    height: 550px;    /* iframe height (550px)
     margin: 10px auto;
     background-color: white;
     border-radius: 10px;
