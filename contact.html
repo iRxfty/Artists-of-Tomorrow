@@ -92,35 +92,10 @@
             <h2>Support Our Mission</h2>
             <p>Artists of Tomorrow relies on the generous support of donors and volunteers to make our competition possible and provide art supplies to participating students.</p>
             
-            <!-- Fixed GoFundMe Embed with Azure-compatible approach -->
+            <!-- Official GoFundMe embed code -->
             <div class="gofundme-container">
-                <iframe id="gofundmeIframe"
-                    src="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow/widget/medium" 
-                    style="width: 100%; height: 480px; max-width: 560px; margin: 0 auto; display: block;"
-                    frameborder="0" 
-                    scrolling="no"
-                    allow="payment"
-                    allowtransparency="true">
-                </iframe>
-                <!-- Fallback for when iframe doesn't load -->
-                <script>
-                    document.getElementById('gofundmeIframe').onerror = function() {
-                        this.style.display = 'none';
-                        const fallback = document.createElement('div');
-                        fallback.className = 'static-embed';
-                        fallback.innerHTML = `
-                            <h3>Support Our GoFundMe Campaign</h3>
-                            <p>Our GoFundMe embed couldn't be loaded, but you can still support us!</p>
-                            <a href="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow" 
-                               class="cta-button gofundme-button" 
-                               target="_blank" 
-                               rel="noopener noreferrer">
-                               Visit Our Campaign
-                            </a>
-                        `;
-                        this.parentNode.appendChild(fallback);
-                    };
-                </script>
+                <div class="gfm-embed" data-url="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow/widget/medium?sharesheet=undefined&attribution_id=sl:a94f062b-a474-47f7-97d1-184072e1c241"></div>
+                <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
             </div>
             
             <div class="social-buttons">
