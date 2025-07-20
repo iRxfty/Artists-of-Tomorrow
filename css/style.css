@@ -15,34 +15,30 @@
     --yellow: #FCF0A0;          /* Pale yellow from logo sun */
     --peach: #FFF0EB;           /* Light peach background from logo */
     --peach-light: #FFF8F5;     /* Lighter peach for sections */
-    
+
     /* Functional color assignments */
-    --primary-color: var(--salmon);        /* Main color - changed to salmon */
-    --primary-dark: var(--salmon-dark);    /* Darker variation of primary */
-    --secondary-color: var(--blue);        /* Secondary color - changed to blue */
-    --secondary-hover: var(--blue-dark);   /* Darker blue for hover */
-    --accent-color: var(--purple);         /* Accent color - purple now as accent */
-    --accent-secondary: var(--pink);       /* Secondary accent - pink */
-    --highlight-color: var(--yellow);      /* Highlight color - yellow */
-    --background-color: var(--peach);      /* Main background color */
-    --light-color: var(--peach-light);     /* Lighter background for sections */
-    
-    /* Standard colors */
+    --primary-color: var(--salmon);
+    --primary-dark: var(--salmon-dark);
+    --secondary-color: var(--blue);
+    --secondary-hover: var(--blue-dark);
+    --accent-color: var(--purple);
+    --accent-secondary: var(--pink);
+    --highlight-color: var(--yellow);
+    --background-color: var(--peach);
+    --light-color: var(--peach-light);
     --dark-color: #333333;
     --white: #FFFFFF;
     --gray: #666666;
     --light-gray: #DDDDDD;
-    
-    /* Award colors */
     --gold: #FFD452;
     --silver: #C6C6C6;
-    --bronze: var(--salmon);  /* Using salmon color for bronze */
-    
+    --bronze: var(--salmon);
+
     /* Fonts */
     --font-heading: 'Cormorant Garamond', serif;
-    --font-body: 'Nunito Sans', sans-serif;
-    --font-accent: 'DM Sans', sans-serif;
-    
+    --font-body: 'Nunito Sans', 'DM Sans', Arial, Helvetica, sans-serif;
+    --font-accent: 'DM Sans', 'Nunito Sans', Arial, Helvetica, sans-serif;
+
     /* Transitions and effects */
     --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-medium: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -60,6 +56,7 @@
 
 html {
     scroll-behavior: smooth;
+    font-family: var(--font-body);
 }
 
 body {
@@ -73,7 +70,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 .container {
     width: 90%;
     max-width: 1200px;
