@@ -1723,13 +1723,13 @@ footer::before {
 .gofundme-container {
     max-width: 600px;
     margin: 40px auto;
-    background-color: white;
+    /* background-color: white; */ /* Removed to let the section background show through */
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     overflow: hidden;
-    height: 800px; /* Much taller height */
-    padding: 0; /* Remove any padding */
+    height: 840px; /* Adjusted for padding (800px for iframe + 40px padding) */
+    padding: 20px; /* Added to create a frame around the widget */
 }
 
 .gofundme-container:hover {
