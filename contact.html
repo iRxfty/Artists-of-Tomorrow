@@ -6,6 +6,13 @@
     <title>Contact Us | Artists of Tomorrow</title>
     <meta name="description" content="Get in touch with the Artists of Tomorrow team">
     
+    <!-- Font preconnect for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -85,15 +92,35 @@
             <h2>Support Our Mission</h2>
             <p>Artists of Tomorrow relies on the generous support of donors and volunteers to make our competition possible and provide art supplies to participating students.</p>
             
-            <!-- GoFundMe Embed using iframe for better Azure compatibility -->
+            <!-- Fixed GoFundMe Embed with Azure-compatible approach -->
             <div class="gofundme-container">
-                <iframe src="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow/widget/medium" 
-                        frameborder="0" 
-                        scrolling="no"
-                        allowtransparency="true"
-                        width="100%" 
-                        height="480px">
+                <iframe id="gofundmeIframe"
+                    src="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow/widget/medium" 
+                    style="width: 100%; height: 480px; max-width: 560px; margin: 0 auto; display: block;"
+                    frameborder="0" 
+                    scrolling="no"
+                    allow="payment"
+                    allowtransparency="true">
                 </iframe>
+                <!-- Fallback for when iframe doesn't load -->
+                <script>
+                    document.getElementById('gofundmeIframe').onerror = function() {
+                        this.style.display = 'none';
+                        const fallback = document.createElement('div');
+                        fallback.className = 'static-embed';
+                        fallback.innerHTML = `
+                            <h3>Support Our GoFundMe Campaign</h3>
+                            <p>Our GoFundMe embed couldn't be loaded, but you can still support us!</p>
+                            <a href="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow" 
+                               class="cta-button gofundme-button" 
+                               target="_blank" 
+                               rel="noopener noreferrer">
+                               Visit Our Campaign
+                            </a>
+                        `;
+                        this.parentNode.appendChild(fallback);
+                    };
+                </script>
             </div>
             
             <div class="social-buttons">
@@ -145,5 +172,6 @@
     </footer>
     <script src="js/main.js"></script>
     <script src="js/privacy-notice.js"></script>
+    <script src="js/clarity-helper.js"></script>
 </body>
 </html>
