@@ -1725,7 +1725,10 @@ footer::before {
     background-color: white;
 
     /* 2. This creates the 10px space on all sides inside the box */
-    padding: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
     
     /* 3. This sets the size and centers the box */
     max-width: 500px; /* 500px for the widget + 20px for padding */
