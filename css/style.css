@@ -1721,16 +1721,14 @@ footer::before {
 }
 
 .gofundme-container {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: var(--white);
-  border-radius: 16px;
-  box-shadow: var(--box-shadow);
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-  overflow: hidden;
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    overflow: hidden;
+    height: 520px; /* Updated to match iframe height */
 }
 
 .gofundme-container:hover {
