@@ -1,5 +1,5 @@
 /* Enhanced Base Styles with Balanced Color Scheme from Logo */
-/* Font imports were moved to HTML for better performance */
+/* Font imports removed - using only HTML links */
 
 :root {
     /* Balanced color palette from logo */
@@ -1399,6 +1399,59 @@ footer::before {
     text-align: center;
 }
 
+/* GoFundMe Static Alternative for GitHub Pages */
+.static-embed {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+}
+
+.static-embed h3 {
+    color: #02a95c;  /* GoFundMe green */
+    margin-bottom: 15px;
+}
+
+.donation-stats {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.gofundme-button {
+    background-color: #02a95c;  /* GoFundMe green */
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gofundme-button:hover {
+    background-color: #018c4c;  /* Darker GoFundMe green */
+}
+
+.gf-icon {
+    margin-right: 8px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-toggle {
@@ -1683,8 +1736,4 @@ footer::before {
 .gofundme-container:hover {
   transform: translateY(-5px);
   box-shadow: var(--box-shadow-hover);
-}
-
-.gofundme-container .gfm-embed {
-  width: 100%;
 }
