@@ -1728,7 +1728,7 @@ footer::before {
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     overflow: hidden;
-    height: 520px; /* Updated to match iframe height */
+    height: 630px; /* Much taller to ensure everything shows */
 }
 
 .gofundme-container:hover {
