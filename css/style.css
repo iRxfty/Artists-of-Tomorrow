@@ -1721,11 +1721,11 @@ footer::before {
 }
 
 .gofundme-container {
-    max-width: 580px; /* 560px for widget + 10px left/right space */
-    height: 705px;    /* 685px for widget + 10px top/bottom space */
-    margin: 40px auto;
+    max-width: 520px; /* 560px for widget + 10px left/right space */
+    height: 620px;    /* 685px for widget + 10px top/bottom space */
+    margin: 10px auto;
     background-color: white;
-    border-radius: 16px;
+    border-radius: 10px;
     box-shadow: var(--box-shadow);
     overflow: hidden;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
