@@ -1721,8 +1721,9 @@ footer::before {
 }
 
 .gofundme-container {
-    max-width: 520px; /* 560px for widget + 10px left/right space */
-    height: 620px;    /* 685px for widget + 10px top/bottom space */
+    /* Set dimensions to be 20px larger than the iframe (10px padding on each side) */
+    max-width: 580px; /* iframe width (560px) + 20px */
+    height: 620px;    /* iframe height (600px) + 20px */
     margin: 10px auto;
     background-color: white;
     border-radius: 10px;
@@ -1730,7 +1731,7 @@ footer::before {
     overflow: hidden;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     
-    /* Flexbox properties for perfect centering */
+    /* Use flexbox to center the iframe within the container */
     display: flex;
     justify-content: center; /* Horizontally centers the widget */
     align-items: center;     /* Vertically centers the widget */
