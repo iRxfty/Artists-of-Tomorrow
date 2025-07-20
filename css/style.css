@@ -1668,3 +1668,25 @@ footer::before {
         gap: 8px;
     }
 }
+
+.gofundme-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  overflow: hidden;
+}
+
+.gofundme-container:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.gofundme-container .gfm-embed {
+  width: 100%;
+}
