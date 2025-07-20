@@ -1721,13 +1721,13 @@ footer::before {
 }
 
 .gofundme-container {
-    /* Set a max-width for the container and use padding for spacing */
-    max-width: 520px; /* Accommodates 500px widget + 20px padding */
+    /* Center the container and set its max width */
+    max-width: 500px; /* Match the iframe's max-width */
     margin: 10px auto;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 10px; /* Creates the 10px border on all sides */
+    
+    /* The iframe itself has a border-radius, so we can apply the hover effect directly */
+    border-radius: 12px; /* Match the GoFundMe widget's rounded corners */
+    overflow: hidden; /* Ensures the hover shadow doesn't exceed the rounded corners */
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 }
 
