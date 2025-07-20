@@ -1728,7 +1728,7 @@ footer::before {
     padding: 10px;
     
     /* 3. This sets the size and centers the box */
-    max-width: 520px; /* 500px for the widget + 20px for padding */
+    max-width: 500px; /* 500px for the widget + 20px for padding */
     margin: 10px auto;
     
     /* 4. These are for the visual style (rounded corners and shadow) */
