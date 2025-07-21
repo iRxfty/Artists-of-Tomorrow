@@ -188,46 +188,39 @@
     <script>
         function makeGoFundMeResponsive() {
             const container = document.querySelector('.gofundme-container');
+            if (!container) return;
+
             const iframe = container.querySelector('iframe');
+            if (!iframe) return;
 
-            if (!container || !iframe) {
-                return;
-            }
+            const naturalWidgetWidth = 480;
+            const naturalWidgetHeight = 535;
+            const horizontalPadding = 20;
+            const verticalPadding = 20;
 
-            // Define the widget's natural dimensions (its size on desktop)
-            const naturalWidgetWidth = 480;  // The content area width (500px container - 20px padding)
-            const naturalWidgetHeight = 535; // The height from the iframe attribute
-            const verticalPadding = 20;      // 10px top + 10px bottom
-
-            // Get the current width of the container
             const containerWidth = container.offsetWidth;
+            if (containerWidth === 0) return;
 
-            // Check if we are on a mobile-sized view
             if (containerWidth < naturalWidgetWidth) {
-                // Calculate the scale needed to fit the widget inside the container's content area
-                const scale = (containerWidth - verticalPadding) / naturalWidgetWidth;
-                
-                // Calculate the new height for the container to wrap the scaled widget perfectly
+                // Mobile View
+                const scale = (containerWidth - horizontalPadding) / naturalWidgetWidth;
                 const newContainerHeight = (naturalWidgetHeight * scale) + verticalPadding;
 
-                // Apply the transformations to the iframe
                 iframe.style.transform = `scale(${scale})`;
                 iframe.style.transformOrigin = 'top left';
-                
-                // Adjust the container's height to prevent empty space
-                container.style.height = `${newContainerHeight}px`;
+                container.style.height = `${newContainerHeight.toFixed(2)}px`;
 
             } else {
-                // On desktop, remove any added styles to ensure it looks normal
-                iframe.style.transform = 'none';
-                container.style.height = 'auto'; // Let height be natural
+                // Desktop View: Reset styles
+                iframe.style.transform = '';
+                iframe.style.transformOrigin = '';
+                container.style.height = '';
             }
         }
 
-        // Run the function when the page loads
-        window.addEventListener('load', makeGoFundMeResponsive);
-
-        // Run it again if the window is resized (e.g., phone rotation)
+        // Use a more reliable event listener for initial run
+        document.addEventListener('DOMContentLoaded', makeGoFundMeResponsive);
+        // Run again on resize for events like screen rotation
         window.addEventListener('resize', makeGoFundMeResponsive);
     </script>
 </body>
