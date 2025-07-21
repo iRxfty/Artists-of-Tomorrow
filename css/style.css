@@ -1718,13 +1718,16 @@ footer::before {
     .social-links {
         gap: 8px;
     }
+    .gofundme-container iframe {
+        height: 580px;
+    }
 }
 
 .gofundme-container {
     background-color: white;
-    padding: 10px; /* Symmetrical padding */
+    padding: 20px 10px; /* 20px top/bottom, 10px left/right */
     
-    /* Accommodate 500px widget + 20px total padding */
+    /* Accommodate 500px widget + 20px total side padding */
     max-width: 520px; 
     margin: 10px auto;
     
@@ -1742,7 +1745,7 @@ footer::before {
 
 .gofundme-container iframe {
     width: 100%;
-    aspect-ratio: 500 / 535; /* Scales height based on width */
+    height: 535px; /* Default height for desktop */
     border: 0;
-    display: block; /* Prevents extra space below iframe */
+    display: block; 
 }
