@@ -1720,14 +1720,13 @@ footer::before {
     }
 }
 
-/* Container for the GoFundMe iframe */
+/* Final style for the GoFundMe widget container */
+/* This creates an even 10px border but will be cut off on mobile */
+
 .gofundme-container {
     background-color: white;
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    max-width: 500px;
+    padding: 10px; /* This creates the even 10px border on all 4 sides */
+    max-width: 500px; /* This sets the correct width for the desktop view */
     margin: 10px auto;
     border-radius: 12px;
     box-shadow: var(--box-shadow);
@@ -1738,20 +1737,4 @@ footer::before {
 .gofundme-container:hover {
   transform: translateY(-5px);
   box-shadow: var(--box-shadow-hover);
-}
-
-/* --- Responsive Scaling for Mobile --- */
-@media (max-width: 500px) {
-    /* Adjust the container to match the shrunken iframe */
-    .gofundme-container {
-        height: 443px;
-        overflow: hidden;
-    }
-
-    /* Shrink and re-center the iframe to prevent overflow */
-    .gofundme-container iframe {
-        transform-origin: top left;
-        /* Corrected horizontal position from -12% to -10% */
-        transform: translateX(-10%) scale(0.8);
-    }
 }
