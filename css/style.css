@@ -1744,15 +1744,14 @@ footer::before {
 @media (max-width: 500px) {
     /* Adjust the container to match the shrunken iframe */
     .gofundme-container {
-        /* Calculated height to remove extra white space */
         height: 443px;
-        /* Neatly contain the scaled iframe */
         overflow: hidden;
     }
 
-    /* Shrink the iframe to prevent overflow */
+    /* Shrink and re-center the iframe to prevent overflow */
     .gofundme-container iframe {
         transform-origin: top left;
-        transform: translateX(-12%) scale(0.8);
+        /* Corrected horizontal position from -12% to -10% */
+        transform: translateX(-10%) scale(0.8);
     }
 }
