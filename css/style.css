@@ -1721,15 +1721,25 @@ footer::before {
 }
 
 .gofundme-container {
+    /* 1. This creates the white box */
     background-color: white;
-    padding: 10px; /* Creates an even 10px border on all 4 sides */
-    max-width: 500px; /* This sets the correct width for the desktop view */
+
+    /* 2. This creates the 10px space on all sides inside the box */
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    
+    /* 3. This sets the size and centers the box */
+    max-width: 500px; /* 500px for the widget + 20px for padding */
     margin: 10px auto;
+    
+    /* 4. These are for the visual style (rounded corners and shadow) */
     border-radius: 12px;
     box-shadow: var(--box-shadow);
     box-sizing: border-box;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    overflow: hidden; /* Ensures the scaled iframe fits neatly */
+    display: block;
 }
 
 .gofundme-container:hover {
