@@ -162,7 +162,7 @@
                 <div class="footer-contact">
                     <h4>Contact Us</h4>
                     <p>Email: <a href="mailto:info.artistsoftomorrow@gmail.com">info.artistsoftomorrow@gmail.com</a></p>
-                    <div classs="social-links">
+                    <div class="social-links">
                         <a href="https://www.instagram.com/artists.0f.tomorrow/" target="_blank" rel="noopener noreferrer">
                             <img src="images/instagram-icon.png" alt="Instagram" class="social-icon"> Instagram
                         </a>
@@ -192,6 +192,12 @@
             const iframe = container.querySelector('iframe');
             if (!iframe) return;
 
+            // --- MANUAL ADJUSTMENT ---
+            // Change this number to fine-tune the padding.
+            // Smaller number (e.g., 0.95) = MORE padding (thicker border)
+            // Larger number (e.g., 1.05)  = LESS padding (thinner border)
+            const PADDING_ADJUSTMENT = 0.95; // Starting with a thicker border
+
             const naturalWidgetWidth = 480;
             const naturalWidgetHeight = 535;
             const horizontalPadding = 20;
@@ -202,11 +208,14 @@
 
             if (containerWidth < naturalWidgetWidth) {
                 // Mobile View
-                const scale = (containerWidth - horizontalPadding) / naturalWidgetWidth;
+                let scale = (containerWidth - horizontalPadding) / naturalWidgetWidth;
+                
+                // Apply the manual adjustment
+                scale = scale * PADDING_ADJUSTMENT;
+
                 const newContainerHeight = (naturalWidgetHeight * scale) + verticalPadding;
 
                 iframe.style.transform = `scale(${scale})`;
-                // This is the crucial change to center the widget
                 iframe.style.transformOrigin = 'top center'; 
                 container.style.height = `${newContainerHeight.toFixed(2)}px`;
 
@@ -218,9 +227,7 @@
             }
         }
 
-        // Use a more reliable event listener for initial run
         document.addEventListener('DOMContentLoaded', makeGoFundMeResponsive);
-        // Run again on resize for events like screen rotation
         window.addEventListener('resize', makeGoFundMeResponsive);
     </script>
 </body>
