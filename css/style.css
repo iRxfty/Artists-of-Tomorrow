@@ -1724,14 +1724,12 @@ footer::before {
     /* 1. This creates the white box */
     background-color: white;
 
-    /* 2. This creates the 10px space on all sides inside the box */
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    /* 2. This creates the space on all sides inside the box */
+    padding: 10px 10px 5px;
     
     /* 3. This sets the size and centers the box */
-    max-width: 500px; /* 500px for the widget + 20px for padding */
+    /* Set to the iframe's max-width (500px) + horizontal padding (2 * 10px) */
+    max-width: 520px; 
     margin: 10px auto;
     
     /* 4. These are for the visual style (rounded corners and shadow) */
