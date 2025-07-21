@@ -1727,12 +1727,14 @@ footer::before {
     /* 2. This creates the space on all sides inside the box */
     padding: 10px 10px 5px;
     
-    /* 3. This sets the size and centers the box */
-    /* Set to the iframe's max-width (500px) + horizontal padding (2 * 10px) */
-    max-width: 520px; 
+    /* 3. This sets the size and centers the box for the desktop view */
+    max-width: 500px;
     margin: 10px auto;
+
+    /* 4. This adds a horizontal scrollbar if the content overflows (on mobile) */
+    overflow-x: auto;
     
-    /* 4. These are for the visual style (rounded corners and shadow) */
+    /* 5. These are for the visual style */
     border-radius: 12px;
     box-shadow: var(--box-shadow);
     box-sizing: border-box;
