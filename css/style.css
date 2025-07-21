@@ -1720,28 +1720,29 @@ footer::before {
     }
 }
 
-/* Final, corrected style for the GoFundMe container */
 .gofundme-container {
+    /* 1. This creates the white box */
     background-color: white;
-    padding: 10px;
-    max-width: 500px;
+
+    /* 2. This creates the 10px space on all sides inside the box */
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    
+    /* 3. This sets the size and centers the box */
+    max-width: 500px; /* 500px for the widget + 20px for padding */
     margin: 10px auto;
+    
+    /* 4. These are for the visual style (rounded corners and shadow) */
     border-radius: 12px;
     box-shadow: var(--box-shadow);
     box-sizing: border-box;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    overflow: hidden;
+    display: block;
 }
 
 .gofundme-container:hover {
   transform: translateY(-5px);
   box-shadow: var(--box-shadow-hover);
-}
-
-/* Base style for the iframe within the container */
-.gofundme-container iframe {
-    display: block;
-    width: 100%;
-    min-height: 535px;
-    border: none;
 }
