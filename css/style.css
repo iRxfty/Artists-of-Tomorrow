@@ -1598,7 +1598,7 @@ footer::before {
 
     /* === RESPONSIVE GOFUNDME CONTAINER HEIGHT === */
     .gofundme-container {
-        height: 500px; /* Shorter height for mobile */
+        height: 480px; /* Shorter height for mobile */
     }
     /* === END OF CORRECTION === */
 }
@@ -1748,3 +1748,4 @@ footer::before {
   transform: translateY(-5px);
   box-shadow: var(--box-shadow-hover);
 }
+/* === END OF CORRECTION === */
