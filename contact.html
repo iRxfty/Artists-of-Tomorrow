@@ -135,7 +135,8 @@
                         scrolling="no"
                         allowtransparency="true"
                         width="500px" 
-                        height="535px">
+                        height="535px"
+                        style="min-height: 535px; width: 100%; max-width: 500px; display: block;">
                 </iframe>
             </div>
         </div>
@@ -183,52 +184,5 @@
     <script src="js/main.js"></script>
     <script src="js/privacy-notice.js"></script>
     <script src="js/clarity-helper.js"></script>
-
-    <script>
-        function makeGoFundMeResponsive() {
-            const container = document.querySelector('.gofundme-container');
-            if (!container) return;
-
-            const iframe = container.querySelector('iframe');
-            if (!iframe) return;
-
-            // --- MANUAL ADJUSTMENT ---
-            // Change this number to fine-tune the padding.
-            // Smaller number (e.g., 0.95) = MORE padding (thicker border)
-            // Larger number (e.g., 1.05)  = LESS padding (thinner border)
-            const PADDING_ADJUSTMENT = 0.95; // Starting with a thicker border
-
-            const naturalWidgetWidth = 480;
-            const naturalWidgetHeight = 535;
-            const horizontalPadding = 20;
-            const verticalPadding = 20;
-
-            const containerWidth = container.offsetWidth;
-            if (containerWidth === 0) return;
-
-            if (containerWidth < naturalWidgetWidth) {
-                // Mobile View
-                let scale = (containerWidth - horizontalPadding) / naturalWidgetWidth;
-                
-                // Apply the manual adjustment
-                scale = scale * PADDING_ADJUSTMENT;
-
-                const newContainerHeight = (naturalWidgetHeight * scale) + verticalPadding;
-
-                iframe.style.transform = `scale(${scale})`;
-                iframe.style.transformOrigin = 'top center'; 
-                container.style.height = `${newContainerHeight.toFixed(2)}px`;
-
-            } else {
-                // Desktop View: Reset styles
-                iframe.style.transform = '';
-                iframe.style.transformOrigin = '';
-                container.style.height = '';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', makeGoFundMeResponsive);
-        window.addEventListener('resize', makeGoFundMeResponsive);
-    </script>
 </body>
 </html>
