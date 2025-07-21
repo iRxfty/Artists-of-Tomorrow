@@ -1595,6 +1595,12 @@ footer::before {
         width: 100%;
         max-width: 300px;
     }
+
+    /* === RESPONSIVE GOFUNDME CONTAINER HEIGHT === */
+    .gofundme-container {
+        height: 500px; /* Shorter height for mobile */
+    }
+    /* === END OF CORRECTION === */
 }
 
 /* Desktop Navigation - Keep menu visible */
@@ -1720,26 +1726,22 @@ footer::before {
     }
 }
 
+/* === CORRECTED GOFUNDME CONTAINER STYLES === */
 .gofundme-container {
-    /* 1. This creates the white box */
     background-color: white;
-
-    /* 2. This creates the space inside the box */
     padding-top: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
     padding-left: 10px;
-    
-    /* 3. This sets the size and centers the box */
-    max-width: 520px; /* Corrected for 500px widget + 20px padding */
-    margin: 10px; /* Ensures a 10px boundary on all sides */
-    
-    /* 4. These are for the visual style (rounded corners and shadow) */
+    max-width: 520px;
+    margin: 10px;
     border-radius: 12px;
     box-shadow: var(--box-shadow);
     box-sizing: border-box;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    display: inline-block; /* Changed to allow centering via parent's text-align */
+    display: inline-block;
+    vertical-align: top;
+    height: 550px; /* Default desktop height (535px iframe + 15px padding) */
 }
 
 .gofundme-container:hover {
