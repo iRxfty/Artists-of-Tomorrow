@@ -365,12 +365,14 @@ nav ul {
 
 nav ul li a {
     padding: 10px 5px;
-    font-weight: 500;
+    font-weight: 600; /* Increased from 500 for better visibility */
     position: relative;
     font-family: var(--font-accent);
-    font-size: 0.95rem;
+    font-size: 1rem; /* Slightly larger font */
     letter-spacing: 0.02em;
     color: var(--dark-color);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
 }
 
 nav ul li a:after {
@@ -386,6 +388,7 @@ nav ul li a:after {
 
 nav ul li a:hover {
     color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 nav ul li a:hover:after,
@@ -605,6 +608,8 @@ nav ul li a.active:after {
     position: relative;
     z-index: 1;
     font-size: 1.8rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
 }
 
 .card p {
