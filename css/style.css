@@ -868,20 +868,9 @@ footer::before {
     letter-spacing: 0.02em;
 }
 
-.footer-links ul li a:before {
-    content: "›";
-    position: absolute;
-    left: 0;
-    transition: transform var(--transition-medium);
-}
-
 .footer-links ul li a:hover {
     color: var(--primary-color);
-    padding-left: 20px;
-}
-
-.footer-links ul li a:hover:before {
-    transform: translateX(3px);
+    padding-left: 0;
 }
 
 .footer-contact p {
