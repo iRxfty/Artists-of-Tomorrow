@@ -1817,10 +1817,6 @@ footer::before {
         margin-right: 8px;
     }
     
-    .logo span {
-        font-size: 1.6rem; /* Slightly smaller on mobile */
-    }
-    
     .footer-logo img {
         width: 35px;
         height: 35px;
@@ -2013,4 +2009,3 @@ footer::before {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     background: white;
 }
-```
