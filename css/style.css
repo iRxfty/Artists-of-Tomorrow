@@ -1,5 +1,21 @@
 /* Enhanced Base Styles with Balanced Color Scheme from Logo */
 /* Font imports removed - using only HTML links */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
 
 :root {
     /* Balanced color palette from logo */
@@ -165,13 +181,16 @@ section {
 
 /* Header Styles */
 header {
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(229, 157, 131, 0.08);
-    position: sticky;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
-    transition: all var(--transition-medium);
-    padding: 10px 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 header.scrolled {
@@ -192,46 +211,112 @@ header .container {
     align-items: center;
     text-decoration: none;
     color: var(--dark-color);
+    transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+    transform: translateX(3px);
 }
 
 .logo img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 15px;
-    transition: transform var(--transition-medium);
-    border-radius: 50%;
+    height: 40px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
 }
 
-.logo:hover img {
-    transform: scale(1.05);
+.logo a:hover img {
+    transform: rotate(-5deg) scale(1.05);
 }
 
 .logo span {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--accent-color);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    padding-bottom: 5px;
 }
 
-/* Mobile Navigation Styles */
+.logo span:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.logo a:hover span:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Mobile Navigation */
 .nav-toggle {
     display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
-    height: 21px;
+    height: 24px;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    z-index: 100;
+    padding: 10px 0;
+    z-index: 1001;
+    position: relative;
 }
 
 .nav-toggle span {
     display: block;
-    height: 3px;
     width: 100%;
-    background-color: var(--primary-color);
+    height: 2.5px;
+    background-color: var(--dark-color);
     border-radius: 3px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    position: relative;
+}
+
+.nav-toggle span:nth-child(1) {
+    transform: translateY(0) rotate(0);
+}
+
+.nav-toggle span:nth-child(2) {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+    background-color: var(--primary-color);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+    background-color: var(--primary-color);
+}
+
+/* Focus state for better accessibility */
+.nav-toggle:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+nav ul li {
+    margin-left: 20px;
 }
 
 nav.collapsed {
@@ -244,10 +329,6 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-nav ul li {
-    margin-left: 20px;
 }
 
 nav ul li a {
@@ -282,13 +363,26 @@ nav ul li a.active:after {
 
 /* Hero Section */
 .hero {
-    background-color: var(--accent-color);
-    background-image: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
     text-align: center;
-    padding: 140px 0 120px;
+    padding: 120px 0 100px;
     position: relative;
     overflow: hidden;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero h1 {
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero h2 {
+    animation: fadeInUp 1s ease-out 0.4s both;
+    margin-bottom: 30px;
+}
+
+.hero .cta-button {
+    animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .hero::before {
@@ -309,80 +403,44 @@ nav ul li a.active:after {
     100% { background-position: 100px 100px; }
 }
 
-.hero h1 {
-    font-size: 4rem;
-    margin-bottom: 15px;
-    color: var(--white);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    position: relative;
-    animation: slideInDown 0.8s ease;
-}
-
-.hero h2 {
-    font-size: 1.6rem;
-    margin-bottom: 35px;
-    font-weight: 400;
-    color: var(--white);
-    animation: slideInUp 1s ease;
-    font-family: var(--font-body);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero h2:after {
-    display: none;
-}
-
-@keyframes slideInDown {
-    from { opacity: 0; transform: translateY(-40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 /* Buttons */
 .cta-button, .secondary-button {
     display: inline-block;
-    padding: 14px 32px;
+    padding: 14px 35px;
     border-radius: 50px;
-    text-decoration: none;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
     transition: all var(--transition-medium);
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-accent);
-    font-size: 16px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
     position: relative;
     overflow: hidden;
     z-index: 1;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cta-button:before, .secondary-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.cta-button:hover:before, .secondary-button:hover:before {
+    width: 100%;
 }
 
 .cta-button {
     background-color: var(--primary-color);
     color: var(--white);
     box-shadow: 0 6px 18px rgba(229, 157, 131, 0.25);
-}
-
-.cta-button:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.7s ease;
-    z-index: -1;
-}
-
-.cta-button:hover:before {
-    left: 100%;
 }
 
 .cta-button:hover {
@@ -476,61 +534,37 @@ nav ul li a.active:after {
 }
 
 .card {
-    background-color: var(--white);
-    border-radius: 16px;
+    background: var(--white);
+    border-radius: 15px;
+    padding: 35px 30px;
+    margin-bottom: 30px;
     box-shadow: var(--box-shadow);
-    padding: 40px 30px;
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    border-top: 5px solid;
+    transition: all var(--transition-medium);
+    border: 1px solid rgba(0,0,0,0.05);
     position: relative;
     overflow: hidden;
 }
 
-.card::before {
+.card:after {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    z-index: 0;
-}
-
-.card:hover::before {
-    opacity: 1;
-    animation: cardShimmer 1.5s infinite;
-}
-
-@keyframes cardShimmer {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: var(--box-shadow-hover);
 }
 
-.card:nth-child(1) {
-    border-top-color: var(--highlight-color);
-}
-
-.card:nth-child(2) {
-    border-top-color: var(--accent-secondary);
-}
-
-.card:nth-child(3) {
-    border-top-color: var(--primary-color);
-}
-
-.card:nth-child(4) {
-    border-top-color: var(--secondary-color);
+.card:hover:after {
+    transform: scaleX(1);
 }
 
 .card h3 {
@@ -1527,6 +1561,13 @@ footer::before {
         transform: translateY(-9px) rotate(-45deg);
     }
     
+    /* Focus state for better accessibility */
+    .nav-toggle:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 4px;
+        border-radius: 4px;
+    }
+    
     h1 {
         font-size: 2.8rem;
     }
@@ -1718,34 +1759,56 @@ footer::before {
     .social-links {
         gap: 8px;
     }
+    .gofundme-container {
+        margin: 20px auto;
+        padding: 20px;
+        width: calc(100% - 40px);
+        max-width: 520px;
+    }
+    
     .gofundme-container iframe {
         height: 580px;
+        width: 100%;
     }
 }
 
 .gofundme-container {
     background-color: white;
-    padding: 20px 10px; /* 20px top/bottom, 10px left/right */
-    
-    /* Accommodate 500px widget + 20px total side padding */
-    max-width: 520px; 
-    margin: 10px auto;
-    
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    display: block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
 }
 
 .gofundme-container:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.gofundme-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    z-index: 1;
 }
 
 .gofundme-container iframe {
     width: 100%;
     height: 535px; /* Default height for desktop */
     border: 0;
-    display: block; 
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: white;
 }
