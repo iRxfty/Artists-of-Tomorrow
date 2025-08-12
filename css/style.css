@@ -1384,13 +1384,16 @@ footer::before {
 /* Contact Page */
 .contact-info {
     text-align: center;
+    padding: 60px 0;
 }
 
 .contact-methods {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px auto 0;
+    max-width: 900px;
 }
 
 .contact-method {
@@ -1399,7 +1402,9 @@ footer::before {
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -1412,6 +1417,31 @@ footer::before {
     color: var(--secondary-color);
     margin-bottom: 15px;
     font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.contact-method p {
+    margin: 15px 0;
+    color: var(--dark-color);
+}
+
+.contact-method .email-address {
+    font-size: 1.1rem;
+    word-break: break-word;
+}
+
+.social-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.social-row img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 .social-buttons {
