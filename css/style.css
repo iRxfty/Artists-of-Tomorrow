@@ -259,7 +259,7 @@ header .container {
 
 .logo span {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Increased from 1.5rem for better visibility */
     font-weight: 700 !important;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -270,6 +270,7 @@ header .container {
     white-space: nowrap;
     text-transform: none;
     letter-spacing: 0.5px;
+    line-height: 1.2; /* Added for better vertical alignment */
 }
 
 .logo span:after {
@@ -1809,9 +1810,13 @@ footer::before {
     
     /* Updated logo styles for mobile */
     .logo img {
-        width: 45px;
-        height: 45px;
-        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+    }
+    
+    .logo span {
+        font-size: 1.6rem; /* Slightly smaller on mobile */
     }
     
     .footer-logo img {
