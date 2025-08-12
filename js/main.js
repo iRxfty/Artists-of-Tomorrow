@@ -1,32 +1,122 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Add scroll event for header styling
+    // Add scroll event for header styling and back-to-top button
     const header = document.querySelector('header');
-    window.addEventListener('scroll', function() {
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '↑';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTopBtn);
+
+    function handleScroll() {
+        // Header scroll effect
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
+
+        // Back to top button visibility
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initialize
+
+    // Back to top functionality
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 
-    // Navigation Toggle Functionality
+    // Enhanced Navigation Toggle Functionality
     const navToggle = document.getElementById('navToggle');
     const mainNav = document.getElementById('mainNav');
     
     if (navToggle && mainNav) {
+        // Close menu when a nav link is clicked (for mobile)
+        const navLinks = mainNav.querySelectorAll('a');
+        
         navToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('expanded');
+            const isExpanded = mainNav.classList.toggle('expanded');
             navToggle.classList.toggle('active');
             
+            // Toggle body scroll
+            document.body.style.overflow = isExpanded ? 'hidden' : '';
+            
             // Accessibility
-            const expanded = mainNav.classList.contains('expanded');
-            navToggle.setAttribute('aria-expanded', expanded);
+            navToggle.setAttribute('aria-expanded', isExpanded);
+            
+            // Focus management
+            if (isExpanded) {
+                // Move focus to first nav item when opening
+                const firstNavItem = mainNav.querySelector('a');
+                if (firstNavItem) firstNavItem.focus();
+            } else {
+                // Return focus to menu button when closing
+                navToggle.focus();
+            }
+        });
+        
+        // Close menu when clicking on a nav link (for single page navigation)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (mainNav.classList.contains('expanded')) {
+                    mainNav.classList.remove('expanded');
+                    navToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+        
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('expanded')) {
+                mainNav.classList.remove('expanded');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.focus();
+            }
         });
         
         // Add accessibility attributes
         navToggle.setAttribute('aria-label', 'Toggle navigation menu');
         navToggle.setAttribute('aria-expanded', 'false');
         navToggle.setAttribute('aria-controls', 'mainNav');
+        
+        // Add tab trapping for better keyboard navigation
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const focusableContent = mainNav.querySelectorAll(focusableElements);
+        
+        if (focusableContent.length > 0) {
+            const firstFocusableElement = focusableContent[0];
+            const lastFocusableElement = focusableContent[focusableContent.length - 1];
+            
+            mainNav.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        // Shift + Tab
+                        if (document.activeElement === firstFocusableElement) {
+                            e.preventDefault();
+                            lastFocusableElement.focus();
+                        }
+                    } else {
+                        // Tab
+                        if (document.activeElement === lastFocusableElement) {
+                            e.preventDefault();
+                            firstFocusableElement.focus();
+                        }
+                    }
+                }
+            });
+        }
     }
     
     // Close menu when clicking outside
@@ -61,13 +151,82 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Contact form submission
+    // Contact form submission with validation
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
+        // Add form validation
+        const formFields = contactForm.querySelectorAll('input[required], textarea[required]');
+        
+        formFields.forEach(field => {
+            field.addEventListener('input', function() {
+                validateField(this);
+            });
+        });
+
+        function validateField(field) {
+            const errorElement = field.nextElementSibling;
+            if (field.validity.valid) {
+                field.classList.remove('error');
+                if (errorElement && errorElement.classList.contains('error-message')) {
+                    errorElement.style.display = 'none';
+                }
+            } else {
+                field.classList.add('error');
+                if (errorElement && errorElement.classList.contains('error-message')) {
+                    errorElement.style.display = 'block';
+                }
+            }
+        }
+
+        contactForm.addEventListener('submit', async function(event) {
             event.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+            
+            // Validate all fields
+            let isValid = true;
+            formFields.forEach(field => {
+                validateField(field);
+                if (!field.validity.valid) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <span class="loading"></span>';
+
+            try {
+                // Simulate form submission (replace with actual form submission)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                const successMessage = contactForm.querySelector('.success-message');
+                if (successMessage) {
+                    successMessage.classList.add('visible');
+                }
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    if (successMessage) {
+                        successMessage.classList.remove('visible');
+                    }
+                }, 5000);
+                
+            } catch (error) {
+                alert('There was an error sending your message. Please try again later.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
         });
     }
     
