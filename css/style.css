@@ -1522,9 +1522,9 @@ footer::before {
         nav.expanded {
         max-height: 500px; /* Increased to accommodate all menu items */
         animation: menuExpand 0.5s ease;
-        padding: 15px 0;
+        padding: 10px 8px;
         border-top: 1px solid rgba(0,0,0,0.05);
-        margin-top: 15px;
+        margin: 15px -8px 0;
     }
     
     @keyframes menuExpand {
@@ -1541,10 +1541,12 @@ footer::before {
     
     nav ul li {
         margin-left: 0;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         width: 100%;
         opacity: 0;
         animation: fadeInMenuItem 0.3s ease forwards;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 4px 0;
     }
     
         nav.expanded ul li:nth-child(1) { animation-delay: 0.1s; }
@@ -1561,9 +1563,37 @@ footer::before {
     }
     
     nav ul li a {
-        display: block;
-        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 8px;
         width: 100%;
+        color: var(--dark-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    
+    nav ul li a:hover {
+        background-color: rgba(0,0,0,0.03);
+        color: var(--primary-color);
+    }
+    
+    nav ul li a::after {
+        content: '→';
+        margin-left: 10px;
+        opacity: 0.5;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        font-size: 1.2rem;
+        line-height: 1;
+        margin-top: 2px;
+    }
+    
+    nav ul li a:hover::after {
+        transform: translateX(4px);
+        opacity: 0.8;
     }
     
     /* Animation for the hamburger icon */
