@@ -1,10 +1,3 @@
-Of course. I can help with that. The main title "Artists of Tomorrow" on the home page has slightly different styling (like letter spacing and text shadow) compared to the main titles on other pages.
-
-To fix this and make the title on the home page match the style of the titles on the other pages, I've adjusted the `style.css` file. Here is the corrected code.
-
-In `style.css`, I have modified the `.hero h1` rule to include the same `letter-spacing` and `text-shadow` properties as the titles on the other pages.
-
-```css
 /* Enhanced Base Styles with Balanced Color Scheme from Logo */
 /* Font imports removed - using only HTML links */
 @keyframes float {
