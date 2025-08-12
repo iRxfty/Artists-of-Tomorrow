@@ -190,6 +190,24 @@ section {
     text-align: center;
 }
 
+/* Email Address Styles */
+.email-address {
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.email-address a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.email-address a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 /* Header Styles */
 header {
     background-color: rgba(255, 255, 255, 0.98);
@@ -1581,14 +1599,11 @@ footer::before {
         color: var(--primary-color);
     }
     
-    nav ul li a::after {
-        content: '→';
-        margin-left: 10px;
-        opacity: 0.5;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-        font-size: 1.2rem;
-        line-height: 1;
-        margin-top: 2px;
+    /* Remove arrows from mobile navigation */
+    @media (max-width: 992px) {
+        nav ul li a::after {
+            display: none;
+        }
     }
     
     nav ul li a:hover::after {
