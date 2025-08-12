@@ -267,6 +267,8 @@ header .container {
     background-clip: text;
     position: relative;
     padding-bottom: 5px;
+    white-space: nowrap;
+    font-weight: 700 !important; /* Ensure bold is always applied */
 }
 
 .logo span:after {
