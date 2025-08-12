@@ -260,7 +260,7 @@ header .container {
 .logo span {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 700 !important;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -268,7 +268,8 @@ header .container {
     position: relative;
     padding-bottom: 5px;
     white-space: nowrap;
-    font-weight: 700 !important; /* Ensure bold is always applied */
+    text-transform: none;
+    letter-spacing: 0.5px;
 }
 
 .logo span:after {
@@ -1387,13 +1388,14 @@ footer::before {
 .contact-info {
     text-align: center;
     padding: 60px 0;
+    background-color: var(--background-color);
 }
 
 .contact-container {
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -1404,6 +1406,8 @@ footer::before {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 40px 0;
 }
 
 .contact-details h2 {
@@ -1411,6 +1415,8 @@ footer::before {
     margin-bottom: 20px;
     font-size: 2.5rem;
     font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
 .contact-details > p {
@@ -1419,6 +1425,7 @@ footer::before {
     line-height: 1.6;
     margin: 0 auto 30px;
     max-width: 600px;
+    font-family: var(--font-body);
 }
 
 .contact-methods {
@@ -1426,9 +1433,9 @@ footer::before {
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
-    margin: 40px auto 0;
-    max-width: 800px;
+    margin: 20px auto 0;
     width: 100%;
+    max-width: 800px;
 }
 
 .contact-method {
@@ -1437,47 +1444,109 @@ footer::before {
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    flex: 1;
-    min-width: 280px;
-    max-width: 380px;
+    flex: 1 1 300px;
+    max-width: 350px;
     text-align: center;
-    margin: 0 auto;
+    margin: 0;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .contact-method:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .contact-method h3 {
     color: var(--secondary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contact-method h3:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
 .contact-method p {
     margin: 15px 0;
     color: var(--dark-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
 }
 
 .contact-method .email-address {
     font-size: 1.1rem;
     word-break: break-word;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-method .email-address:hover {
+    color: var(--primary-dark);
 }
 
 .social-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin: 15px 0;
+    transition: transform 0.3s ease;
 }
 
 .social-row img {
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.social-row a {
+    color: var(--dark-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family: var(--font-body);
+}
+
+.social-row:hover {
+    transform: translateX(5px);
+}
+
+.social-row:hover a {
+    color: var(--primary-color);
+}
+
+/* Responsive adjustments for contact section */
+@media (max-width: 768px) {
+    .contact-info {
+        padding: 40px 0;
+    }
+    
+    .contact-details h2 {
+        font-size: 2.2rem;
+    }
+    
+    .contact-methods {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .contact-method {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .social-buttons {
@@ -1748,11 +1817,13 @@ footer::before {
     .contact-methods {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
     }
-
+    
     .contact-method {
         width: 100%;
-        max-width: 300px;
+        max-width: 100%;
+        margin: 0;
     }
 }
 
