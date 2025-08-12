@@ -1387,9 +1387,14 @@ footer::before {
     padding: 60px 0;
 }
 
+.contact-container {
+    display: flex;
+    justify-content: center;
+}
+
 .contact-details {
     max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
     text-align: center;
 }
 
@@ -1423,9 +1428,9 @@ footer::before {
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    width: 100%;
+    flex: 1;
+    min-width: 280px;
     max-width: 400px;
-    margin: 0 auto;
     text-align: center;
 }
 
