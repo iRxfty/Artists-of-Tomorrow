@@ -411,7 +411,7 @@ nav ul li a.active:after {
 .hero h1 {
     animation: fadeInUp 1s ease-out 0.2s both;
     letter-spacing: -0.02em;
-    font-weight: 800 !important; /* Increased font weight */
+    font-weight: 700 !important; /* Corrected to available font weight */
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     font-family: var(--font-heading);
     font-size: 4rem;
