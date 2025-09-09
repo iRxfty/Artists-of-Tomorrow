@@ -411,19 +411,17 @@ nav ul li a.active:after {
 .hero h1 {
     animation: fadeInUp 1s ease-out 0.2s both;
     letter-spacing: -0.02em;
-    font-weight: 700 !important; /* CORRECTED: Was 800, now 700 to match available font weight */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    font-weight: 700; /* keep real 700 weight */
     font-family: var(--font-heading);
     font-size: 4rem;
     line-height: 1.1;
     margin-bottom: 20px;
-    color: #FFFFFF; /* Fallback color */
-    background: linear-gradient(135deg, #E59D83, #C4B5ED); /* Direct color values */
+    background: linear-gradient(135deg, #E59D83, #C4B5ED);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    -webkit-text-stroke: 0.5px rgba(0,0,0,0.2);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
