@@ -182,6 +182,25 @@ section {
     position: relative;
 }
 
+/* Reusable fade-in effect for section content */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.fade-in.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in {
+        transition: none;
+        transform: none;
+    }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -414,7 +433,7 @@ nav ul li a.active:after {
     letter-spacing: -0.02em;
     font-weight: 700; /* keep real 700 weight */
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 6vw, 4rem);
     line-height: 1.1;
     margin-bottom: 20px;
     background: linear-gradient(135deg, #E59D83, #C4B5ED);
@@ -431,6 +450,7 @@ nav ul li a.active:after {
 .hero h2 {
     animation: fadeInUp 1s ease-out 0.4s both;
     margin-bottom: 30px;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
 }
 
 .hero .cta-button {
@@ -1829,14 +1849,6 @@ footer::before {
         padding: 100px 0 80px;
     }
     
-    .hero h1 {
-        font-size: 3rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.4rem;
-    }
-    
     /* Updated prize cards for mobile view */
     .prize-cards {
         flex-direction: column;
@@ -1964,14 +1976,6 @@ footer::before {
     .social-buttons {
         flex-direction: column;
         align-items: center;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.2rem;
     }
     
     .google-form-container {

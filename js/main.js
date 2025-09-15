@@ -230,27 +230,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add animation classes to elements when they become visible
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.card, .prize-card, .step, .judge-card, .prize, .contact-method');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect();
-            
-            // Check if element is in viewport
-            if (elementPosition.top < window.innerHeight * 0.9 && elementPosition.bottom > 0) {
-                if (!element.classList.contains('animated')) {
-                    element.classList.add('animated');
-                    element.style.animation = 'fadeIn 0.8s ease forwards';
-                }
+    // Fade-in elements when they enter the viewport
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                obs.unobserve(entry.target);
             }
         });
-    };
-    
-    // Run on scroll and on load
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('resize', animateOnScroll);
-    animateOnScroll(); // Run once on page load
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section, .card, .prize-card, .step, .judge-card, .prize, .contact-method').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
     
     // Add special effects to prizes section
     const enhancePrizes = function() {
