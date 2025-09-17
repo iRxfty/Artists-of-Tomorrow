@@ -1,62 +1,108 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if user has already accepted
-    if (!localStorage.getItem('privacyAccepted')) {
-        // Create banner element
-        const banner = document.createElement('div');
-        banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#333333;color:#fff;padding:15px;text-align:center;box-shadow:0 -4px 10px rgba(0,0,0,0.2);z-index:1000;animation:slideInUp 0.5s ease;';
-        
-        // Add content to banner - using relative path instead of absolute
-        banner.innerHTML = `
-            <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:15px;">
-                <p style="margin:0;flex-grow:1;">This website uses analytics tools to improve your experience. 
-                <a href="privacy.html" id="privacyLink" style="color:#E08D79;text-decoration:underline;">Privacy Policy</a></p>
-                <button id="acceptPrivacy" style="background:#E08D79;color:white;border:none;padding:10px 25px;margin:5px;cursor:pointer;border-radius:50px;font-weight:bold;transition:all 0.3s ease;">Accept</button>
-            </div>
-        `;
-        
-        // Add banner to page
-        document.body.appendChild(banner);
-        
-        // Add button click handler
-        document.getElementById('acceptPrivacy').addEventListener('click', function() {
-            localStorage.setItem('privacyAccepted', 'true');
-            banner.style.animation = 'slideOutDown 0.5s ease forwards';
-            
-            // Add animation styles
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes slideOutDown {
-                    from { transform: translateY(0); opacity: 1; }
-                    to { transform: translateY(100%); opacity: 0; }
-                }
-                
-                @keyframes slideInUp {
-                    from { transform: translateY(100%); opacity: 0; }
-                    to { transform: translateY(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Remove banner after animation completes
-            setTimeout(() => {
-                banner.style.display = 'none';
-            }, 500);
-        });
-        
-        // Add hover effect to the accept button
-        const acceptBtn = document.getElementById('acceptPrivacy');
-        if (acceptBtn) {
-            acceptBtn.addEventListener('mouseenter', function() {
-                this.style.backgroundColor = '#D07A69';
-                this.style.transform = 'translateY(-2px)';
-                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-            });
-            
-            acceptBtn.addEventListener('mouseleave', function() {
-                this.style.backgroundColor = '#E08D79';
-                this.style.transform = '';
-                this.style.boxShadow = '';
-            });
+const COOKIE_CONSENT_KEY = 'cookieConsentStatus';
+const LEGACY_CONSENT_KEY = 'privacyAccepted';
+
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        const legacyValue = localStorage.getItem(LEGACY_CONSENT_KEY);
+        const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+        if (legacyValue && !storedConsent) {
+            localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
         }
+
+        if (legacyValue) {
+            localStorage.removeItem(LEGACY_CONSENT_KEY);
+        }
+
+        if (localStorage.getItem(COOKIE_CONSENT_KEY)) {
+            return;
+        }
+    } catch (error) {
+        console.warn('Cookie consent banner could not access localStorage.', error);
+    }
+
+    const banner = document.createElement('div');
+    banner.className = 'cookie-consent';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-live', 'polite');
+    banner.setAttribute('aria-label', 'Cookie consent notice');
+
+    banner.innerHTML = `
+        <div class="cookie-consent__container">
+            <div class="cookie-consent__icon" aria-hidden="true">🍪</div>
+            <div class="cookie-consent__content">
+                <h2 class="cookie-consent__title">Your privacy matters</h2>
+                <p class="cookie-consent__description">
+                    We use cookies and similar technologies to understand how our site is used and to improve your experience.
+                    Learn more in our <a href="privacy.html">privacy policy</a>.
+                </p>
+            </div>
+            <div class="cookie-consent__actions">
+                <button type="button" class="cookie-consent__button cookie-consent__button--secondary" data-consent="decline">
+                    Decline
+                </button>
+                <button type="button" class="cookie-consent__button cookie-consent__button--primary" data-consent="accept">
+                    Accept all
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => {
+        banner.classList.add('cookie-consent--visible');
+    });
+
+    const acceptButton = banner.querySelector('[data-consent="accept"]');
+    const declineButton = banner.querySelector('[data-consent="decline"]');
+
+    const removeBanner = () => {
+        if (banner.isConnected) {
+            banner.remove();
+        }
+    };
+
+    const handleChoice = (status) => {
+        try {
+            localStorage.setItem(COOKIE_CONSENT_KEY, status);
+        } catch (error) {
+            console.warn('Unable to persist cookie consent choice.', error);
+        }
+
+        banner.classList.remove('cookie-consent--visible');
+        banner.classList.add('cookie-consent--hidden');
+
+        const transitionCleanup = () => removeBanner();
+        banner.addEventListener('transitionend', transitionCleanup, { once: true });
+
+        setTimeout(() => {
+            if (banner.isConnected) {
+                removeBanner();
+            }
+        }, 600);
+    };
+
+    if (acceptButton) {
+        acceptButton.addEventListener('click', () => handleChoice('accepted'));
+    }
+
+    if (declineButton) {
+        declineButton.addEventListener('click', () => handleChoice('declined'));
+    }
+
+    banner.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            handleChoice('declined');
+        }
+    });
+
+    if (acceptButton) {
+        setTimeout(() => {
+            try {
+                acceptButton.focus({ preventScroll: true });
+            } catch (error) {
+                acceptButton.focus();
+            }
+        }, 120);
     }
 });
