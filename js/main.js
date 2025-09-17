@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const prizeAmounts = document.querySelectorAll('.prize-amount');
             prizeAmounts.forEach(amount => {
                 amount.style.width = '100%';
-                amount.style.textAlign = 'center';
+                amount.style.textAlign = 'left';
                 amount.style.margin = '5px 0';
             });
         }

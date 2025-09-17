@@ -1,5 +1,5 @@
 /* Enhanced Base Styles with Balanced Color Scheme from Logo */
-/* Font imports removed - using only HTML links */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -49,11 +49,11 @@
     --bronze: var(--salmon);
 
     /* Typography */
-    --font-heading: 'Cormorant Garamond', Georgia, serif;
-    --font-body: 'DM Sans', 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    --font-accent: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    --font-size-base: 1.1rem;
-    --line-height-base: 1.7;
+    --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', 'DM Sans', 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-accent: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-size-base: 1.05rem;
+    --line-height-base: 1.75;
     --heading-line-height: 1.3;
     --letter-spacing-heading: -0.02em;
     --letter-spacing-body: 0.01em;
@@ -180,6 +180,24 @@ img {
 section {
     padding: 80px 0;
     position: relative;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+}
+
+.section-header p {
+    margin: 12px auto 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.section-header h2:after {
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Reusable fade-in effect for section content */
@@ -693,149 +711,187 @@ nav ul li a.active:after {
     line-height: 1.7;
 }
 
-/* Prizes Section - Updated with balanced colors */
+/* Prizes Section */
 .prizes {
-    background-color: var(--light-color);
-    text-align: center;
-    padding: 60px 0 80px;
+    background: linear-gradient(180deg, var(--light-color) 0%, var(--white) 100%);
     position: relative;
     overflow: hidden;
+    padding: 90px 0;
+}
+
+.prizes::before,
+.prizes::after {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    opacity: 0.25;
+    z-index: 0;
 }
 
 .prizes::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(122, 184, 204, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(229, 157, 131, 0.05) 0%, transparent 40%);
+    background: radial-gradient(circle, rgba(122, 184, 204, 0.25) 0%, transparent 65%);
+    top: -180px;
+    left: -140px;
 }
 
-.prizes h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 50px;
-    font-size: 3.2rem;
+.prizes::after {
+    background: radial-gradient(circle, rgba(229, 157, 131, 0.22) 0%, transparent 70%);
+    bottom: -200px;
+    right: -160px;
+}
+
+.prizes .container {
     position: relative;
+    z-index: 1;
 }
 
-.prizes h2:after {
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--primary-color);
-    height: 4px;
-    width: 80px;
-}
-
-/* Updated prize cards to rectangular design with balanced colors */
 .prize-cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 30px;
-    margin: 40px 0;
+    margin-bottom: 40px;
 }
 
 .prize-card {
+    position: relative;
+    padding: 32px 28px;
+    border-radius: 22px;
+    background: var(--white);
+    border: 1px solid rgba(45, 55, 72, 0.08);
+    box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 20px;
-    color: var(--dark-color);
-    width: 280px;
-    height: 200px;
-    background-color: white !important;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    border-top: 5px solid;
-    border-radius: 12px;
+    gap: 16px;
+    align-items: flex-start;
+    text-align: left;
+    overflow: hidden;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    position: relative;
 }
 
-.prize-card.first {
-    border-top-color: var(--gold);
-}
-
-.prize-card.second {
-    border-top-color: var(--silver);
-}
-
-.prize-card.third {
-    border-top-color: var(--blue);
+.prize-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(229, 157, 131, 0.12), rgba(122, 184, 204, 0.12));
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    z-index: 0;
 }
 
 .prize-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.prize-card:hover::before {
+    opacity: 1;
+}
+
+.prize-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.prize-card.first {
+    border-top: 6px solid var(--gold);
+}
+
+.prize-card.second {
+    border-top: 6px solid var(--silver);
+}
+
+.prize-card.third {
+    border-top: 6px solid var(--blue);
+}
+
+.prize-card.recognition {
+    border-top: 6px solid var(--accent-color);
 }
 
 .prize-rank {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    font-family: var(--font-heading);
     color: var(--dark-color);
-    text-shadow: none;
+    letter-spacing: -0.01em;
+    font-family: var(--font-heading);
 }
 
 .prize-amount {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    text-align: center;
-    padding: 0 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 6px;
+    align-items: flex-start;
+    line-height: 1.2;
 }
 
-/* Indian Rupee symbol styling */
+.prize-value {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+}
+
+.prize-value .rupee-symbol {
+    margin-right: 0;
+}
+
+.prize-card.recognition .prize-amount {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    letter-spacing: 0.04em;
+}
+
 .rupee-symbol {
     display: inline-block;
     font-weight: 700;
-    margin-right: 3px;
-    font-size: 1.05em;
-    color: var(--primary-color);
+    font-size: 1em;
+    color: var(--primary-dark);
 }
 
-/* Indian Rupees label - fixed visibility */
-.currency-label {
-    display: block;
-    font-size: 0.8em;
-    color: var(--secondary-color);
+.prize-amount .currency-label {
+    font-size: 0.75rem;
     font-weight: 600;
-    margin-top: 8px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.honorable-mention {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-top: 50px;
-    background: var(--white);
-    padding: 16px 32px;
-    border-radius: 30px;
-    display: inline-block;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transform: rotate(-2deg);
-    transition: transform var(--transition-medium);
-    position: relative;
-    z-index: 2;
-    font-family: var(--font-accent);
     color: var(--secondary-color);
 }
 
-.honorable-mention:hover {
-    transform: rotate(0deg) scale(1.05);
-    color: var(--primary-color);
+.prize-description {
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+}
+
+.prize-note {
+    background: linear-gradient(135deg, rgba(229, 157, 131, 0.18), rgba(122, 184, 204, 0.18));
+    border-radius: 24px;
+    padding: 28px 32px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(45, 55, 72, 0.08);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prize-note h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--dark-color);
+}
+
+.prize-note p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.7;
 }
 
 /* Footer */
@@ -1218,102 +1274,51 @@ footer::before {
 }
 
 .prizes-detailed {
-    text-align: center;
-}
-
-.prizes-detailed h2 {
-    text-align: center;
-    font-size: 2.8rem;
-    margin-bottom: 50px;
-}
-
-.prizes-detailed h2:after {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.prize-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.prize {
-    background-color: var(--white);
-    padding: 35px 30px;
-    border-radius: 16px;
-    width: 280px;
-    box-shadow: var(--box-shadow);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    background: linear-gradient(180deg, var(--white) 0%, var(--light-color) 100%);
     position: relative;
-    overflow: hidden;
+    padding: 90px 0;
 }
 
-.prize::before {
+.prizes-detailed::before {
     content: '';
     position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.3);
-    transform: scale(0);
-    transition: transform var(--transition-slow);
+    inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(219, 193, 225, 0.18) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(252, 240, 160, 0.15) 0%, transparent 60%);
     z-index: 0;
 }
 
-.prize:hover::before {
-    transform: scale(10);
-}
-
-.prize:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.prize:nth-child(1) {
-    border-top: 5px solid var(--gold);
-}
-
-.prize:nth-child(2) {
-    border-top: 5px solid var(--silver);
-}
-
-.prize:nth-child(3) {
-    border-top: 5px solid var(--blue);
-}
-
-.prize:nth-child(4) {
-    border-top: 5px solid var(--accent-color);
-}
-
-.prize h3 {
-    color: var(--secondary-color);
-    margin-bottom: 15px;
+.prizes-detailed .container {
     position: relative;
     z-index: 1;
+}
+
+.prizes-detailed .section-header p {
+    max-width: 640px;
+    margin: 12px auto 0;
+}
+
+.prizes-detailed .prize-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.prizes-detailed .prize-card {
+    min-height: 0;
+}
+
+.prizes-detailed .prize-card .prize-amount {
     font-size: 1.8rem;
-    font-family: var(--font-heading);
 }
 
-.prize .prize-amount {
-    font-weight: 600;
-    color: var(--primary-color);
-    position: relative;
-    z-index: 1;
-    font-size: 1.5rem;
-    font-family: var(--font-accent);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.prizes-detailed .prize-card.recognition .prize-amount {
+    font-size: 1.4rem;
 }
 
-.prize .currency-label {
-    color: var(--secondary-color);
-    font-weight: 600;
+.prizes-detailed .prize-note {
+    max-width: 780px;
 }
 
 /* Submission Page */
@@ -1849,22 +1854,18 @@ footer::before {
         padding: 100px 0 80px;
     }
     
-    /* Updated prize cards for mobile view */
-    .prize-cards {
-        flex-direction: column;
-        align-items: center;
-        gap: 60px; /* Extra large gap for mobile to avoid text overlap */
+    .prize-cards,
+    .prizes-detailed .prize-list {
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
-    
-    .prize-list {
-        flex-direction: column;
-        align-items: center;
+
+    .prize-card {
+        padding: 28px 24px;
     }
-    
-    .prize {
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 20px;
+
+    .prize-note {
+        padding: 24px 22px;
     }
     
     section {
@@ -1923,12 +1924,6 @@ footer::before {
         width: 100%;
     }
     
-    /* Restore horizontal layout for prize cards on desktop */
-    .prize-cards {
-        flex-direction: row;
-        justify-content: center;
-        gap: 40px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1940,29 +1935,29 @@ footer::before {
         min-width: 100%;
     }
     
-    /* Fix for mobile prize cards */
     .prize-card {
-        width: 280px;
-        height: auto;
-        padding-bottom: 20px;
+        padding: 24px 20px;
     }
-    
+
     .prize-rank {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
     }
-    
+
     .prize-amount {
-        font-size: 1.5rem;
-        margin-top: 5px;
+        font-size: 1.6rem;
     }
-    
-    .currency-label {
-        margin-top: 10px;
-        font-size: 0.9em;
+
+    .prize-amount .currency-label {
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
     }
-    
-    .prizes {
-        padding-bottom: 100px; /* Extra padding at bottom */
+
+    .prize-note {
+        padding: 20px 18px;
+    }
+
+    .prize-note h3 {
+        font-size: 1.4rem;
     }
     
     .step {
