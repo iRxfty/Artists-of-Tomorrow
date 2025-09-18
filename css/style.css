@@ -2399,13 +2399,19 @@ footer::before {
 @media (max-width: 768px) {
     .cookie-consent {
         bottom: 16px;
-        padding: 18px;
+        padding: 16px;
         border-radius: 18px;
     }
 
     .cookie-consent__container {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .cookie-consent__content {
+        flex: 1 1 auto;
+        width: 100%;
     }
 
     .cookie-consent__actions {
