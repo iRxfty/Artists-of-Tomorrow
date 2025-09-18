@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const animateGroups = document.querySelectorAll('[data-animate-group]');
+    animateGroups.forEach(group => {
+        const scopedElements = Array.from(group.querySelectorAll('[data-animate]')).filter(element => {
+            const nearestGroup = element.closest('[data-animate-group]');
+            return nearestGroup === group;
+        });
+
+        scopedElements.forEach((element, index) => {
+            if (!element.style.getPropertyValue('--reveal-delay')) {
+                const delay = Math.min(index * 0.12, 0.6);
+                element.style.setProperty('--reveal-delay', `${delay}s`);
+            }
+        });
+    });
+
+    const animatedElements = document.querySelectorAll('[data-animate]');
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -10%',
+            threshold: 0.1
+        });
+
+        animatedElements.forEach((element, index) => {
+            if (!element.style.getPropertyValue('--reveal-delay')) {
+                const delay = Math.min(index * 0.08, 0.4);
+                element.style.setProperty('--reveal-delay', `${delay}s`);
+            }
+            observer.observe(element);
+        });
+    } else {
+        animatedElements.forEach(element => element.classList.add('is-visible'));
+    }
+
     // Add scroll event for header styling and back-to-top button
     const header = document.querySelector('header');
     const backToTopBtn = document.createElement('button');
