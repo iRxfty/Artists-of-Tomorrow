@@ -83,6 +83,26 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navToggle && mainNav) {
         const submenuToggles = mainNav.querySelectorAll('.submenu-toggle');
 
+        const openActiveSubmenu = () => {
+            const activeSubLink = mainNav.querySelector('.submenu a[aria-current="page"], .submenu a.active');
+            if (!activeSubLink) {
+                return;
+            }
+
+            const parentItem = activeSubLink.closest('.has-submenu');
+            if (!parentItem) {
+                return;
+            }
+
+            parentItem.classList.add('open');
+
+            const activeToggle = parentItem.querySelector('.submenu-toggle');
+            if (activeToggle) {
+                activeToggle.setAttribute('aria-expanded', 'true');
+                activeToggle.classList.add('active');
+            }
+        };
+
         const closeAllSubmenus = () => {
             submenuToggles.forEach(toggle => {
                 const parentItem = toggle.closest('.has-submenu');
@@ -160,9 +180,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Accessibility
             navToggle.setAttribute('aria-expanded', isExpanded);
-            
+
             // Focus management
             if (isExpanded) {
+                openActiveSubmenu();
                 // Move focus to first nav item when opening
                 const firstNavItem = mainNav.querySelector('a');
                 if (firstNavItem) firstNavItem.focus();
@@ -262,9 +283,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Show the upload section
             const uploadSection = document.getElementById('uploadSection');
+            const submissionNumberField = document.getElementById('submissionNumber');
+
             if (uploadSection) {
                 uploadSection.classList.remove('hidden');
-                document.getElementById('submissionNumber').value = submissionNumber;
+            }
+
+            if (submissionNumberField) {
+                submissionNumberField.value = submissionNumber;
             }
         });
     }

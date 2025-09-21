@@ -531,6 +531,14 @@ nav ul li > .submenu-toggle:focus {
     border-radius: 6px;
 }
 
+}
+
+nav ul li > .submenu-toggle:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
 nav ul li > a:after {
     content: '';
     position: absolute;
@@ -2054,6 +2062,7 @@ footer::before {
 
 .journey-section {
     padding: 80px 0;
+    scroll-margin-top: 120px;
 }
 
 .journey-section--alt {
@@ -2074,6 +2083,28 @@ footer::before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
+}
+
+.journey-subsection {
+    margin-top: 56px;
+}
+
+.journey-subsection h3 {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.journey-subsection-lead {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.journey-subsection--team .team-grid,
+.journey-subsection--winners .winner-grid {
+    margin-top: 32px;
 }
 
 .journey-card {
@@ -2141,6 +2172,22 @@ footer::before {
     gap: 16px;
     flex-wrap: wrap;
     margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+    .journey-section {
+        padding: 60px 0;
+        scroll-margin-top: 96px;
+    }
+
+    .journey-subsection {
+        margin-top: 44px;
+    }
+
+    .journey-subsection-lead {
+        margin-bottom: 24px;
+    }
+
 }
 
 /* Team & Profile Cards */
