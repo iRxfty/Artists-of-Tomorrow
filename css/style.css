@@ -2519,11 +2519,11 @@ footer::before {
     }
     
     nav.expanded {
-        max-height: 550px; /* Increased to ensure all items fit */
+        max-height: 100vh; /* Increased to ensure all items fit */
         animation: menuExpand 0.5s ease;
         padding: 10px 8px;
         border-top: 1px solid rgba(0,0,0,0.05);
-        margin: 15px -8px 0;
+        margin: 15px 0 0; /* Removed negative margin */
     }
     
     @keyframes menuExpand {
@@ -2633,6 +2633,8 @@ footer::before {
         background: rgba(255, 255, 255, 0.65);
         font-size: 1rem;
         color: var(--dark-color); /* Added to ensure text is visible */
+        display: block; /* Ensures proper rendering of long text */
+        line-height: 1.5; /* Ensures proper rendering of long text */
     }
 
     nav ul li .submenu a:hover,
