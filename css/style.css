@@ -369,6 +369,9 @@ header .container {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 0;
 }
 
 /* Updated Logo Styles for 1080px x 1080px logo - CIRCULAR */
@@ -428,9 +431,9 @@ header .container {
     transform-origin: left;
 }
 
-/* Mobile Navigation */
+/* Navigation */
 .nav-toggle {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
@@ -485,44 +488,108 @@ header .container {
     border-radius: 4px;
 }
 
-nav ul li {
-    margin-left: 12px;
-    position: relative;
+nav {
+    flex-basis: 100%;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    order: 3;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1002;
 }
 
 nav.collapsed {
     max-height: 0;
-    overflow: hidden;
+}
+
+nav.expanded {
+    max-height: 85vh;
+    animation: menuExpand 0.5s ease;
+    padding: 12px 10px 18px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 14px 0 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 16px;
+    box-shadow: 0 18px 28px -18px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+    opacity: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@keyframes menuExpand {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 nav ul {
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
+    gap: 0;
+}
+
+nav ul li {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+}
+
+nav ul li:last-child {
+    border-bottom: none;
+}
+
+nav.expanded ul li {
+    animation: fadeInMenuItem 0.3s ease forwards;
+}
+
+nav.expanded ul li:nth-child(1) { animation-delay: 0.1s; }
+nav.expanded ul li:nth-child(2) { animation-delay: 0.15s; }
+nav.expanded ul li:nth-child(3) { animation-delay: 0.2s; }
+nav.expanded ul li:nth-child(4) { animation-delay: 0.25s; }
+nav.expanded ul li:nth-child(5) { animation-delay: 0.3s; }
+nav.expanded ul li:nth-child(6) { animation-delay: 0.35s; }
+nav.expanded ul li:nth-child(7) { animation-delay: 0.4s; }
+nav.expanded ul li:nth-child(8) { animation-delay: 0.45s; }
+nav.expanded ul li:nth-child(9) { animation-delay: 0.5s; }
+
+@keyframes fadeInMenuItem {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 nav ul li > a,
 nav ul li > .submenu-toggle {
-    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 10px;
     font-weight: 600;
     position: relative;
     font-family: var(--font-accent);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     letter-spacing: 0.02em;
     color: var(--dark-color);
-    transition: color 0.2s ease, transform 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
     background: transparent;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    white-space: nowrap;
+    white-space: normal;
+    border-radius: 10px;
 }
 
 nav ul li > .submenu-toggle {
+    text-align: left;
     font: inherit;
 }
 
@@ -532,27 +599,15 @@ nav ul li > .submenu-toggle:focus {
     border-radius: 6px;
 }
 
-nav ul li > a:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width var(--transition-medium);
-}
-
 nav ul li > a:hover,
 nav ul li > .submenu-toggle:hover,
 nav ul li > .submenu-toggle:focus-visible {
     color: var(--primary-color);
-    transform: translateY(-2px);
+    background-color: rgba(229, 157, 131, 0.12);
 }
 
-nav ul li > a:hover:after,
-nav ul li > a.active:after {
-    width: 100%;
+nav ul li > a:after {
+    display: none;
 }
 
 nav ul li > .submenu-toggle.active,
@@ -565,7 +620,7 @@ nav ul li > .submenu-toggle .submenu-icon {
     display: inline-block;
     width: 0;
     height: 0;
-    margin-left: 4px;
+    margin-left: 12px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid currentColor;
@@ -573,68 +628,57 @@ nav ul li > .submenu-toggle .submenu-icon {
     transform-origin: center;
 }
 
-nav ul li.has-submenu:hover > .submenu-toggle .submenu-icon,
 nav ul li.has-submenu.open > .submenu-toggle .submenu-icon,
 nav ul li.has-submenu:focus-within > .submenu-toggle .submenu-icon {
     transform: rotate(180deg);
 }
 
 nav ul li .submenu {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    background: var(--white);
     list-style: none;
-    padding: 12px 0;
+    padding: 6px 0 0 18px;
     margin: 0;
-    border-radius: 14px;
-    box-shadow: var(--box-shadow);
-    min-width: 280px;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity var(--transition-medium), transform var(--transition-medium);
+    max-height: 0;
+    overflow: hidden;
     pointer-events: none;
-    z-index: 1001; /* Increased z-index */
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+nav ul li.has-submenu.open > .submenu,
+nav ul li.has-submenu:focus-within > .submenu {
+    max-height: 600px;
+    pointer-events: auto;
+    opacity: 1;
+    margin-top: 8px;
 }
 
 nav ul li .submenu li {
-    margin: 0;
     border: none;
-    animation: none;
+    margin-bottom: 6px;
 }
 
 nav ul li .submenu a {
     display: block;
-    padding: 10px 20px;
-    font-weight: 500;
-    font-size: 0.95rem;
+    padding: 12px 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
     color: var(--dark-color);
     text-decoration: none;
-    transition: background var(--transition-medium), color var(--transition-medium);
-    white-space: normal;
-    line-height: 1.5;
+    background: transparent;
+    border-radius: 10px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    line-height: 1.45;
+    word-break: break-word;
 }
 
 nav ul li .submenu a:hover,
 nav ul li .submenu a:focus {
-    background-color: var(--peach-light);
+    background-color: rgba(229, 157, 131, 0.12);
     color: var(--primary-color);
 }
 
 nav ul li .submenu a.active {
-    background-color: rgba(229, 157, 131, 0.12);
     color: var(--primary-color);
-    font-weight: 600;
-}
-
-nav ul li.has-submenu:hover > .submenu,
-nav ul li.has-submenu.open > .submenu,
-nav ul li.has-submenu:focus-within > .submenu {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
 }
 
 /* Hero Section */
@@ -2505,189 +2549,91 @@ footer::before {
     .nav-toggle {
         display: flex;
     }
-    
+
     header .container {
         flex-wrap: wrap;
         position: relative;
+        gap: 6px 0;
     }
-    
-    nav {
-        width: 100%;
-        max-height: 0;
-        transition: max-height 0.5s ease;
-        overflow: hidden;
-        order: 3; /* Ensure navigation appears below both logo and toggle */
-    }
-    
+
     nav.expanded {
         max-height: 100vh;
-        animation: menuExpand 0.5s ease;
-        padding: 10px 8px;
-        border-top: 1px solid rgba(0,0,0,0.05);
-        margin: 15px 0 0;
+        padding: 12px 10px 20px;
+        margin: 16px 0 0;
+        box-shadow: none;
+        border-radius: 12px;
     }
-    
-    @keyframes menuExpand {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
+
     nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 20px;
-        width: 100%;
+        margin-top: 8px;
     }
-    
+
     nav ul li {
-        margin-left: 0;
-        margin-bottom: 8px;
-        width: 100%;
-        opacity: 0;
-        animation: fadeInMenuItem 0.3s ease forwards;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
         padding: 4px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    nav.expanded ul li:nth-child(1) { animation-delay: 0.1s; }
-    nav.expanded ul li:nth-child(2) { animation-delay: 0.15s; }
-    nav.expanded ul li:nth-child(3) { animation-delay: 0.2s; }
-    nav.expanded ul li:nth-child(4) { animation-delay: 0.25s; }
-    nav.expanded ul li:nth-child(5) { animation-delay: 0.3s; }
-    nav.expanded ul li:nth-child(6) { animation-delay: 0.35s; }
-    nav.expanded ul li:nth-child(7) { animation-delay: 0.4s; }
-    nav.expanded ul li:nth-child(8) { animation-delay: 0.45s; }
-    nav.expanded ul li:nth-child(9) { animation-delay: 0.5s; }
-
-    @keyframes fadeInMenuItem {
-        from { opacity: 0; transform: translateX(-20px); }
-        to { opacity: 1; transform: translateX(0); }
+    nav ul li:last-child {
+        border-bottom: none;
     }
 
     nav ul li > a,
     nav ul li > .submenu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         padding: 12px 8px;
-        width: 100%;
-        color: var(--dark-color);
-        text-decoration: none;
-        transition: all 0.2s ease;
-        border-radius: 6px;
         font-size: 1.1rem;
-        font-weight: 500;
-    }
-
-    nav ul li > .submenu-toggle {
-        text-align: left;
-    }
-
-    nav ul li > a:hover,
-    nav ul li > .submenu-toggle:hover,
-    nav ul li > .submenu-toggle:focus-visible {
-        background-color: rgba(0,0,0,0.03);
-        color: var(--primary-color);
-    }
-
-    /* Remove arrows from mobile navigation */
-    nav ul li > a::after {
-        display: none;
-    }
-
-    nav ul li > a:hover::after {
-        transform: translateX(4px);
-        opacity: 0.8;
     }
 
     nav ul li .submenu {
-        position: static;
-        background: transparent;
+        padding: 6px 0 0 18px;
         box-shadow: none;
-        padding: 0 0 0 12px;
-        margin-top: 0;
-        visibility: visible;
-        opacity: 1;
-        transform: none;
-        max-height: 0;
-        overflow: hidden;
-        pointer-events: none;
-        transition: max-height 0.3s ease;
-    }
-
-    nav ul li.has-submenu.open > .submenu {
-        max-height: 600px;
-        pointer-events: auto;
-        margin-top: 8px;
     }
 
     nav ul li .submenu li {
-        margin-bottom: 8px;
-        padding: 0;
-        border: none;
-        animation: none;
-        background: rgba(240, 240, 240, 0.9);
-        border-radius: 6px;
+        margin-bottom: 6px;
     }
 
     nav ul li .submenu a {
-        padding: 12px 16px;
-        font-size: 0.9rem;
-        color: #333;
-        line-height: 1.4;
-        white-space: normal;
-        word-break: break-word;
-        background: none;
-        border-radius: 0;
+        padding: 12px 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--dark-color);
     }
 
     nav ul li .submenu a:hover,
     nav ul li .submenu a:focus {
-        background: none;
-        color: var(--primary-dark);
+        background-color: rgba(229, 157, 131, 0.12);
+        color: var(--primary-color);
     }
 
-    nav ul li > .submenu-toggle .submenu-icon {
-        margin-left: auto;
-    }
-    
-    /* Animation for the hamburger icon */
     .nav-toggle.active span:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
     }
-    
+
     .nav-toggle.active span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .nav-toggle.active span:nth-child(3) {
         transform: translateY(-9px) rotate(-45deg);
     }
-    
-    /* Focus state for better accessibility */
-    .nav-toggle:focus {
-        outline: 2px solid var(--primary-color);
-        outline-offset: 4px;
-        border-radius: 4px;
-    }
-    
+
     h1 {
         font-size: 2.8rem;
     }
-    
+
     h2 {
         font-size: 2.2rem;
     }
-    
+
     .footer-content > div {
         width: 100%;
         margin-bottom: 30px;
     }
-    
+
     .hero {
         padding: 100px 0 80px;
     }
-    
+
     .prize-cards,
     .prizes-detailed .prize-list {
         grid-template-columns: 1fr;
@@ -2701,18 +2647,18 @@ footer::before {
     .prize-note {
         padding: 24px 22px;
     }
-    
+
     section {
         padding: 60px 0;
     }
-    
+
     /* Updated logo styles for mobile */
     .logo img {
         width: 40px;
         height: 40px;
         margin-right: 8px;
     }
-    
+
     .footer-logo img {
         width: 35px;
         height: 35px;
@@ -2723,41 +2669,12 @@ footer::before {
         align-items: center;
         gap: 20px;
     }
-    
+
     .contact-method {
         width: 100%;
         max-width: 100%;
         margin: 0;
     }
-}
-
-/* Desktop Navigation - Keep menu visible */
-@media (min-width: 769px) {
-    nav {
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    
-    nav ul li {
-        position: relative;
-    }
-    
-    nav ul li::after {
-        content: '';
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: var(--primary-color);
-        transition: width var(--transition-medium);
-        opacity: 0.7;
-    }
-    
-    nav ul li:hover::after {
-        width: 100%;
-    }
-    
 }
 
 @media (max-width: 480px) {
