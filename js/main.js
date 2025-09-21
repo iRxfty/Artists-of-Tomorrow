@@ -175,8 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExpanded = mainNav.classList.toggle('expanded');
             navToggle.classList.toggle('active');
 
-            // Toggle body scroll
-            document.body.style.overflow = isExpanded ? 'hidden' : '';
+            // Toggle body scroll (only lock on smaller viewports)
+            const lockScroll = window.innerWidth <= 768;
+            document.body.style.overflow = isExpanded && lockScroll ? 'hidden' : '';
 
             // Accessibility
             navToggle.setAttribute('aria-expanded', isExpanded);
