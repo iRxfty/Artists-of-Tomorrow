@@ -486,7 +486,7 @@ header .container {
 }
 
 nav ul li {
-    margin-left: 12px; /* Decreased spacing */
+    margin-left: 12px;
     position: relative;
 }
 
@@ -508,7 +508,7 @@ nav ul li > .submenu-toggle {
     font-weight: 600;
     position: relative;
     font-family: var(--font-accent);
-    font-size: 0.95rem; /* Decreased font size */
+    font-size: 0.95rem;
     letter-spacing: 0.02em;
     color: var(--dark-color);
     transition: color 0.2s ease, transform 0.2s ease;
@@ -519,7 +519,7 @@ nav ul li > .submenu-toggle {
     border: none;
     cursor: pointer;
     text-decoration: none;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 nav ul li > .submenu-toggle {
@@ -595,7 +595,7 @@ nav ul li .submenu {
     transform: translateY(8px);
     transition: opacity var(--transition-medium), transform var(--transition-medium);
     pointer-events: none;
-    z-index: 1000;
+    z-index: 1001; /* Increased z-index */
 }
 
 nav ul li .submenu li {
@@ -2520,11 +2520,11 @@ footer::before {
     }
     
     nav.expanded {
-        max-height: 100vh; /* Increased to ensure all items fit */
+        max-height: 100vh;
         animation: menuExpand 0.5s ease;
         padding: 10px 8px;
         border-top: 1px solid rgba(0,0,0,0.05);
-        margin: 15px 0 0; /* Removed negative margin */
+        margin: 15px 0 0;
     }
     
     @keyframes menuExpand {
@@ -2626,24 +2626,24 @@ footer::before {
         padding: 0;
         border: none;
         animation: none;
+        background: rgba(240, 240, 240, 0.9);
+        border-radius: 6px;
     }
 
     nav ul li .submenu a {
-        display: block;
         padding: 12px 16px;
-        border-radius: 6px;
-        background: rgba(240, 240, 240, 0.9);
         font-size: 0.9rem;
         color: #333;
         line-height: 1.4;
         white-space: normal;
         word-break: break-word;
-        transition: background 0.2s ease, color 0.2s ease;
+        background: none;
+        border-radius: 0;
     }
 
     nav ul li .submenu a:hover,
     nav ul li .submenu a:focus {
-        background: rgba(229, 157, 131, 0.2);
+        background: none;
         color: var(--primary-dark);
     }
 
