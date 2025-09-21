@@ -49,24 +49,65 @@ document.addEventListener('DOMContentLoaded', function() {
     backToTopBtn.setAttribute('aria-label', 'Back to top');
     document.body.appendChild(backToTopBtn);
 
-    function handleScroll() {
+    let lastKnownScrollY = 0;
+    let scrollTicking = false;
+
+    function updateScrollEffects(scrollPosition) {
         // Header scroll effect
-        if (window.scrollY > 50) {
+        if (scrollPosition > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
 
         // Back to top button visibility
-        if (window.pageYOffset > 300) {
+        if (scrollPosition > 300) {
             backToTopBtn.classList.add('visible');
         } else {
             backToTopBtn.classList.remove('visible');
         }
     }
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initialize
+    function requestScrollTick() {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            if (window.requestAnimationFrame) {
+                window.requestAnimationFrame(() => {
+                    updateScrollEffects(lastKnownScrollY);
+                    scrollTicking = false;
+                });
+            } else {
+                updateScrollEffects(lastKnownScrollY);
+                scrollTicking = false;
+            }
+        }
+    }
+
+    function onScroll() {
+        lastKnownScrollY = window.scrollY || window.pageYOffset || 0;
+        requestScrollTick();
+    }
+
+    const supportsPassiveListeners = (() => {
+        let supportsPassive = false;
+        try {
+            const opts = Object.defineProperty({}, 'passive', {
+                get() {
+                    supportsPassive = true;
+                    return false;
+                }
+            });
+            window.addEventListener('testPassive', null, opts);
+            window.removeEventListener('testPassive', null, opts);
+        } catch (e) {
+            supportsPassive = false;
+        }
+        return supportsPassive;
+    })();
+
+    window.addEventListener('scroll', onScroll, supportsPassiveListeners ? { passive: true } : false);
+    lastKnownScrollY = window.scrollY || window.pageYOffset || 0;
+    updateScrollEffects(lastKnownScrollY); // Initialize
 
     // Back to top functionality
     backToTopBtn.addEventListener('click', function() {
