@@ -396,7 +396,7 @@ header .container {
 
 .logo span {
     font-family: var(--font-heading);
-    font-size: 1.8rem; /* Increased from 1.5rem for better visibility */
+    font-size: 1.5rem; /* Decreased from 1.8rem */
     font-weight: 700 !important;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -486,7 +486,7 @@ header .container {
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 15px; /* Decreased from 20px */
     position: relative;
 }
 
@@ -523,14 +523,6 @@ nav ul li > .submenu-toggle {
 
 nav ul li > .submenu-toggle {
     font: inherit;
-}
-
-nav ul li > .submenu-toggle:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 4px;
-    border-radius: 6px;
-}
-
 }
 
 nav ul li > .submenu-toggle:focus {
@@ -2526,8 +2518,8 @@ footer::before {
         order: 3; /* Ensure navigation appears below both logo and toggle */
     }
     
-        nav.expanded {
-        max-height: 500px; /* Increased to accommodate all menu items */
+    nav.expanded {
+        max-height: 550px; /* Increased to ensure all items fit */
         animation: menuExpand 0.5s ease;
         padding: 10px 8px;
         border-top: 1px solid rgba(0,0,0,0.05);
@@ -2640,6 +2632,7 @@ footer::before {
         border-radius: 6px;
         background: rgba(255, 255, 255, 0.65);
         font-size: 1rem;
+        color: var(--dark-color); /* Added to ensure text is visible */
     }
 
     nav ul li .submenu a:hover,
@@ -2824,6 +2817,7 @@ footer::before {
     
     .logo span {
         font-size: 1.3rem;
+        white-space: normal; /* Allow logo text to wrap */
     }
     
     .footer-logo img {
