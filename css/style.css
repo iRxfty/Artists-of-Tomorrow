@@ -531,6 +531,14 @@ nav ul li > .submenu-toggle:focus {
     border-radius: 6px;
 }
 
+}
+
+nav ul li > .submenu-toggle:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
 nav ul li > a:after {
     content: '';
     position: absolute;
