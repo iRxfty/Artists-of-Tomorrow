@@ -81,16 +81,83 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainNav = document.getElementById('mainNav');
     
     if (navToggle && mainNav) {
+        const submenuToggles = mainNav.querySelectorAll('.submenu-toggle');
+
+        const closeAllSubmenus = () => {
+            submenuToggles.forEach(toggle => {
+                const parentItem = toggle.closest('.has-submenu');
+                if (parentItem) {
+                    parentItem.classList.remove('open');
+                }
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        submenuToggles.forEach(toggle => {
+            toggle.setAttribute('aria-expanded', toggle.getAttribute('aria-expanded') === 'true' ? 'true' : 'false');
+
+            toggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const parentItem = toggle.closest('.has-submenu');
+                const isOpen = parentItem.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', isOpen);
+
+                submenuToggles.forEach(otherToggle => {
+                    if (otherToggle !== toggle) {
+                        const otherParent = otherToggle.closest('.has-submenu');
+                        if (otherParent) {
+                            otherParent.classList.remove('open');
+                        }
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                if (isOpen) {
+                    const firstSubLink = parentItem.querySelector('.submenu a');
+                    if (firstSubLink) {
+                        firstSubLink.focus();
+                    }
+                } else {
+                    toggle.focus();
+                }
+            });
+
+            toggle.addEventListener('keydown', function(event) {
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    const parentItem = toggle.closest('.has-submenu');
+                    if (!parentItem.classList.contains('open')) {
+                        closeAllSubmenus();
+                        parentItem.classList.add('open');
+                        toggle.setAttribute('aria-expanded', 'true');
+                    }
+                    const firstSubLink = parentItem.querySelector('.submenu a');
+                    if (firstSubLink) {
+                        firstSubLink.focus();
+                    }
+                }
+
+                if (event.key === 'Escape') {
+                    const parentItem = toggle.closest('.has-submenu');
+                    if (parentItem && parentItem.classList.contains('open')) {
+                        parentItem.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                        toggle.focus();
+                    }
+                }
+            });
+        });
+
         // Close menu when a nav link is clicked (for mobile)
         const navLinks = mainNav.querySelectorAll('a');
         
         navToggle.addEventListener('click', function() {
             const isExpanded = mainNav.classList.toggle('expanded');
             navToggle.classList.toggle('active');
-            
+
             // Toggle body scroll
             document.body.style.overflow = isExpanded ? 'hidden' : '';
-            
+
             // Accessibility
             navToggle.setAttribute('aria-expanded', isExpanded);
             
@@ -102,9 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Return focus to menu button when closing
                 navToggle.focus();
+                closeAllSubmenus();
             }
         });
-        
+
         // Close menu when clicking on a nav link (for single page navigation)
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -113,26 +181,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     navToggle.classList.remove('active');
                     document.body.style.overflow = '';
                     navToggle.setAttribute('aria-expanded', 'false');
+                    closeAllSubmenus();
                 }
             });
         });
-        
+
         // Close menu when pressing Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mainNav.classList.contains('expanded')) {
-                mainNav.classList.remove('expanded');
-                navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-                navToggle.setAttribute('aria-expanded', 'false');
-                navToggle.focus();
+            if (e.key === 'Escape') {
+                if (mainNav.classList.contains('expanded')) {
+                    mainNav.classList.remove('expanded');
+                    navToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.focus();
+                }
+                closeAllSubmenus();
             }
         });
-        
+
         // Add accessibility attributes
         navToggle.setAttribute('aria-label', 'Toggle navigation menu');
         navToggle.setAttribute('aria-expanded', 'false');
         navToggle.setAttribute('aria-controls', 'mainNav');
-        
+
         // Add tab trapping for better keyboard navigation
         const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
         const focusableContent = mainNav.querySelectorAll(focusableElements);
@@ -159,18 +231,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+
+        document.addEventListener('click', function(event) {
+            const clickInsideNav = event.target.closest('nav');
+            const clickOnToggle = event.target.closest('.nav-toggle');
+
+            if (!event.target.closest('.has-submenu')) {
+                closeAllSubmenus();
+            }
+
+            if (mainNav.classList.contains('expanded') && !clickInsideNav && !clickOnToggle) {
+                mainNav.classList.remove('expanded');
+                navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (mainNav && mainNav.classList.contains('expanded') && 
-            !event.target.closest('nav') && 
-            !event.target.closest('.nav-toggle')) {
-            mainNav.classList.remove('expanded');
-            navToggle.classList.remove('active');
-            navToggle.setAttribute('aria-expanded', 'false');
-        }
-    });
 
     // Registration form handling
     const registrationForm = document.getElementById('registrationForm');
