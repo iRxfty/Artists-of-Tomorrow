@@ -712,6 +712,7 @@ nav ul li .submenu a.active {
     line-height: 1.1;
     margin-bottom: 20px;
     background: linear-gradient(135deg, #FF8F6B 0%, #FFB4E6 55%, #CAB6FF 100%);
+    background: linear-gradient(135deg, #FFBEA6, #D8CBFF);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
