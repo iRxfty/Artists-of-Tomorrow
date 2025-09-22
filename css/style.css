@@ -711,12 +711,16 @@ nav ul li .submenu a.active {
     font-size: clamp(2.5rem, 6vw, 4rem);
     line-height: 1.1;
     margin-bottom: 20px;
+    background: linear-gradient(135deg, #FF8F6B 0%, #FFB4E6 55%, #CAB6FF 100%);
     background: linear-gradient(135deg, #FFBEA6, #D8CBFF);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow:
+        0 10px 30px rgba(194, 110, 75, 0.38),
+        0 6px 22px rgba(138, 116, 208, 0.35),
+        0 3px 8px rgba(0, 0, 0, 0.18);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
