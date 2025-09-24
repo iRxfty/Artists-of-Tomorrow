@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait placeholder for Poonam Yadav</title>
+  <desc id="desc">Stylized illustration used temporarily in place of Poonam Yadav's portrait.</desc>
+  <defs>
+    <linearGradient id="poonamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#43cea2" />
+      <stop offset="100%" stop-color="#185a9d" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" fill="url(#poonamGradient)" rx="24" />
+  <g fill="#fff">
+    <circle cx="160" cy="124" r="58" opacity="0.9" />
+    <path d="M76 248c22-44 70-64 84-64s62 20 84 64" fill="#fff" opacity="0.9"/>
+  </g>
+  <text x="160" y="282" font-family="'Poppins', 'Helvetica Neue', Arial, sans-serif" font-size="34" text-anchor="middle" fill="#f2f6ff" font-weight="600">Poonam</text>
+</svg>
