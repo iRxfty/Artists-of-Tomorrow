@@ -435,13 +435,14 @@ header .container {
 .nav-toggle {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 24px;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 28px;
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px 0;
+    padding: 0;
     z-index: 1001;
     position: relative;
 }
@@ -449,35 +450,29 @@ header .container {
 .nav-toggle span {
     display: block;
     width: 100%;
-    height: 2.5px;
+    height: 3px;
     background-color: var(--dark-color);
-    border-radius: 3px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 999px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
-    position: relative;
-}
-
-.nav-toggle span:nth-child(1) {
-    transform: translateY(0) rotate(0);
 }
 
 .nav-toggle span:nth-child(2) {
     opacity: 1;
-    transform: scaleX(1);
 }
 
 .nav-toggle.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
     background-color: var(--primary-color);
 }
 
 .nav-toggle.active span:nth-child(2) {
     opacity: 0;
-    transform: scaleX(0);
 }
 
 .nav-toggle.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg);
     background-color: var(--primary-color);
 }
 
@@ -612,7 +607,7 @@ nav ul li > a:after {
 
 nav ul li > .submenu-toggle.active,
 nav ul li.has-submenu.open > .submenu-toggle,
-nav ul li.has-submenu:focus-within > .submenu-toggle {
+nav ul li > .submenu-toggle[aria-expanded="true"] {
     color: var(--primary-color);
 }
 
@@ -629,7 +624,7 @@ nav ul li > .submenu-toggle .submenu-icon {
 }
 
 nav ul li.has-submenu.open > .submenu-toggle .submenu-icon,
-nav ul li.has-submenu:focus-within > .submenu-toggle .submenu-icon {
+nav ul li > .submenu-toggle[aria-expanded="true"] .submenu-icon {
     transform: rotate(180deg);
 }
 
@@ -645,7 +640,7 @@ nav ul li .submenu {
 }
 
 nav ul li.has-submenu.open > .submenu,
-nav ul li.has-submenu:focus-within > .submenu {
+nav ul li > .submenu-toggle[aria-expanded="true"] + .submenu {
     max-height: 600px;
     pointer-events: auto;
     opacity: 1;
@@ -705,25 +700,50 @@ nav ul li .submenu a.active {
 
 .hero h1 {
     animation: fadeInUp 1s ease-out 0.2s both;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.022em;
     font-weight: 700; /* keep real 700 weight */
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #FF8F6B 0%, #FFB4E6 55%, #CAB6FF 100%);
-    background: linear-gradient(135deg, #FFBEA6, #D8CBFF);
+    font-size: clamp(2.7rem, 6.5vw, 4.4rem);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    display: inline-block;
+    position: relative;
+    padding: 0.25em 0.55em;
+    background: linear-gradient(118deg,
+            var(--salmon-dark) 0%,
+            var(--salmon) 22%,
+            var(--purple-dark) 50%,
+            var(--accent-color) 68%,
+            var(--secondary-hover) 85%,
+            var(--secondary-color) 100%);
+    background-size: 160% 160%;
+    background-position: 45% 55%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0;
+    -webkit-text-stroke: 1.5px rgba(48, 24, 16, 0.35);
     text-shadow:
-        0 10px 30px rgba(194, 110, 75, 0.38),
-        0 6px 22px rgba(138, 116, 208, 0.35),
-        0 3px 8px rgba(0, 0, 0, 0.18);
+        0 14px 38px rgba(199, 105, 70, 0.42),
+        0 18px 46px rgba(71, 118, 160, 0.38),
+        0 0 26px rgba(252, 240, 160, 0.75),
+        0 3px 10px rgba(0, 0, 0, 0.32);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.hero h1::before {
+    content: '';
+    position: absolute;
+    inset: 18% -14% 20%;
+    border-radius: 50px;
+    background: radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 62%),
+                radial-gradient(circle at 78% 42%, rgba(252, 240, 160, 0.9), rgba(252, 240, 160, 0) 70%),
+                linear-gradient(135deg, rgba(211, 138, 112, 0.58), rgba(122, 184, 204, 0.5));
+    filter: blur(16px);
+    opacity: 0.75;
+    z-index: -1;
+    mix-blend-mode: screen;
 }
 
 .hero h2 {
