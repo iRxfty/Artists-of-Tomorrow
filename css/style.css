@@ -47,6 +47,13 @@
     --peach: #FFF0EB;           /* Light peach background from logo */
     --peach-light: #FFF8F5;     /* Lighter peach for sections */
 
+    /* Vivid accents for hero moments */
+    --purple-bright: #B8A6EF;
+    --salmon-bright: #F4AE96;
+    --blue-bright: #8ECFE3;
+    --pink-bright: #EAB9E7;
+    --yellow-bright: #FFE8A3;
+
     /* Functional color assignments */
     --primary-color: var(--salmon);
     --primary-dark: var(--salmon-dark);
@@ -678,8 +685,14 @@ nav ul li .submenu a.active {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(229, 157, 131, 0.88), rgba(122, 184, 204, 0.92)),
-                radial-gradient(circle at top right, rgba(252, 240, 160, 0.5), transparent 55%);
+    background:
+        radial-gradient(circle at 18% 22%, rgba(255, 243, 237, 0.86) 0%, rgba(255, 243, 237, 0) 58%),
+        radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--yellow-bright) 60%, transparent) 0%, transparent 60%),
+        linear-gradient(128deg,
+            color-mix(in srgb, var(--salmon-bright) 68%, var(--white) 32%) 0%,
+            color-mix(in srgb, var(--pink-bright) 72%, var(--white) 28%) 42%,
+            color-mix(in srgb, var(--purple-bright) 74%, var(--white) 26%) 70%,
+            color-mix(in srgb, var(--blue-bright) 76%, var(--white) 24%) 100%);
     color: var(--white);
     text-align: center;
     padding: clamp(110px, 20vh, 160px) 0 clamp(90px, 18vh, 140px);
@@ -709,39 +722,13 @@ nav ul li .submenu a.active {
     display: inline-block;
     position: relative;
     padding: 0.25em 0.55em;
-    background: linear-gradient(118deg,
-            var(--salmon-dark) 0%,
-            var(--salmon) 22%,
-            var(--purple-dark) 50%,
-            var(--accent-color) 68%,
-            var(--secondary-hover) 85%,
-            var(--secondary-color) 100%);
-    background-size: 160% 160%;
-    background-position: 45% 55%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1.5px rgba(48, 24, 16, 0.35);
+    color: color-mix(in srgb, var(--gold) 88%, var(--white) 12%);
     text-shadow:
-        0 14px 38px rgba(199, 105, 70, 0.42),
-        0 18px 46px rgba(71, 118, 160, 0.38),
-        0 0 26px rgba(252, 240, 160, 0.75),
-        0 3px 10px rgba(0, 0, 0, 0.32);
-    background: linear-gradient(120deg,
-            rgba(255, 236, 222, 0.95) 0%,
-            rgba(229, 157, 131, 0.98) 28%,
-            rgba(219, 193, 225, 0.95) 60%,
-            rgba(122, 184, 204, 0.96) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
-    text-shadow:
-        0 20px 40px rgba(194, 110, 75, 0.35),
-        0 16px 36px rgba(122, 184, 204, 0.32),
-        0 0 28px rgba(252, 240, 160, 0.85),
-        0 2px 8px rgba(0, 0, 0, 0.28);
-  text-rendering: optimizeLegibility;
+        0 18px 38px color-mix(in srgb, var(--salmon-bright) 38%, transparent),
+        0 16px 34px color-mix(in srgb, var(--blue-bright) 32%, transparent),
+        0 0 30px color-mix(in srgb, var(--yellow-bright) 70%, transparent),
+        0 3px 12px rgba(0, 0, 0, 0.26);
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -751,16 +738,16 @@ nav ul li .submenu a.active {
     position: absolute;
     inset: 18% -14% 20%;
     border-radius: 50px;
-    background: radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 62%),
-                radial-gradient(circle at 78% 42%, rgba(252, 240, 160, 0.9), rgba(252, 240, 160, 0) 70%),
-                linear-gradient(135deg, rgba(211, 138, 112, 0.58), rgba(122, 184, 204, 0.5));
+    background: radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 62%),
+                radial-gradient(circle at 78% 38%, rgba(255, 224, 102, 0.92), rgba(255, 224, 102, 0) 70%),
+                linear-gradient(135deg, rgba(244, 169, 248, 0.62), rgba(99, 197, 245, 0.56));
+    background: radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 62%),
+                radial-gradient(circle at 78% 38%, color-mix(in srgb, var(--yellow-bright) 72%, transparent), rgba(255, 224, 102, 0) 70%),
+                linear-gradient(135deg,
+                    color-mix(in srgb, var(--pink-bright) 52%, transparent),
+                    color-mix(in srgb, var(--blue-bright) 48%, transparent));
     filter: blur(16px);
-    opacity: 0.75;
-    background: radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 60%),
-                radial-gradient(circle at 80% 40%, rgba(252, 240, 160, 0.85), rgba(252, 240, 160, 0) 68%),
-                linear-gradient(135deg, rgba(219, 193, 225, 0.55), rgba(122, 184, 204, 0.45));
-    filter: blur(18px);
-    opacity: 0.85;
+    opacity: 0.9;
     z-index: -1;
     mix-blend-mode: screen;
 }
@@ -814,8 +801,13 @@ nav ul li .submenu a.active {
     width: clamp(80px, 14vw, 160px);
     height: clamp(80px, 14vw, 160px);
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85), rgba(219, 193, 225, 0));
-    box-shadow: 0 20px 40px rgba(196, 181, 237, 0.32);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--pink-bright) 22%, transparent));
+    box-shadow:
+        0 18px 32px rgba(167, 139, 250, 0.28),
+        0 20px 46px rgba(99, 197, 245, 0.24);
+    box-shadow:
+        0 18px 32px color-mix(in srgb, var(--purple-bright) 26%, transparent),
+        0 20px 46px color-mix(in srgb, var(--blue-bright) 22%, transparent);
     animation: shimmerPulse 9s ease-in-out infinite;
 }
 
@@ -828,14 +820,14 @@ nav ul li .submenu a.active {
 .hero-orb.orb-two {
     justify-self: center;
     animation-delay: 2.5s;
-    background: radial-gradient(circle at 40% 40%, rgba(252, 240, 160, 0.9), rgba(252, 240, 160, 0));
+    background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--yellow-bright) 68%, transparent), rgba(252, 240, 160, 0));
 }
 
 .hero-orb.orb-three {
     justify-self: end;
     margin-right: clamp(12px, 6vw, 80px);
     animation-delay: 4.5s;
-    background: radial-gradient(circle at 60% 40%, rgba(122, 184, 204, 0.95), rgba(122, 184, 204, 0));
+    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--blue-bright) 72%, transparent), rgba(122, 184, 204, 0));
 }
 
 @media (max-width: 640px) {
@@ -890,30 +882,36 @@ nav ul li .submenu a.active {
 }
 
 .cta-button {
-    background-color: var(--primary-color);
+    background-color: var(--salmon-bright);
     color: var(--white);
-    box-shadow: 0 6px 18px rgba(229, 157, 131, 0.25);
+    box-shadow: 0 10px 26px rgba(255, 139, 104, 0.45);
+    box-shadow: 0 10px 26px color-mix(in srgb, var(--salmon-bright) 45%, transparent);
 }
 
 .cta-button:hover {
-    background-color: var(--primary-dark);
+    background-color: rgba(214, 122, 243, 0.95);
+    background-color: color-mix(in srgb, var(--salmon-bright) 82%, var(--purple-bright));
     color: var(--white);
     transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(229, 157, 131, 0.4);
+    box-shadow: 0 14px 28px rgba(167, 139, 250, 0.35);
+    box-shadow: 0 14px 28px color-mix(in srgb, var(--purple-bright) 35%, transparent);
 }
 
 .secondary-button {
     background-color: transparent;
-    color: var(--secondary-color);
-    border: 2px solid var(--secondary-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    color: var(--blue-bright);
+    border: 2px solid var(--blue-bright);
+    box-shadow: 0 4px 18px rgba(99, 197, 245, 0.25);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--blue-bright) 25%, transparent);
 }
 
 .secondary-button:hover {
-    background-color: var(--secondary-color);
+    background-color: rgba(99, 197, 245, 0.95);
+    background-color: var(--blue-bright);
     color: var(--white);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(122, 184, 204, 0.2);
+    box-shadow: 0 8px 24px rgba(99, 197, 245, 0.32);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--blue-bright) 32%, transparent);
 }
 
 /* Back to Top Button */
