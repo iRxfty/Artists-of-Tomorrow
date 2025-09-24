@@ -53,6 +53,11 @@
     --blue-bright: #63C5F5;
     --pink-bright: #F4A9F8;
     --yellow-bright: #FFE066;
+    --purple-bright: #B8A6EF;
+    --salmon-bright: #F4AE96;
+    --blue-bright: #8ECFE3;
+    --pink-bright: #EAB9E7;
+    --yellow-bright: #FFE8A3;
 
     /* Functional color assignments */
     --primary-color: var(--salmon);
@@ -695,6 +700,21 @@ nav ul li .submenu a.active {
                     color-mix(in srgb, var(--pink-bright) 88%, transparent),
                     color-mix(in srgb, var(--blue-bright) 92%, transparent)),
                 radial-gradient(circle at top right, color-mix(in srgb, var(--yellow-bright) 65%, transparent), transparent 58%);
+    background:
+        radial-gradient(circle at 18% 22%, rgba(255, 246, 230, 0.9) 0%, rgba(255, 246, 230, 0) 58%),
+        radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--yellow-bright) 72%, transparent) 0%, transparent 60%),
+        linear-gradient(128deg,
+            color-mix(in srgb, var(--salmon-bright) 72%, var(--white) 28%) 0%,
+            color-mix(in srgb, var(--gold) 78%, var(--white) 22%) 42%,
+            color-mix(in srgb, #ffb86b 82%, var(--white) 18%) 70%,
+            color-mix(in srgb, #ff9248 86%, var(--white) 14%) 100%);
+        radial-gradient(circle at 18% 22%, rgba(255, 243, 237, 0.86) 0%, rgba(255, 243, 237, 0) 58%),
+        radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--yellow-bright) 60%, transparent) 0%, transparent 60%),
+        linear-gradient(128deg,
+            color-mix(in srgb, var(--salmon-bright) 68%, var(--white) 32%) 0%,
+            color-mix(in srgb, var(--pink-bright) 72%, var(--white) 28%) 42%,
+            color-mix(in srgb, var(--purple-bright) 74%, var(--white) 26%) 70%,
+            color-mix(in srgb, var(--blue-bright) 76%, var(--white) 24%) 100%);
     color: var(--white);
     text-align: center;
     padding: clamp(110px, 20vh, 160px) 0 clamp(90px, 18vh, 140px);
@@ -736,6 +756,24 @@ nav ul li .submenu a.active {
             color-mix(in srgb, var(--pink-bright) 94%, transparent) 48%,
             color-mix(in srgb, var(--purple-bright) 96%, transparent) 66%,
             color-mix(in srgb, var(--blue-bright) 96%, transparent) 100%);
+    color: color-mix(in srgb, var(--gold) 88%, var(--white) 12%);
+    text-shadow:
+        0 18px 38px color-mix(in srgb, var(--salmon-bright) 38%, transparent),
+        0 16px 34px color-mix(in srgb, var(--blue-bright) 32%, transparent),
+        0 0 30px color-mix(in srgb, var(--yellow-bright) 70%, transparent),
+        0 3px 12px rgba(0, 0, 0, 0.26);
+    color: color-mix(in srgb, var(--gold) 90%, var(--white) 10%);
+    text-shadow:
+        0 18px 38px color-mix(in srgb, var(--salmon-bright) 42%, transparent),
+        0 16px 34px color-mix(in srgb, #fdba54 36%, transparent),
+        0 0 30px color-mix(in srgb, var(--yellow-bright) 74%, transparent),
+        0 3px 12px rgba(0, 0, 0, 0.26);
+    background: linear-gradient(118deg,
+            color-mix(in srgb, var(--salmon-bright) 40%, var(--white)) 0%,
+            color-mix(in srgb, var(--salmon-bright) 70%, var(--white) 30%) 22%,
+            color-mix(in srgb, var(--pink-bright) 68%, var(--white) 32%) 48%,
+            color-mix(in srgb, var(--purple-bright) 70%, var(--white) 30%) 70%,
+            color-mix(in srgb, var(--blue-bright) 72%, var(--white) 28%) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -745,6 +783,10 @@ nav ul li .submenu a.active {
         0 16px 38px rgba(99, 197, 245, 0.38),
         0 0 32px rgba(255, 224, 102, 0.88),
         0 3px 10px rgba(0, 0, 0, 0.3);
+        0 18px 38px rgba(229, 157, 131, 0.32),
+        0 16px 34px rgba(122, 184, 204, 0.28),
+        0 0 26px rgba(255, 232, 163, 0.6),
+        0 3px 10px rgba(0, 0, 0, 0.24);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -755,6 +797,12 @@ nav ul li .submenu a.active {
     position: absolute;
     inset: 18% -14% 20%;
     border-radius: 50px;
+    background:
+        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 62%),
+        radial-gradient(circle at 78% 38%, color-mix(in srgb, var(--yellow-bright) 78%, transparent), rgba(255, 224, 102, 0) 70%),
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--salmon-bright) 64%, transparent),
+            color-mix(in srgb, #ffad51 58%, transparent));
     background: radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 62%),
                 radial-gradient(circle at 78% 38%, rgba(255, 224, 102, 0.92), rgba(255, 224, 102, 0) 70%),
                 linear-gradient(135deg, rgba(244, 169, 248, 0.62), rgba(99, 197, 245, 0.56));
@@ -763,7 +811,11 @@ nav ul li .submenu a.active {
                 linear-gradient(135deg,
                     color-mix(in srgb, var(--pink-bright) 62%, transparent),
                     color-mix(in srgb, var(--blue-bright) 56%, transparent));
-    filter: blur(16px);
+                radial-gradient(circle at 78% 38%, color-mix(in srgb, var(--yellow-bright) 72%, transparent), rgba(255, 224, 102, 0) 70%),
+                linear-gradient(135deg,
+                    color-mix(in srgb, var(--pink-bright) 52%, transparent),
+                    color-mix(in srgb, var(--blue-bright) 48%, transparent));
+  filter: blur(16px);
     opacity: 0.9;
     z-index: -1;
     mix-blend-mode: screen;
@@ -820,12 +872,19 @@ nav ul li .submenu a.active {
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(244, 169, 248, 0.15));
     background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), color-mix(in srgb, var(--pink-bright) 15%, transparent));
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--salmon-bright) 32%, transparent));
+    box-shadow:
+        0 18px 32px color-mix(in srgb, var(--salmon-bright) 28%, transparent),
+        0 20px 46px color-mix(in srgb, #ffba59 22%, transparent);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--pink-bright) 22%, transparent));
     box-shadow:
         0 18px 32px rgba(167, 139, 250, 0.28),
         0 20px 46px rgba(99, 197, 245, 0.24);
     box-shadow:
         0 18px 32px color-mix(in srgb, var(--purple-bright) 28%, transparent),
         0 20px 46px color-mix(in srgb, var(--blue-bright) 24%, transparent);
+        0 18px 32px color-mix(in srgb, var(--purple-bright) 26%, transparent),
+        0 20px 46px color-mix(in srgb, var(--blue-bright) 22%, transparent);
     animation: shimmerPulse 9s ease-in-out infinite;
 }
 
@@ -838,14 +897,16 @@ nav ul li .submenu a.active {
 .hero-orb.orb-two {
     justify-self: center;
     animation-delay: 2.5s;
-    background: radial-gradient(circle at 40% 40%, rgba(252, 240, 160, 0.9), rgba(252, 240, 160, 0));
+    background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--yellow-bright) 76%, transparent), rgba(252, 240, 160, 0));
+    background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--yellow-bright) 68%, transparent), rgba(252, 240, 160, 0));
 }
 
 .hero-orb.orb-three {
     justify-self: end;
     margin-right: clamp(12px, 6vw, 80px);
     animation-delay: 4.5s;
-    background: radial-gradient(circle at 60% 40%, rgba(122, 184, 204, 0.95), rgba(122, 184, 204, 0));
+    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, #ffad51 70%, transparent), rgba(255, 204, 153, 0));
+    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--blue-bright) 72%, transparent), rgba(122, 184, 204, 0));
 }
 
 @media (max-width: 640px) {
