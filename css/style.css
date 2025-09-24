@@ -729,6 +729,12 @@ nav ul li .submenu a.active {
     display: inline-block;
     position: relative;
     padding: 0.25em 0.55em;
+    color: color-mix(in srgb, var(--gold) 88%, var(--white) 12%);
+    text-shadow:
+        0 18px 38px color-mix(in srgb, var(--salmon-bright) 38%, transparent),
+        0 16px 34px color-mix(in srgb, var(--blue-bright) 32%, transparent),
+        0 0 30px color-mix(in srgb, var(--yellow-bright) 70%, transparent),
+        0 3px 12px rgba(0, 0, 0, 0.26);
     color: color-mix(in srgb, var(--gold) 90%, var(--white) 10%);
     text-shadow:
         0 18px 38px color-mix(in srgb, var(--salmon-bright) 42%, transparent),
