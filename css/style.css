@@ -607,7 +607,7 @@ nav ul li > a:after {
 
 nav ul li > .submenu-toggle.active,
 nav ul li.has-submenu.open > .submenu-toggle,
-nav ul li.has-submenu:focus-within > .submenu-toggle {
+nav ul li > .submenu-toggle[aria-expanded="true"] {
     color: var(--primary-color);
 }
 
@@ -624,7 +624,7 @@ nav ul li > .submenu-toggle .submenu-icon {
 }
 
 nav ul li.has-submenu.open > .submenu-toggle .submenu-icon,
-nav ul li.has-submenu:focus-within > .submenu-toggle .submenu-icon {
+nav ul li > .submenu-toggle[aria-expanded="true"] .submenu-icon {
     transform: rotate(180deg);
 }
 
@@ -640,7 +640,7 @@ nav ul li .submenu {
 }
 
 nav ul li.has-submenu.open > .submenu,
-nav ul li.has-submenu:focus-within > .submenu {
+nav ul li > .submenu-toggle[aria-expanded="true"] + .submenu {
     max-height: 600px;
     pointer-events: auto;
     opacity: 1;
@@ -709,6 +709,24 @@ nav ul li .submenu a.active {
     display: inline-block;
     position: relative;
     padding: 0.25em 0.55em;
+    background: linear-gradient(118deg,
+            var(--salmon-dark) 0%,
+            var(--salmon) 22%,
+            var(--purple-dark) 50%,
+            var(--accent-color) 68%,
+            var(--secondary-hover) 85%,
+            var(--secondary-color) 100%);
+    background-size: 160% 160%;
+    background-position: 45% 55%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px rgba(48, 24, 16, 0.35);
+    text-shadow:
+        0 14px 38px rgba(199, 105, 70, 0.42),
+        0 18px 46px rgba(71, 118, 160, 0.38),
+        0 0 26px rgba(252, 240, 160, 0.75),
+        0 3px 10px rgba(0, 0, 0, 0.32);
     background: linear-gradient(120deg,
             rgba(255, 236, 222, 0.95) 0%,
             rgba(229, 157, 131, 0.98) 28%,
@@ -723,7 +741,7 @@ nav ul li .submenu a.active {
         0 16px 36px rgba(122, 184, 204, 0.32),
         0 0 28px rgba(252, 240, 160, 0.85),
         0 2px 8px rgba(0, 0, 0, 0.28);
-    text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -733,6 +751,11 @@ nav ul li .submenu a.active {
     position: absolute;
     inset: 18% -14% 20%;
     border-radius: 50px;
+    background: radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 62%),
+                radial-gradient(circle at 78% 42%, rgba(252, 240, 160, 0.9), rgba(252, 240, 160, 0) 70%),
+                linear-gradient(135deg, rgba(211, 138, 112, 0.58), rgba(122, 184, 204, 0.5));
+    filter: blur(16px);
+    opacity: 0.75;
     background: radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 60%),
                 radial-gradient(circle at 80% 40%, rgba(252, 240, 160, 0.85), rgba(252, 240, 160, 0) 68%),
                 linear-gradient(135deg, rgba(219, 193, 225, 0.55), rgba(122, 184, 204, 0.45));
