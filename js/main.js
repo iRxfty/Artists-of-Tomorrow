@@ -620,94 +620,38 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const originalItems = Array.from(track.querySelectorAll('.carousel-item'));
-        if (!originalItems.length) {
+        const carouselItems = Array.from(track.querySelectorAll('.carousel-item'));
+        if (!carouselItems.length) {
             return;
         }
 
         track.setAttribute('data-carousel-initialized', 'true');
 
-        const createClone = (item, index, position) => {
-            const clone = item.cloneNode(true);
-            clone.classList.add('carousel-item--clone');
-            clone.dataset.cloneSourceIndex = String(index);
-            clone.setAttribute('aria-hidden', 'true');
-            clone.setAttribute('tabindex', '-1');
-            clone.setAttribute('role', 'button');
-
-            if (position === 'before') {
-                const firstElement = track.firstElementChild;
-                if (firstElement) {
-                    track.insertBefore(clone, firstElement);
-                } else {
-                    track.appendChild(clone);
-                }
-            } else {
-                track.appendChild(clone);
-            }
-
-            return clone;
-        };
-
-        const clonesBefore = originalItems.map((item, index) => createClone(item, index, 'before'));
-        const clonesAfter = originalItems.map((item, index) => createClone(item, index, 'after'));
-
-        const carouselItems = originalItems;
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
 
         let currentIndex = 0;
         let scrollFrame = null;
-        let carouselMetrics = { contentWidth: 0, gap: 0 };
-        let isAdjustingScroll = false;
+        let trackPaddingLeft = 0;
 
-        const updateCarouselMetrics = () => {
+        const updateTrackPadding = () => {
             const styles = window.getComputedStyle(track);
-            const gapValue = parseFloat(styles.columnGap || styles.gridColumnGap || '0') || 0;
-            let totalWidth = 0;
-
-            carouselItems.forEach((item, itemIndex) => {
-                const rect = item.getBoundingClientRect();
-                totalWidth += rect.width;
-                if (itemIndex < carouselItems.length - 1) {
-                    totalWidth += gapValue;
-                }
-            });
-
-            carouselMetrics = {
-                contentWidth: totalWidth,
-                gap: gapValue
-            };
-
-            return carouselMetrics;
+            trackPaddingLeft = parseFloat(styles.paddingLeft || '0') || 0;
         };
 
-        const ensureInfiniteLoop = () => {
-            if (isAdjustingScroll) {
-                return;
+        const getScrollOffsetForItem = item => {
+            const itemRect = item.getBoundingClientRect();
+            const trackRect = track.getBoundingClientRect();
+            return itemRect.left - trackRect.left + track.scrollLeft - trackPaddingLeft;
+        };
+
+        const updateButtons = () => {
+            const disableControls = carouselItems.length <= 1;
+            if (prevButton) {
+                prevButton.disabled = disableControls;
             }
-
-            const { contentWidth } = carouselMetrics;
-            if (!contentWidth) {
-                return;
-            }
-
-            const scrollLeft = track.scrollLeft;
-            const lowerThreshold = contentWidth * 0.5;
-            const upperThreshold = contentWidth * 1.5;
-
-            if (scrollLeft < lowerThreshold) {
-                isAdjustingScroll = true;
-                track.scrollLeft = scrollLeft + contentWidth;
-                requestAnimationFrame(() => {
-                    isAdjustingScroll = false;
-                });
-            } else if (scrollLeft > upperThreshold) {
-                isAdjustingScroll = true;
-                track.scrollLeft = scrollLeft - contentWidth;
-                requestAnimationFrame(() => {
-                    isAdjustingScroll = false;
-                });
+            if (nextButton) {
+                nextButton.disabled = disableControls;
             }
         };
 
@@ -718,6 +662,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const caption = item.dataset.caption || (image ? image.dataset.caption || '' : '');
             return { element: item, image, src, alt, caption };
         });
+
+        updateTrackPadding();
+        updateButtons();
 
         const goToIndex = (index, options = {}) => {
             if (!carouselItems.length) {
@@ -732,12 +679,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const { behavior } = options;
             const scrollBehavior = behavior || (reduceMotion ? 'auto' : 'smooth');
+            const offset = getScrollOffsetForItem(targetItem);
 
-            targetItem.scrollIntoView({
-                behavior: scrollBehavior,
-                inline: 'center',
-                block: 'nearest'
+            track.scrollTo({
+                left: offset,
+                behavior: scrollBehavior
             });
+            updateButtons();
         };
 
         const updateCurrentIndex = () => {
@@ -758,6 +706,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             currentIndex = closestIndex;
+            updateButtons();
         };
 
         const scheduleIndexUpdate = () => {
@@ -768,21 +717,20 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         if (prevButton) {
-            prevButton.disabled = false;
+            prevButton.disabled = carouselItems.length <= 1;
             prevButton.addEventListener('click', () => {
                 goToIndex(currentIndex - 1);
             });
         }
 
         if (nextButton) {
-            nextButton.disabled = false;
+            nextButton.disabled = carouselItems.length <= 1;
             nextButton.addEventListener('click', () => {
                 goToIndex(currentIndex + 1);
             });
         }
 
         track.addEventListener('scroll', () => {
-            ensureInfiniteLoop();
             scheduleIndexUpdate();
         }, { passive: true });
 
@@ -797,20 +745,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         const handleResize = () => {
-            updateCarouselMetrics();
+            updateTrackPadding();
             requestAnimationFrame(() => {
                 goToIndex(currentIndex, { behavior: 'auto' });
-                ensureInfiniteLoop();
             });
         };
 
         window.addEventListener('resize', handleResize);
 
         requestAnimationFrame(() => {
-            updateCarouselMetrics();
-            if (carouselMetrics.contentWidth) {
-                track.scrollLeft = carouselMetrics.contentWidth;
-            }
+            updateTrackPadding();
             goToIndex(currentIndex, { behavior: 'auto' });
             updateCurrentIndex();
         });
@@ -857,13 +801,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             modalItems.forEach((itemData, index) => {
                 registerModalTrigger(itemData.element, index, { focusable: true });
-            });
-
-            [...clonesBefore, ...clonesAfter].forEach(clone => {
-                const sourceIndex = Number.parseInt(clone.dataset.cloneSourceIndex || '', 10);
-                if (Number.isInteger(sourceIndex)) {
-                    registerModalTrigger(clone, sourceIndex, { focusable: false });
-                }
             });
         }
     });
