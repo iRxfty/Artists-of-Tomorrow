@@ -459,165 +459,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
     enhancePrizes();
 
-    // Photo gallery enhancements
-    const galleryContainers = document.querySelectorAll('[data-gallery]');
-    if (galleryContainers.length) {
-        const body = document.body;
-        const galleryModal = document.createElement('div');
-        galleryModal.className = 'photo-gallery-modal';
-        galleryModal.setAttribute('aria-hidden', 'true');
-        galleryModal.innerHTML = `
-            <div class="photo-gallery-modal__backdrop" data-gallery-close></div>
-            <div class="photo-gallery-modal__dialog" role="dialog" aria-modal="true" aria-label="Expanded gallery image">
-                <button type="button" class="photo-gallery-modal__close" data-gallery-close aria-label="Close gallery view">&times;</button>
-                <figure class="photo-gallery-modal__figure">
-                    <img alt="">
-                    <figcaption></figcaption>
-                </figure>
-            </div>
-        `;
-        body.appendChild(galleryModal);
+    // Photo carousel controls
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+        const track = carousel.querySelector('[data-carousel-track]');
+        if (!track) {
+            return;
+        }
 
-        const modalImage = galleryModal.querySelector('img');
-        const modalCaption = galleryModal.querySelector('figcaption');
-        const closeControls = galleryModal.querySelectorAll('[data-gallery-close]');
-        let previouslyFocusedElement = null;
+        const prevButton = carousel.querySelector('[data-carousel-prev]');
+        const nextButton = carousel.querySelector('[data-carousel-next]');
+        let scrollAnimationFrame = null;
 
-        const closeModal = () => {
-            galleryModal.classList.remove('is-active');
-            galleryModal.setAttribute('aria-hidden', 'true');
-            body.classList.remove('gallery-open');
-            modalImage.removeAttribute('src');
-            modalImage.removeAttribute('alt');
-            modalCaption.textContent = '';
-            if (previouslyFocusedElement) {
-                previouslyFocusedElement.focus();
-                previouslyFocusedElement = null;
+        const getScrollStep = () => track.clientWidth * 0.8;
+
+        const updateControls = () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (prevButton) {
+                prevButton.disabled = track.scrollLeft <= 1;
+            }
+            if (nextButton) {
+                nextButton.disabled = track.scrollLeft >= (maxScroll - 1);
             }
         };
 
-        const openModal = (image) => {
-            if (!image) {
-                return;
+        const scheduleUpdate = () => {
+            if (scrollAnimationFrame) {
+                cancelAnimationFrame(scrollAnimationFrame);
             }
-
-            modalImage.src = image.currentSrc || image.src;
-            modalImage.alt = image.alt || '';
-            modalCaption.textContent = image.alt || '';
-            previouslyFocusedElement = document.activeElement;
-            galleryModal.classList.add('is-active');
-            galleryModal.setAttribute('aria-hidden', 'false');
-            body.classList.add('gallery-open');
-            const closeButton = galleryModal.querySelector('.photo-gallery-modal__close');
-            if (closeButton) {
-                closeButton.focus();
-            }
+            scrollAnimationFrame = requestAnimationFrame(updateControls);
         };
 
-        closeControls.forEach(control => {
-            control.addEventListener('click', closeModal);
-        });
-
-        galleryModal.addEventListener('keydown', event => {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        galleryModal.addEventListener('click', event => {
-            if (event.target === galleryModal || event.target.classList.contains('photo-gallery-modal__backdrop')) {
-                closeModal();
-            }
-        });
-
-        const activateFigure = figure => {
-            if (!figure) {
-                return;
-            }
-
-            figure.setAttribute('role', 'button');
-            figure.setAttribute('tabindex', '0');
-
-            const figureImage = figure.querySelector('img');
-            const activate = () => {
-                openModal(figureImage);
-            };
-
-            if (figureImage) {
-                const label = figureImage.alt || 'View gallery image';
-                figure.setAttribute('aria-label', label);
-            }
-
-            figure.addEventListener('click', activate);
-            figure.addEventListener('keydown', event => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    activate();
-                }
+        const scrollByAmount = direction => {
+            track.scrollBy({
+                left: direction * getScrollStep(),
+                behavior: reduceMotion ? 'auto' : 'smooth'
             });
         };
 
-        galleryContainers.forEach(container => {
-            const galleryLabel = container.getAttribute('data-gallery-label');
-            if (galleryLabel) {
-                container.setAttribute('aria-label', galleryLabel);
-            }
-            container.setAttribute('role', 'list');
-
-            const baseFigures = Array.from(container.querySelectorAll('[data-gallery-item]'));
-            if (!baseFigures.length) {
-                return;
-            }
-            const sentinel = document.createElement('div');
-            sentinel.className = 'photo-gallery-sentinel';
-            sentinel.setAttribute('aria-hidden', 'true');
-            container.appendChild(sentinel);
-
-            const templateFigures = baseFigures.map(figure => figure.cloneNode(true));
-
-            const appendClones = () => {
-                const fragment = document.createDocumentFragment();
-                templateFigures.forEach(templateFigure => {
-                    const clone = templateFigure.cloneNode(true);
-                    activateFigure(clone);
-                    fragment.appendChild(clone);
-                });
-                container.insertBefore(fragment, sentinel);
-            };
-
-            let loadingMore = false;
-            let observer;
-            const scheduleAppend = () => {
-                if (loadingMore) {
-                    return;
-                }
-                loadingMore = true;
-                requestAnimationFrame(() => {
-                    appendClones();
-                    loadingMore = false;
-                    if (observer) {
-                        observer.observe(sentinel);
-                    }
-                });
-            };
-
-            observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        observer.unobserve(sentinel);
-                        scheduleAppend();
-                    }
-                });
-            }, {
-                root: null,
-                rootMargin: '0px 0px 200px',
-                threshold: 0.1
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                scrollByAmount(-1);
             });
+        }
 
-            baseFigures.forEach(figure => activateFigure(figure));
-            observer.observe(sentinel);
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                scrollByAmount(1);
+            });
+        }
+
+        track.addEventListener('scroll', scheduleUpdate, { passive: true });
+
+        track.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                scrollByAmount(-1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                scrollByAmount(1);
+            }
         });
-    }
+
+        window.addEventListener('resize', scheduleUpdate);
+        updateControls();
+    });
 
     // Add particle effect to buttons
     const addButtonEffects = function() {
