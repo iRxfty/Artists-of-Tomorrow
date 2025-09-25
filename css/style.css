@@ -2252,7 +2252,7 @@ footer::before {
 .carousel-track {
     position: relative;
     display: flex;
-    gap: clamp(16px, 4vw, 24px);<<<<<< codex/fix-image-spacing-for-landscape-and-portrait
+    gap: clamp(16px, 4vw, 24px);
     align-items: center;
     overflow-x: auto;
     padding: clamp(20px, 4vw, 32px);
@@ -2276,6 +2276,7 @@ footer::before {
 .carousel-item {
     --carousel-aspect: 3 / 4;
     --carousel-max-visual-width: min(78vw, 560px);
+    --carousel-frame-padding: clamp(18px, 4vw, 28px);
     flex: 0 0 100%;
     scroll-snap-align: center;
     display: grid;
@@ -2283,7 +2284,7 @@ footer::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(18px, 4vw, 28px);
+    padding: var(--carousel-frame-padding);
     margin: 0;
     background: var(--white);
     border-radius: clamp(18px, 4vw, 28px);
@@ -2313,8 +2314,8 @@ footer::before {
 
 .carousel-item--landscape {
     --carousel-aspect: 3 / 2;
-    --carousel-max-visual-width: min(90vw, 860px);
-    padding: clamp(12px, 3vw, 20px);
+    --carousel-max-visual-width: min(92vw, 880px);
+    --carousel-frame-padding: clamp(12px, 3vw, 20px);
 }
 
 .carousel-item--landscape .carousel-item__frame {
@@ -2571,8 +2572,8 @@ footer::before {
     }
 
     .carousel-item {
-        padding: clamp(16px, 6vw, 24px);
         --carousel-max-visual-width: min(92vw, 460px);
+        --carousel-frame-padding: clamp(16px, 6vw, 24px);
     }
 
     .carousel-item--landscape {
@@ -2600,8 +2601,8 @@ footer::before {
     }
 
     .carousel-item {
-        padding: clamp(14px, 7vw, 20px);
         --carousel-max-visual-width: min(96vw, 420px);
+        --carousel-frame-padding: clamp(14px, 7vw, 20px);
     }
 
     .carousel-item--landscape {
