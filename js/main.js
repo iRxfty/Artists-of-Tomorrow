@@ -629,10 +629,118 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
+        const cloneRegistry = new Map();
+
+        const slideData = carouselItems.map(item => {
+            const image = item.querySelector('img');
+            if (!image) {
+                return { item, image: null };
+            }
+
+            let frame = item.querySelector('.carousel-item__frame');
+            if (!frame) {
+                frame = document.createElement('div');
+                frame.className = 'carousel-item__frame';
+            }
+
+            if (!frame.contains(image)) {
+                frame.appendChild(image);
+            }
+
+            if (frame.parentElement !== item) {
+                item.appendChild(frame);
+            }
+
+            item.classList.add('carousel-item--portrait');
+
+            const applyOrientation = () => {
+                const { naturalWidth = 0, naturalHeight = 0 } = image;
+                const isLandscape = naturalWidth >= naturalHeight && naturalWidth > 0;
+                item.classList.toggle('carousel-item--landscape', isLandscape);
+                item.classList.toggle('carousel-item--portrait', !isLandscape);
+
+                const clonesForItem = cloneRegistry.get(item);
+                if (clonesForItem && clonesForItem.length) {
+                    clonesForItem.forEach(cloneItem => {
+                        cloneItem.classList.toggle('carousel-item--landscape', isLandscape);
+                        cloneItem.classList.toggle('carousel-item--portrait', !isLandscape);
+                    });
+                }
+            };
+
+            if (image.complete && image.naturalWidth) {
+                applyOrientation();
+            } else {
+                image.addEventListener('load', applyOrientation, { once: true });
+            }
+
+            return { item, image };
+        });
+
+        const cloneCount = Math.min(carouselItems.length, 2);
+        const clonesBefore = [];
+        const clonesAfter = [];
+
+        if (carouselItems.length > 1) {
+            for (let index = 0; index < cloneCount; index += 1) {
+                const source = carouselItems[carouselItems.length - 1 - index];
+                const clone = source.cloneNode(true);
+                clone.classList.add('carousel-item--clone', 'carousel-item--clone-before');
+                clone.dataset.carouselClone = 'true';
+                clone.setAttribute('aria-hidden', 'true');
+                clone.setAttribute('tabindex', '-1');
+                clone.removeAttribute('role');
+                clone.removeAttribute('aria-label');
+                clone.querySelectorAll('[tabindex]').forEach(element => {
+                    element.setAttribute('tabindex', '-1');
+                });
+                const isLandscape = source.classList.contains('carousel-item--landscape');
+                clone.classList.toggle('carousel-item--landscape', isLandscape);
+                clone.classList.toggle('carousel-item--portrait', !isLandscape);
+                clone.querySelectorAll('img').forEach(imageElement => {
+                    imageElement.setAttribute('aria-hidden', 'true');
+                });
+                track.insertBefore(clone, track.firstChild);
+                clonesBefore.unshift(clone);
+                const existingClones = cloneRegistry.get(source) || [];
+                existingClones.push(clone);
+                cloneRegistry.set(source, existingClones);
+            }
+
+            for (let index = 0; index < cloneCount; index += 1) {
+                const source = carouselItems[index];
+                const clone = source.cloneNode(true);
+                clone.classList.add('carousel-item--clone', 'carousel-item--clone-after');
+                clone.dataset.carouselClone = 'true';
+                clone.setAttribute('aria-hidden', 'true');
+                clone.setAttribute('tabindex', '-1');
+                clone.removeAttribute('role');
+                clone.removeAttribute('aria-label');
+                clone.querySelectorAll('[tabindex]').forEach(element => {
+                    element.setAttribute('tabindex', '-1');
+                });
+                const isLandscape = source.classList.contains('carousel-item--landscape');
+                clone.classList.toggle('carousel-item--landscape', isLandscape);
+                clone.classList.toggle('carousel-item--portrait', !isLandscape);
+                clone.querySelectorAll('img').forEach(imageElement => {
+                    imageElement.setAttribute('aria-hidden', 'true');
+                });
+                track.appendChild(clone);
+                clonesAfter.push(clone);
+                const existingClones = cloneRegistry.get(source) || [];
+                existingClones.push(clone);
+                cloneRegistry.set(source, existingClones);
+            }
+        }
 
         let currentIndex = 0;
         let scrollFrame = null;
         let trackPaddingLeft = 0;
+        let isLooping = false;
+        let loopResetIndex = null;
+        let loopTargetOffset = null;
+        let isAdjustingScroll = false;
+        const scrollTolerance = 4;
 
         const updateTrackPadding = () => {
             const styles = window.getComputedStyle(track);
@@ -640,9 +748,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const getScrollOffsetForItem = item => {
-            const itemRect = item.getBoundingClientRect();
-            const trackRect = track.getBoundingClientRect();
-            return itemRect.left - trackRect.left + track.scrollLeft - trackPaddingLeft;
+            if (!item) {
+                return 0;
+            }
+            return (item.offsetLeft || 0) - trackPaddingLeft;
         };
 
         const updateButtons = () => {
@@ -655,8 +764,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        const modalItems = carouselItems.map(item => {
-            const image = item.querySelector('img');
+        const modalItems = slideData.map(({ item, image }) => {
             const src = image ? image.getAttribute('src') || image.currentSrc || '' : '';
             const alt = image ? image.getAttribute('alt') || '' : '';
             const caption = item.dataset.caption || (image ? image.dataset.caption || '' : '');
@@ -666,29 +774,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTrackPadding();
         updateButtons();
 
-        const goToIndex = (index, options = {}) => {
-            if (!carouselItems.length) {
-                return;
-            }
-
-            currentIndex = (index + carouselItems.length) % carouselItems.length;
-            const targetItem = carouselItems[currentIndex];
-            if (!targetItem) {
-                return;
-            }
-
-            const { behavior } = options;
-            const scrollBehavior = behavior || (reduceMotion ? 'auto' : 'smooth');
-            const offset = getScrollOffsetForItem(targetItem);
-
-            track.scrollTo({
-                left: offset,
-                behavior: scrollBehavior
-            });
-            updateButtons();
-        };
-
         const updateCurrentIndex = () => {
+            if (isLooping || isAdjustingScroll) {
+                return;
+            }
             const trackRect = track.getBoundingClientRect();
             const trackCenter = trackRect.left + trackRect.width / 2;
 
@@ -710,10 +799,86 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const scheduleIndexUpdate = () => {
+            if (isLooping || isAdjustingScroll) {
+                return;
+            }
             if (scrollFrame) {
                 cancelAnimationFrame(scrollFrame);
             }
             scrollFrame = requestAnimationFrame(updateCurrentIndex);
+        };
+
+        const finalizeLoopJump = () => {
+            if (loopResetIndex == null) {
+                isLooping = false;
+                return;
+            }
+
+            isAdjustingScroll = true;
+            const offset = getScrollOffsetForItem(carouselItems[loopResetIndex]);
+            track.scrollTo({
+                left: offset,
+                behavior: 'auto'
+            });
+            currentIndex = loopResetIndex;
+            loopResetIndex = null;
+            loopTargetOffset = null;
+            isLooping = false;
+            updateButtons();
+            updateCurrentIndex();
+            requestAnimationFrame(() => {
+                isAdjustingScroll = false;
+            });
+        };
+
+        const goToIndex = (index, options = {}) => {
+            if (!carouselItems.length) {
+                return;
+            }
+
+            const total = carouselItems.length;
+            const normalizedIndex = (index + total) % total;
+            const { behavior } = options;
+            const scrollBehavior = behavior || (reduceMotion ? 'auto' : 'smooth');
+
+            let targetItem = carouselItems[normalizedIndex];
+            let shouldLoop = false;
+
+            if (index < 0 && clonesBefore.length) {
+                targetItem = clonesBefore[clonesBefore.length - 1];
+                shouldLoop = true;
+            } else if (index >= total && clonesAfter.length) {
+                targetItem = clonesAfter[0];
+                shouldLoop = true;
+            } else {
+                currentIndex = normalizedIndex;
+            }
+
+            if (!targetItem) {
+                return;
+            }
+
+            const offset = getScrollOffsetForItem(targetItem);
+
+            if (shouldLoop) {
+                isLooping = true;
+                loopResetIndex = normalizedIndex;
+                loopTargetOffset = offset;
+            } else {
+                loopResetIndex = null;
+                loopTargetOffset = null;
+            }
+
+            track.scrollTo({
+                left: offset,
+                behavior: scrollBehavior
+            });
+
+            if (!shouldLoop) {
+                updateButtons();
+            } else if (scrollBehavior === 'auto') {
+                finalizeLoopJump();
+            }
         };
 
         if (prevButton) {
@@ -731,6 +896,52 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         track.addEventListener('scroll', () => {
+            if (isAdjustingScroll) {
+                return;
+            }
+
+            if (isLooping) {
+                if (typeof loopTargetOffset === 'number' && Math.abs(track.scrollLeft - loopTargetOffset) <= scrollTolerance) {
+                    finalizeLoopJump();
+                }
+                return;
+            }
+
+            if (carouselItems.length > 1) {
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                if (clonesBefore.length && track.scrollLeft <= scrollTolerance) {
+                    isAdjustingScroll = true;
+                    const offset = getScrollOffsetForItem(carouselItems[carouselItems.length - 1]);
+                    track.scrollTo({
+                        left: offset,
+                        behavior: 'auto'
+                    });
+                    currentIndex = carouselItems.length - 1;
+                    updateButtons();
+                    updateCurrentIndex();
+                    requestAnimationFrame(() => {
+                        isAdjustingScroll = false;
+                    });
+                    return;
+                }
+
+                if (clonesAfter.length && track.scrollLeft >= maxScroll - scrollTolerance) {
+                    isAdjustingScroll = true;
+                    const offset = getScrollOffsetForItem(carouselItems[0]);
+                    track.scrollTo({
+                        left: offset,
+                        behavior: 'auto'
+                    });
+                    currentIndex = 0;
+                    updateButtons();
+                    updateCurrentIndex();
+                    requestAnimationFrame(() => {
+                        isAdjustingScroll = false;
+                    });
+                    return;
+                }
+            }
+
             scheduleIndexUpdate();
         }, { passive: true });
 

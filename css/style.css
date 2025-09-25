@@ -2241,16 +2241,19 @@ footer::before {
     color: var(--secondary-color);
 }
 
+
 .photo-carousel {
     position: relative;
-    max-width: min(92vw, 940px);
+    max-width: min(94vw, 1080px);
     margin: 0 auto;
     padding: clamp(24px, 6vw, 48px) clamp(56px, 7vw, 132px);
 }
 
 .carousel-track {
+    position: relative;
     display: flex;
-    gap: clamp(16px, 4vw, 24px);
+    gap: clamp(16px, 4vw, 24px);<<<<<< codex/fix-image-spacing-for-landscape-and-portrait
+    align-items: center;
     overflow-x: auto;
     padding: clamp(20px, 4vw, 32px);
     scroll-padding: clamp(20px, 4vw, 32px);
@@ -2271,8 +2274,12 @@ footer::before {
 
 
 .carousel-item {
+    --carousel-aspect: 3 / 4;
+    --carousel-max-visual-width: min(78vw, 560px);
     flex: 0 0 100%;
     scroll-snap-align: center;
+    display: grid;
+    place-items: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2284,15 +2291,47 @@ footer::before {
     overflow: hidden;
 }
 
+.carousel-item__frame {
+    width: min(100%, var(--carousel-max-visual-width));
+    aspect-ratio: var(--carousel-aspect);
+    border-radius: clamp(16px, 4vw, 26px);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: var(--white);
+}
+
 .carousel-item img {
-    display: block;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: min(70vh, 680px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    object-position: center;
     cursor: zoom-in;
+    border-radius: inherit;
+    transition: transform var(--transition-medium);
+}
+
+.carousel-item--landscape {
+    --carousel-aspect: 3 / 2;
+    --carousel-max-visual-width: min(90vw, 860px);
+    padding: clamp(12px, 3vw, 20px);
+}
+
+.carousel-item--landscape .carousel-item__frame {
     border-radius: clamp(14px, 3.5vw, 24px);
+}
+
+.carousel-item--landscape img {
+    object-fit: cover;
+}
+
+.carousel-item--portrait {
+    --carousel-aspect: 3 / 4;
+    --carousel-max-visual-width: min(76vw, 540px);
+}
+
+.carousel-item--clone {
+    pointer-events: none;
 }
 
 .carousel-control {
@@ -2477,6 +2516,14 @@ footer::before {
         scroll-padding: clamp(16px, 5vw, 24px);
     }
 
+    .carousel-item {
+        --carousel-max-visual-width: min(86vw, 520px);
+    }
+
+    .carousel-item--landscape {
+        --carousel-max-visual-width: min(94vw, 700px);
+    }
+
     .gallery-modal__inner {
         width: min(94vw, 720px);
         grid-template-columns: minmax(0, 1fr);
@@ -2525,6 +2572,11 @@ footer::before {
 
     .carousel-item {
         padding: clamp(16px, 6vw, 24px);
+        --carousel-max-visual-width: min(92vw, 460px);
+    }
+
+    .carousel-item--landscape {
+        --carousel-max-visual-width: min(98vw, 640px);
     }
 
     .carousel-control {
@@ -2549,6 +2601,11 @@ footer::before {
 
     .carousel-item {
         padding: clamp(14px, 7vw, 20px);
+        --carousel-max-visual-width: min(96vw, 420px);
+    }
+
+    .carousel-item--landscape {
+        --carousel-max-visual-width: min(100vw, 540px);
     }
 
     .gallery-modal__figure figcaption {
