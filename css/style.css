@@ -2529,16 +2529,27 @@ footer::before {
         width: min(94vw, 720px);
         grid-template-columns: minmax(0, 1fr);
         justify-items: center;
+        position: relative;
     }
 
     .gallery-modal__nav {
-        position: static;
-        order: 1;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
     }
 
     .gallery-modal__figure {
         order: 2;
         max-height: 80vh;
+    }
+
+    .gallery-modal__nav--prev {
+        left: clamp(10px, 4vw, 20px);
+    }
+
+    .gallery-modal__nav--next {
+        right: clamp(10px, 4vw, 20px);
     }
 }
 
