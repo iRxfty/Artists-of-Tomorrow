@@ -2252,6 +2252,8 @@ footer::before {
     grid-auto-flow: column;
     grid-auto-columns: minmax(720px, min(90vw, 1280px));
     gap: 32px;
+    grid-auto-columns: minmax(400px, min(60vw, 720px));
+    gap: 24px;
     overflow-x: auto;
     padding: 20px 0 20px 20px;
     scroll-snap-type: x mandatory;
@@ -2534,6 +2536,8 @@ footer::before {
     .carousel-track {
         grid-auto-columns: minmax(92vw, 100%);
         padding: 14px 0;
+        grid-auto-columns: minmax(260px, 82%);
+        padding: 12px 0;
     }
 
     .carousel-control {
