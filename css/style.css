@@ -2230,13 +2230,13 @@ footer::before {
 }
 
 .photo-gallery {
-    margin-top: 48px;
+    margin-top: 40px;
 }
 
 .photo-gallery h4 {
     font-family: var(--font-heading);
     font-size: clamp(1.3rem, 1.1rem + 0.5vw, 1.6rem);
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     text-align: center;
     color: var(--secondary-color);
 }
@@ -2244,18 +2244,17 @@ footer::before {
 
 .photo-carousel {
     position: relative;
-    padding: 0 clamp(64px, 8vw, 140px);
+    padding: 0 clamp(56px, 7vw, 132px);
 }
 
 .carousel-track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(720px, min(90vw, 1280px));
-    gap: 32px;
     grid-auto-columns: minmax(400px, min(60vw, 720px));
-    gap: 24px;
+    gap: 28px;
     overflow-x: auto;
-    padding: 20px 0 20px 20px;
+    padding: 24px;
+    scroll-padding: 0 24px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -2280,7 +2279,8 @@ footer::before {
     background: var(--white);
     box-shadow: var(--box-shadow);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
+    min-height: clamp(320px, 52vw, 600px);
     display: flex;
     align-items: stretch;
 }
@@ -2493,19 +2493,9 @@ footer::before {
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 1024px) {
     .photo-carousel {
-        padding: 0 18px;
-    }
-
-    .carousel-track {
-        grid-auto-columns: 96vw;
-        gap: 18px;
-        padding: 12px 0 12px 12px;
-    }
-
-    .gallery-modal__figure figcaption {
-        font-size: 0.95rem;
+        padding: 0 clamp(32px, 5vw, 72px);
     }
 }
 
@@ -2522,22 +2512,20 @@ footer::before {
     right: 0;
 }
 
-@media (max-width: 1024px) {
-    .photo-carousel {
-        padding: 0 36px;
-    }
-}
-
 @media (max-width: 768px) {
     .photo-carousel {
-        padding: 0 clamp(20px, 5vw, 32px);
+        padding: 0 clamp(24px, 5vw, 36px);
     }
 
     .carousel-track {
-        grid-auto-columns: minmax(92vw, 100%);
-        padding: 14px 0;
-        grid-auto-columns: minmax(260px, 82%);
-        padding: 12px 0;
+        grid-auto-columns: minmax(280px, 82%);
+        gap: 22px;
+        padding: 18px;
+        scroll-padding: 0 18px;
+    }
+
+    .carousel-item {
+        min-height: clamp(260px, 58vw, 520px);
     }
 
     .carousel-control {
@@ -2548,16 +2536,26 @@ footer::before {
 
 @media (max-width: 520px) {
     .photo-gallery {
-        margin-top: 36px;
+        margin-top: 32px;
     }
 
     .photo-carousel {
-        padding: 0 16px;
+        padding: 0 18px;
     }
 
     .carousel-track {
         grid-auto-columns: minmax(220px, 88%);
-        gap: 14px;
+        gap: 16px;
+        padding: 16px;
+        scroll-padding: 0 16px;
+    }
+
+    .carousel-item {
+        min-height: clamp(220px, 68vw, 380px);
+    }
+
+    .gallery-modal__figure figcaption {
+        font-size: 0.95rem;
     }
 }
 
