@@ -2362,11 +2362,11 @@ footer::before {
 .carousel-control:hover,
 .carousel-control:focus-visible {
     background: var(--secondary-color);
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%);
 }
 
 .carousel-control:active {
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%);
 }
 
 .carousel-control:disabled {
