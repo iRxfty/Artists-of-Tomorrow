@@ -616,20 +616,100 @@ document.addEventListener('DOMContentLoaded', function() {
     // Photo carousel controls
     document.querySelectorAll('[data-carousel]').forEach(carousel => {
         const track = carousel.querySelector('[data-carousel-track]');
-        if (!track) {
+        if (!track || track.hasAttribute('data-carousel-initialized')) {
             return;
         }
 
-        const carouselItems = Array.from(track.querySelectorAll('.carousel-item'));
-        if (!carouselItems.length) {
+        const originalItems = Array.from(track.querySelectorAll('.carousel-item'));
+        if (!originalItems.length) {
             return;
         }
 
+        track.setAttribute('data-carousel-initialized', 'true');
+
+        const createClone = (item, index, position) => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('carousel-item--clone');
+            clone.dataset.cloneSourceIndex = String(index);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('tabindex', '-1');
+            clone.setAttribute('role', 'button');
+
+            if (position === 'before') {
+                const firstElement = track.firstElementChild;
+                if (firstElement) {
+                    track.insertBefore(clone, firstElement);
+                } else {
+                    track.appendChild(clone);
+                }
+            } else {
+                track.appendChild(clone);
+            }
+
+            return clone;
+        };
+
+        const clonesBefore = originalItems.map((item, index) => createClone(item, index, 'before'));
+        const clonesAfter = originalItems.map((item, index) => createClone(item, index, 'after'));
+
+        const carouselItems = originalItems;
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
 
         let currentIndex = 0;
         let scrollFrame = null;
+        let carouselMetrics = { contentWidth: 0, gap: 0 };
+        let isAdjustingScroll = false;
+
+        const updateCarouselMetrics = () => {
+            const styles = window.getComputedStyle(track);
+            const gapValue = parseFloat(styles.columnGap || styles.gridColumnGap || '0') || 0;
+            let totalWidth = 0;
+
+            carouselItems.forEach((item, itemIndex) => {
+                const rect = item.getBoundingClientRect();
+                totalWidth += rect.width;
+                if (itemIndex < carouselItems.length - 1) {
+                    totalWidth += gapValue;
+                }
+            });
+
+            carouselMetrics = {
+                contentWidth: totalWidth,
+                gap: gapValue
+            };
+
+            return carouselMetrics;
+        };
+
+        const ensureInfiniteLoop = () => {
+            if (isAdjustingScroll) {
+                return;
+            }
+
+            const { contentWidth } = carouselMetrics;
+            if (!contentWidth) {
+                return;
+            }
+
+            const scrollLeft = track.scrollLeft;
+            const lowerThreshold = contentWidth * 0.5;
+            const upperThreshold = contentWidth * 1.5;
+
+            if (scrollLeft < lowerThreshold) {
+                isAdjustingScroll = true;
+                track.scrollLeft = scrollLeft + contentWidth;
+                requestAnimationFrame(() => {
+                    isAdjustingScroll = false;
+                });
+            } else if (scrollLeft > upperThreshold) {
+                isAdjustingScroll = true;
+                track.scrollLeft = scrollLeft - contentWidth;
+                requestAnimationFrame(() => {
+                    isAdjustingScroll = false;
+                });
+            }
+        };
 
         const modalItems = carouselItems.map(item => {
             const image = item.querySelector('img');
@@ -639,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return { element: item, image, src, alt, caption };
         });
 
-        const goToIndex = index => {
+        const goToIndex = (index, options = {}) => {
             if (!carouselItems.length) {
                 return;
             }
@@ -650,8 +730,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            const { behavior } = options;
+            const scrollBehavior = behavior || (reduceMotion ? 'auto' : 'smooth');
+
             targetItem.scrollIntoView({
-                behavior: reduceMotion ? 'auto' : 'smooth',
+                behavior: scrollBehavior,
                 inline: 'center',
                 block: 'nearest'
             });
@@ -698,7 +781,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        track.addEventListener('scroll', scheduleIndexUpdate, { passive: true });
+        track.addEventListener('scroll', () => {
+            ensureInfiniteLoop();
+            scheduleIndexUpdate();
+        }, { passive: true });
 
         track.addEventListener('keydown', event => {
             if (event.key === 'ArrowLeft') {
@@ -710,24 +796,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        window.addEventListener('resize', scheduleIndexUpdate);
-        updateCurrentIndex();
+        const handleResize = () => {
+            updateCarouselMetrics();
+            requestAnimationFrame(() => {
+                goToIndex(currentIndex, { behavior: 'auto' });
+                ensureInfiniteLoop();
+            });
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        requestAnimationFrame(() => {
+            updateCarouselMetrics();
+            if (carouselMetrics.contentWidth) {
+                track.scrollLeft = carouselMetrics.contentWidth;
+            }
+            goToIndex(currentIndex, { behavior: 'auto' });
+            updateCurrentIndex();
+        });
 
         if (galleryModalElement) {
             const modalData = modalItems.map(({ src, alt, caption }) => ({ src, alt, caption }));
 
-            modalItems.forEach((itemData, index) => {
-                const { element, alt } = itemData;
-                if (!element) {
+            const registerModalTrigger = (element, index, { focusable } = { focusable: true }) => {
+                if (!element || index < 0 || index >= modalData.length) {
                     return;
                 }
 
-                element.setAttribute('tabindex', '0');
+                const itemAlt = modalItems[index]?.alt;
+
                 element.setAttribute('role', 'button');
-                if (alt) {
-                    element.setAttribute('aria-label', `Open larger view of ${alt}`);
+
+                if (focusable) {
+                    element.setAttribute('tabindex', '0');
+                    if (itemAlt) {
+                        element.setAttribute('aria-label', `Open larger view of ${itemAlt}`);
+                    } else {
+                        element.setAttribute('aria-label', 'Open larger view of this artwork');
+                    }
                 } else {
-                    element.setAttribute('aria-label', 'Open larger view of this artwork');
+                    element.setAttribute('tabindex', '-1');
+                    element.setAttribute('aria-hidden', 'true');
                 }
 
                 const handleOpen = () => {
@@ -735,12 +844,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 element.addEventListener('click', handleOpen);
-                element.addEventListener('keydown', event => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        handleOpen();
-                    }
-                });
+
+                if (focusable) {
+                    element.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            handleOpen();
+                        }
+                    });
+                }
+            };
+
+            modalItems.forEach((itemData, index) => {
+                registerModalTrigger(itemData.element, index, { focusable: true });
+            });
+
+            [...clonesBefore, ...clonesAfter].forEach(clone => {
+                const sourceIndex = Number.parseInt(clone.dataset.cloneSourceIndex || '', 10);
+                if (Number.isInteger(sourceIndex)) {
+                    registerModalTrigger(clone, sourceIndex, { focusable: false });
+                }
             });
         }
     });
