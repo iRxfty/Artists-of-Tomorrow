@@ -2362,11 +2362,11 @@ footer::before {
 .carousel-control:hover,
 .carousel-control:focus-visible {
     background: var(--secondary-color);
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%);
 }
 
 .carousel-control:active {
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%);
 }
 
 .carousel-control:disabled {
@@ -2497,12 +2497,14 @@ footer::before {
     cursor: pointer;
     transition: background var(--transition-medium), transform var(--transition-medium);
     font-size: clamp(1.6rem, 1.1rem + 1.2vw, 2.2rem);
+    --gallery-nav-translate-y: 0;
+    transform: translateY(var(--gallery-nav-translate-y));
 }
 
 .gallery-modal__nav:hover,
 .gallery-modal__nav:focus-visible {
     background: rgba(229, 157, 131, 0.8);
-    transform: scale(1.05);
+    transform: translateY(var(--gallery-nav-translate-y)) scale(1.05);
 }
 
 .gallery-modal__nav--prev {
@@ -2541,7 +2543,8 @@ footer::before {
     .gallery-modal__nav {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        --gallery-nav-translate-y: -50%;
+        transform: translateY(var(--gallery-nav-translate-y));
         z-index: 2;
     }
 
