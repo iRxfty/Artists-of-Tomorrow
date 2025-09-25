@@ -2243,12 +2243,10 @@ footer::before {
 
 .photo-carousel {
     position: relative;
+    padding: 0 clamp(48px, 6vw, 96px);
     max-width: min(92vw, 940px);
     margin: 0 auto;
-    padding: clamp(32px, 6vw, 56px);
-    background: var(--white);
-    border-radius: clamp(24px, 5vw, 36px);
-    box-shadow: var(--box-shadow);
+    padding: 0 clamp(56px, 7vw, 132px);
 }
 
 .carousel-track {
@@ -2257,9 +2255,11 @@ footer::before {
     grid-auto-columns: minmax(0, 100%);
     gap: 0;
     overflow-x: auto;
-    justify-items: center;
-    padding: 0 clamp(24px, 4.5vw, 36px);
-    scroll-padding: 0 clamp(24px, 4.5vw, 36px);
+    padding: clamp(18px, 4vw, 28px) 0;
+    scroll-padding: 0;
+    scroll-padding-inline: 0;
+    padding: clamp(18px, 4vw, 28px) 24px;
+    scroll-padding: 0 24px;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
     scroll-behavior: smooth;
@@ -2277,7 +2277,6 @@ footer::before {
 
 .carousel-item {
     scroll-snap-align: center;
-    width: min(100%, 720px);
     border-radius: clamp(18px, 4vw, 28px);
     background: rgba(255, 255, 255, 0.95);
     box-shadow: var(--box-shadow);
@@ -2316,8 +2315,6 @@ footer::before {
     cursor: pointer;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), background var(--transition-medium);
-    z-index: 2;
-    pointer-events: auto;
 }
 
 .carousel-control[disabled] {
@@ -2506,7 +2503,7 @@ footer::before {
 
 @media (max-width: 1024px) {
     .photo-carousel {
-        padding: clamp(28px, 6vw, 44px);
+        padding: 0 clamp(32px, 5vw, 72px);
     }
 }
 
@@ -2516,20 +2513,23 @@ footer::before {
 }
 
 .carousel-control--prev {
-    left: clamp(16px, 3vw, 28px);
+    left: 0;
 }
 
 .carousel-control--next {
-    right: clamp(16px, 3vw, 28px);
+    right: 0;
 }
 
 @media (max-width: 768px) {
     .photo-carousel {
-        padding: clamp(24px, 6vw, 36px);
+        padding: 0 clamp(22px, 5vw, 32px);
     }
 
     .carousel-track {
-        padding: 0 clamp(18px, 6vw, 24px);
+        padding: clamp(14px, 5vw, 20px) 0;
+        scroll-padding: 0;
+        scroll-padding-inline: 0;
+        padding: clamp(14px, 5vw, 20px) clamp(18px, 6vw, 24px);
         scroll-padding: 0 clamp(18px, 6vw, 24px);
     }
 
@@ -2549,11 +2549,14 @@ footer::before {
     }
 
     .photo-carousel {
-        padding: clamp(18px, 7vw, 28px);
+        padding: 0 clamp(16px, 6vw, 22px);
     }
 
     .carousel-track {
-        padding: 0 clamp(16px, 7vw, 22px);
+        padding: clamp(12px, 6vw, 18px) 0;
+        scroll-padding: 0;
+        scroll-padding-inline: 0;
+        padding: clamp(12px, 6vw, 18px) clamp(16px, 7vw, 22px);
         scroll-padding: 0 clamp(16px, 7vw, 22px);
     }
 
