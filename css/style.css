@@ -2247,6 +2247,7 @@ footer::before {
     padding: 0 clamp(48px, 6vw, 96px);
     max-width: min(92vw, 940px);
     margin: 0 auto;
+    padding: 0 clamp(56px, 7vw, 132px);
 }
 
 .carousel-track {
@@ -2257,6 +2258,11 @@ footer::before {
     overflow-x: auto;
     padding: clamp(18px, 4vw, 28px) 0;
     scroll-padding: 0;
+    grid-auto-columns: minmax(400px, min(60vw, 720px));
+    gap: 28px;
+    overflow-x: auto;
+    padding: 24px;
+    scroll-padding: 0 24px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -2278,6 +2284,9 @@ footer::before {
     box-shadow: var(--box-shadow);
     aspect-ratio: 3 / 2;
     min-height: clamp(300px, 48vw, 560px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    aspect-ratio: 4 / 3;
+    min-height: clamp(320px, 52vw, 600px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2522,6 +2531,18 @@ footer::before {
 
     .carousel-item {
         min-height: clamp(240px, 60vw, 420px);
+        padding: 0 clamp(24px, 5vw, 36px);
+    }
+
+    .carousel-track {
+        grid-auto-columns: minmax(280px, 82%);
+        gap: 22px;
+        padding: 18px;
+        scroll-padding: 0 18px;
+    }
+
+    .carousel-item {
+        min-height: clamp(260px, 58vw, 520px);
     }
 
     .carousel-control {
@@ -2546,6 +2567,18 @@ footer::before {
     .carousel-item {
         min-height: clamp(210px, 72vw, 360px);
         padding: clamp(10px, 5vw, 16px);
+        padding: 0 18px;
+    }
+
+    .carousel-track {
+        grid-auto-columns: minmax(220px, 88%);
+        gap: 16px;
+        padding: 16px;
+        scroll-padding: 0 16px;
+    }
+
+    .carousel-item {
+        min-height: clamp(220px, 68vw, 380px);
     }
 
     .gallery-modal__figure figcaption {
