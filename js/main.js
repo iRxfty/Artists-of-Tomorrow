@@ -456,9 +456,74 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     };
-    
+
     enhancePrizes();
-    
+
+    // Photo carousel controls
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+        const track = carousel.querySelector('[data-carousel-track]');
+        if (!track) {
+            return;
+        }
+
+        const prevButton = carousel.querySelector('[data-carousel-prev]');
+        const nextButton = carousel.querySelector('[data-carousel-next]');
+        let scrollAnimationFrame = null;
+
+        const getScrollStep = () => track.clientWidth * 0.8;
+
+        const updateControls = () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (prevButton) {
+                prevButton.disabled = track.scrollLeft <= 1;
+            }
+            if (nextButton) {
+                nextButton.disabled = track.scrollLeft >= (maxScroll - 1);
+            }
+        };
+
+        const scheduleUpdate = () => {
+            if (scrollAnimationFrame) {
+                cancelAnimationFrame(scrollAnimationFrame);
+            }
+            scrollAnimationFrame = requestAnimationFrame(updateControls);
+        };
+
+        const scrollByAmount = direction => {
+            track.scrollBy({
+                left: direction * getScrollStep(),
+                behavior: reduceMotion ? 'auto' : 'smooth'
+            });
+        };
+
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                scrollByAmount(-1);
+            });
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                scrollByAmount(1);
+            });
+        }
+
+        track.addEventListener('scroll', scheduleUpdate, { passive: true });
+
+        track.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                scrollByAmount(-1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                scrollByAmount(1);
+            }
+        });
+
+        window.addEventListener('resize', scheduleUpdate);
+        updateControls();
+    });
+
     // Add particle effect to buttons
     const addButtonEffects = function() {
         const buttons = document.querySelectorAll('.cta-button, .secondary-button');
