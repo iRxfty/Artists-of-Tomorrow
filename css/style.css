@@ -2275,23 +2275,50 @@ footer::before {
 .carousel-item {
     flex: 0 0 100%;
     scroll-snap-align: center;
-    aspect-ratio: 16 / 9;
-    min-height: clamp(280px, 48vw, 520px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: clamp(12px, 3vw, 22px);
+    min-height: clamp(260px, 45vw, 620px);
+    transition: min-height var(--transition-medium) ease;
+}
+
+.carousel-item[data-orientation="landscape"] {
+    min-height: clamp(220px, 32vw, 460px);
+}
+
+.carousel-item[data-orientation="portrait"] {
+    min-height: clamp(360px, 58vw, 760px);
+}
+
+.carousel-item[data-orientation="square"] {
+    min-height: clamp(300px, 48vw, 600px);
 }
 
 .carousel-item img {
-    width: 100%;
-    height: 100%;
     display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: min(68vh, 660px);
     object-fit: contain;
     cursor: zoom-in;
     border-radius: clamp(14px, 3.5vw, 24px);
     background: var(--white);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    transition: max-height var(--transition-medium) ease;
+}
+
+.carousel-item[data-orientation="landscape"] img {
+    max-height: min(56vh, 520px);
+}
+
+.carousel-item[data-orientation="portrait"] img {
+    max-height: min(84vh, 780px);
+}
+
+.carousel-item[data-orientation="square"] img {
+    max-height: min(70vh, 680px);
 }
 
 .carousel-control {
