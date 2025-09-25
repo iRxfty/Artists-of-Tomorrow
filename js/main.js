@@ -514,6 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return { open, close };
     })();
 
+    // Photo carousel controls
     document.querySelectorAll('[data-carousel]').forEach(carousel => {
         const track = carousel.querySelector('[data-carousel-track]');
         if (!track) {
@@ -623,6 +624,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const baseStep = track.clientWidth * 0.8;
             const itemStep = metrics.itemWidth + metrics.gap;
             return Math.max(baseStep, itemStep || baseStep);
+        let scrollAnimationFrame = null;
+
+        const getScrollStep = () => track.clientWidth * 0.8;
+
+        const updateControls = () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (prevButton) {
+                prevButton.disabled = track.scrollLeft <= 1;
+            }
+            if (nextButton) {
+                nextButton.disabled = track.scrollLeft >= (maxScroll - 1);
+            }
+        };
+
+        const scheduleUpdate = () => {
+            if (scrollAnimationFrame) {
+                cancelAnimationFrame(scrollAnimationFrame);
+            }
+            scrollAnimationFrame = requestAnimationFrame(updateControls);
         };
 
         const scrollByAmount = direction => {
@@ -667,6 +687,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         }, { passive: true });
+        track.addEventListener('scroll', scheduleUpdate, { passive: true });
 
         track.addEventListener('keydown', event => {
             if (event.key === 'ArrowLeft') {
@@ -710,6 +731,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         window.addEventListener('resize', debouncedSetup);
         setupCarousel();
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                scrollByAmount(1);
+            }
+        });
+
+        window.addEventListener('resize', scheduleUpdate);
+        updateControls();
     });
 
     // Add particle effect to buttons

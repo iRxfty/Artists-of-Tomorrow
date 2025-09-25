@@ -2244,6 +2244,7 @@ footer::before {
 .photo-carousel {
     position: relative;
     padding: 0 64px;
+    padding: 0 48px;
 }
 
 .carousel-track {
@@ -2259,6 +2260,16 @@ footer::before {
     border-radius: 22px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05), 0 18px 32px rgba(0, 0, 0, 0.08);
+    grid-auto-columns: minmax(220px, min(32vw, 320px));
+    gap: 18px;
+    overflow-x: auto;
+    padding: 12px 0 12px 12px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .carousel-track:focus {
@@ -2288,12 +2299,19 @@ footer::before {
     transform: translateY(-4px);
     box-shadow: var(--box-shadow-strong);
     outline: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .carousel-item img {
     width: 100%;
     height: 100%;
     display: block;
+    display: block;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -2349,6 +2367,7 @@ footer::before {
 @media (max-width: 1024px) {
     .photo-carousel {
         padding: 0 48px;
+        padding: 0 36px;
     }
 }
 
@@ -2361,6 +2380,8 @@ footer::before {
         grid-auto-columns: minmax(260px, 80%);
         padding: 12px 0;
         gap: 18px;
+        grid-auto-columns: minmax(200px, 72%);
+        padding: 12px 0;
     }
 
     .carousel-control {
@@ -2447,6 +2468,11 @@ footer::before {
 
 body.lightbox-open {
     overflow: hidden;
+}
+
+        grid-auto-columns: minmax(180px, 86%);
+        gap: 14px;
+    }
 }
 
 .journey-card {
