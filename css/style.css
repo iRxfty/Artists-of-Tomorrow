@@ -2339,6 +2339,8 @@ footer::before {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    -webkit-appearance: none;
+    appearance: none;
     background: var(--primary-color);
     color: var(--white);
     border: none;
@@ -2360,6 +2362,10 @@ footer::before {
 .carousel-control:hover,
 .carousel-control:focus-visible {
     background: var(--secondary-color);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-control:active {
     transform: translateY(-50%) scale(1.05);
 }
 
