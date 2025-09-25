@@ -459,6 +459,158 @@ document.addEventListener('DOMContentLoaded', function() {
 
     enhancePrizes();
 
+    const galleryModalElement = document.querySelector('[data-gallery-modal]');
+    const galleryModalImage = galleryModalElement?.querySelector('[data-gallery-image]');
+    const galleryModalCaption = galleryModalElement?.querySelector('[data-gallery-caption]');
+    const galleryModalPrev = galleryModalElement?.querySelector('[data-gallery-prev]');
+    const galleryModalNext = galleryModalElement?.querySelector('[data-gallery-next]');
+    const galleryModalCloseElements = galleryModalElement ? galleryModalElement.querySelectorAll('[data-gallery-close]') : [];
+
+    const galleryModalState = {
+        items: [],
+        index: 0,
+        previousFocus: null,
+        keyHandler: null
+    };
+
+    const renderGalleryModal = () => {
+        if (!galleryModalElement || !galleryModalImage || !galleryModalState.items.length) {
+            return;
+        }
+
+        const currentItem = galleryModalState.items[galleryModalState.index];
+        galleryModalImage.src = currentItem.src;
+        galleryModalImage.alt = currentItem.alt || '';
+
+        if (galleryModalCaption) {
+            if (currentItem.alt) {
+                galleryModalCaption.textContent = currentItem.alt;
+                galleryModalCaption.style.display = '';
+            } else {
+                galleryModalCaption.textContent = '';
+                galleryModalCaption.style.display = 'none';
+            }
+        }
+    };
+
+    const closeGalleryModal = () => {
+        if (!galleryModalElement) {
+            return;
+        }
+
+        galleryModalElement.classList.remove('is-visible');
+        galleryModalElement.setAttribute('aria-hidden', 'true');
+        document.body.style.removeProperty('overflow');
+
+        if (galleryModalState.keyHandler) {
+            window.removeEventListener('keydown', galleryModalState.keyHandler);
+            galleryModalState.keyHandler = null;
+        }
+
+        if (galleryModalImage) {
+            galleryModalImage.src = '';
+            galleryModalImage.alt = '';
+        }
+
+        if (galleryModalCaption) {
+            galleryModalCaption.textContent = '';
+        }
+
+        const { previousFocus } = galleryModalState;
+        if (previousFocus && typeof previousFocus.focus === 'function') {
+            previousFocus.focus({ preventScroll: true });
+        }
+
+        galleryModalState.items = [];
+        galleryModalState.previousFocus = null;
+        galleryModalState.index = 0;
+    };
+
+    const showModalRelativeImage = direction => {
+        if (!galleryModalState.items.length) {
+            return;
+        }
+
+        const total = galleryModalState.items.length;
+        galleryModalState.index = (galleryModalState.index + direction + total) % total;
+        renderGalleryModal();
+    };
+
+    const openGalleryModal = (items, startIndex, triggerElement) => {
+        if (!galleryModalElement || !items || !items.length) {
+            return;
+        }
+
+        galleryModalState.items = items;
+        galleryModalState.index = (startIndex + items.length) % items.length;
+        galleryModalState.previousFocus = triggerElement || document.activeElement;
+
+        galleryModalElement.classList.add('is-visible');
+        galleryModalElement.setAttribute('aria-hidden', 'false');
+        document.body.style.setProperty('overflow', 'hidden');
+
+        renderGalleryModal();
+
+        if (galleryModalState.keyHandler) {
+            window.removeEventListener('keydown', galleryModalState.keyHandler);
+        }
+
+        galleryModalState.keyHandler = event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeGalleryModal();
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                showModalRelativeImage(1);
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                showModalRelativeImage(-1);
+            } else if (event.key === 'Tab' && galleryModalElement) {
+                const focusableElements = Array.from(galleryModalElement.querySelectorAll('button'));
+                if (!focusableElements.length) {
+                    return;
+                }
+
+                const first = focusableElements[0];
+                const last = focusableElements[focusableElements.length - 1];
+
+                if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                } else if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', galleryModalState.keyHandler);
+
+        const closeButton = galleryModalElement.querySelector('.gallery-modal__close');
+        if (closeButton) {
+            closeButton.focus({ preventScroll: true });
+        }
+    };
+
+    if (galleryModalPrev) {
+        galleryModalPrev.addEventListener('click', () => {
+            showModalRelativeImage(-1);
+        });
+    }
+
+    if (galleryModalNext) {
+        galleryModalNext.addEventListener('click', () => {
+            showModalRelativeImage(1);
+        });
+    }
+
+    galleryModalCloseElements.forEach(closeElement => {
+        closeElement.addEventListener('click', event => {
+            event.preventDefault();
+            closeGalleryModal();
+        });
+    });
+
     // Photo carousel controls
     document.querySelectorAll('[data-carousel]').forEach(carousel => {
         const track = carousel.querySelector('[data-carousel-track]');
@@ -466,62 +618,128 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        const carouselItems = Array.from(track.querySelectorAll('.carousel-item'));
+        if (!carouselItems.length) {
+            return;
+        }
+
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
-        let scrollAnimationFrame = null;
 
-        const getScrollStep = () => track.clientWidth * 0.8;
+        let currentIndex = 0;
+        let scrollFrame = null;
 
-        const updateControls = () => {
-            const maxScroll = track.scrollWidth - track.clientWidth;
-            if (prevButton) {
-                prevButton.disabled = track.scrollLeft <= 1;
+        const modalItems = carouselItems.map(item => {
+            const image = item.querySelector('img');
+            const src = image ? image.getAttribute('src') || image.currentSrc || '' : '';
+            const alt = image ? image.getAttribute('alt') || '' : '';
+            return { element: item, image, src, alt };
+        });
+
+        const goToIndex = index => {
+            if (!carouselItems.length) {
+                return;
             }
-            if (nextButton) {
-                nextButton.disabled = track.scrollLeft >= (maxScroll - 1);
-            }
-        };
 
-        const scheduleUpdate = () => {
-            if (scrollAnimationFrame) {
-                cancelAnimationFrame(scrollAnimationFrame);
+            currentIndex = (index + carouselItems.length) % carouselItems.length;
+            const targetItem = carouselItems[currentIndex];
+            if (!targetItem) {
+                return;
             }
-            scrollAnimationFrame = requestAnimationFrame(updateControls);
-        };
 
-        const scrollByAmount = direction => {
-            track.scrollBy({
-                left: direction * getScrollStep(),
-                behavior: reduceMotion ? 'auto' : 'smooth'
+            targetItem.scrollIntoView({
+                behavior: reduceMotion ? 'auto' : 'smooth',
+                inline: 'center',
+                block: 'nearest'
             });
         };
 
+        const updateCurrentIndex = () => {
+            const trackRect = track.getBoundingClientRect();
+            const trackCenter = trackRect.left + trackRect.width / 2;
+
+            let closestIndex = currentIndex;
+            let closestDistance = Number.POSITIVE_INFINITY;
+
+            carouselItems.forEach((item, index) => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenter = itemRect.left + (itemRect.width / 2);
+                const distance = Math.abs(itemCenter - trackCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            currentIndex = closestIndex;
+        };
+
+        const scheduleIndexUpdate = () => {
+            if (scrollFrame) {
+                cancelAnimationFrame(scrollFrame);
+            }
+            scrollFrame = requestAnimationFrame(updateCurrentIndex);
+        };
+
         if (prevButton) {
+            prevButton.disabled = false;
             prevButton.addEventListener('click', () => {
-                scrollByAmount(-1);
+                goToIndex(currentIndex - 1);
             });
         }
 
         if (nextButton) {
+            nextButton.disabled = false;
             nextButton.addEventListener('click', () => {
-                scrollByAmount(1);
+                goToIndex(currentIndex + 1);
             });
         }
 
-        track.addEventListener('scroll', scheduleUpdate, { passive: true });
+        track.addEventListener('scroll', scheduleIndexUpdate, { passive: true });
 
         track.addEventListener('keydown', event => {
             if (event.key === 'ArrowLeft') {
                 event.preventDefault();
-                scrollByAmount(-1);
+                goToIndex(currentIndex - 1);
             } else if (event.key === 'ArrowRight') {
                 event.preventDefault();
-                scrollByAmount(1);
+                goToIndex(currentIndex + 1);
             }
         });
 
-        window.addEventListener('resize', scheduleUpdate);
-        updateControls();
+        window.addEventListener('resize', scheduleIndexUpdate);
+        updateCurrentIndex();
+
+        if (galleryModalElement) {
+            const modalData = modalItems.map(({ src, alt }) => ({ src, alt }));
+
+            modalItems.forEach((itemData, index) => {
+                const { element, alt } = itemData;
+                if (!element) {
+                    return;
+                }
+
+                element.setAttribute('tabindex', '0');
+                element.setAttribute('role', 'button');
+                if (alt) {
+                    element.setAttribute('aria-label', `Open larger view of ${alt}`);
+                } else {
+                    element.setAttribute('aria-label', 'Open larger view of this artwork');
+                }
+
+                const handleOpen = () => {
+                    openGalleryModal(modalData, index, element);
+                };
+
+                element.addEventListener('click', handleOpen);
+                element.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleOpen();
+                    }
+                });
+            });
+        }
     });
 
     // Add particle effect to buttons

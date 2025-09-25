@@ -166,35 +166,30 @@
                                 <img src="images/2ndPlaceMiddleSchool.jpeg" alt="Artwork by the 2nd place middle school winner">
                             </div>
                             <h4>2nd Place</h4>
-                            <p>Use this placeholder to highlight the second-place artist and the story behind their work.</p>
                         </article>
                         <article class="winner-card third-place" data-animate>
                             <div class="winner-image">
                                 <img src="images/3rdPlaceMiddleSchool.jpg" alt="Artwork by the 3rd place middle school winner">
                             </div>
                             <h4>3rd Place</h4>
-                            <p>Celebrate the third-place winner by sharing their name, inspiration, and artwork details.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/1stHonorableMentionMiddleSchool.jpeg" alt="Artwork recognized with honorable mention in the middle school competition">
                             </div>
                             <h4>Honorable Mention 1</h4>
-                            <p>Spotlight an additional artist by replacing this text with their recognition and artwork photo.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/2ndHonorableMentionMiddleSchool.jpeg" alt="Artwork highlighted as an honorable mention in the middle school competition">
                             </div>
                             <h4>Honorable Mention 2</h4>
-                            <p>Use this card to feature another standout submission from the competition.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/3rdHonorableMentionMiddleSchool.jpeg" alt="Artwork earning honorable mention recognition in the middle school competition">
                             </div>
                             <h4>Honorable Mention 3</h4>
-                            <p>Share the story of this honoree by adding their photo, name, and the highlights of their artwork.</p>
                         </article>
                     </div>
                     <div class="photo-gallery" data-animate>
@@ -326,49 +321,42 @@
                 </div>
                 <div class="journey-subsection journey-subsection--winners" data-animate>
                     <h3>Winner Gallery</h3>
-                    <p class="journey-subsection-lead">Showcase the high school winners and honorable mentions once selections are made.</p>
                     <div class="winner-grid" data-animate-group>
                         <article class="winner-card first-place" data-animate>
                             <div class="winner-image">
                                 <img src="images/1stPlaceHighSchool.jpeg" alt="Artwork from the first-place high school winner">
                             </div>
                             <h4>1st Place</h4>
-                            <p>Our first-place artist captured the spirit of movement with expressive linework and confident shading that drew the judges in immediately.</p>
                         </article>
                         <article class="winner-card second-place" data-animate>
                             <div class="winner-image">
                                 <img src="images/2ndPlaceHighSchool.jpeg" alt="Artwork from the second-place high school winner">
                             </div>
                             <h4>2nd Place</h4>
-                            <p>The second-place piece layers intricate details to portray everyday motion, demonstrating remarkable patience and craft.</p>
                         </article>
                         <article class="winner-card third-place" data-animate>
                             <div class="winner-image">
                                 <img src="images/3rdPlaceHighSchool.jpeg" alt="Artwork from the third-place high school winner">
                             </div>
                             <h4>3rd Place</h4>
-                            <p>Dynamic gestures and a bold perspective earned this artwork third place and showcased a thoughtful interpretation of the prompt.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/1stHonorableMentionHighSchool.jpeg" alt="Artwork from the honorable mention high school artist">
                             </div>
                             <h4>Honorable Mention 1</h4>
-                            <p>This honorable mention blends delicate textures and storytelling, offering a memorable take on movement in daily life.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/2ndHonorableMentionHighSchool.jpeg" alt="Artwork from the second honorable mention high school artist">
                             </div>
                             <h4>Honorable Mention 2</h4>
-                            <p>Soft gradients and delicate pencil work earned this artist a nod for the way their composition balances energy and calm.</p>
                         </article>
                         <article class="winner-card honorable-mention" data-animate>
                             <div class="winner-image">
                                 <img src="images/3rdHonorableMentionHighSchool.jpeg" alt="Artwork from the third honorable mention high school artist">
                             </div>
                             <h4>Honorable Mention 3</h4>
-                            <p>A vibrant colour palette and expressive marks made this piece stand out as a joyful celebration of motion.</p>
                         </article>
                     </div>
                     <div class="photo-gallery" data-animate>
@@ -432,6 +420,23 @@
             </div>
         </section>
     </main>
+
+    <div class="gallery-modal" data-gallery-modal aria-hidden="true">
+        <div class="gallery-modal__overlay" data-gallery-close></div>
+        <div class="gallery-modal__inner" role="dialog" aria-modal="true" aria-label="Enlarged gallery image">
+            <button class="gallery-modal__close" type="button" data-gallery-close aria-label="Close gallery view">&times;</button>
+            <button class="gallery-modal__nav gallery-modal__nav--prev" type="button" data-gallery-prev aria-label="View previous photo">
+                <span aria-hidden="true">&#10094;</span>
+            </button>
+            <figure class="gallery-modal__figure">
+                <img src="" alt="" data-gallery-image>
+                <figcaption data-gallery-caption></figcaption>
+            </figure>
+            <button class="gallery-modal__nav gallery-modal__nav--next" type="button" data-gallery-next aria-label="View next photo">
+                <span aria-hidden="true">&#10095;</span>
+            </button>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
