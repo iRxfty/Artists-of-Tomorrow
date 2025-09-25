@@ -2229,6 +2229,149 @@ footer::before {
     margin-top: 32px;
 }
 
+.photo-gallery {
+    margin-top: 48px;
+}
+
+.photo-gallery h4 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 1.1rem + 0.5vw, 1.6rem);
+    margin-bottom: 18px;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+.photo-carousel {
+    position: relative;
+    padding: 0 48px;
+}
+
+.carousel-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, min(32vw, 320px));
+    gap: 18px;
+    overflow-x: auto;
+    padding: 12px 0 12px 12px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.carousel-track:focus {
+    outline: 3px solid rgba(229, 157, 131, 0.45);
+    outline-offset: 4px;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    scroll-snap-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.carousel-item img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-medium), background var(--transition-medium);
+}
+
+.carousel-control:hover,
+.carousel-control:focus-visible {
+    background: var(--secondary-color);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-control:disabled {
+    opacity: 0.45;
+    cursor: default;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+}
+
+.carousel-control:disabled:hover,
+.carousel-control:disabled:focus-visible {
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-control span {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.carousel-control--prev {
+    left: 0;
+}
+
+.carousel-control--next {
+    right: 0;
+}
+
+@media (max-width: 1024px) {
+    .photo-carousel {
+        padding: 0 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-carousel {
+        padding: 0 24px;
+    }
+
+    .carousel-track {
+        grid-auto-columns: minmax(200px, 72%);
+        padding: 12px 0;
+    }
+
+    .carousel-control {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 520px) {
+    .photo-gallery {
+        margin-top: 36px;
+    }
+
+    .photo-carousel {
+        padding: 0 16px;
+    }
+
+    .carousel-track {
+        grid-auto-columns: minmax(180px, 86%);
+        gap: 14px;
+    }
+}
+
 .journey-card {
     background: var(--white);
     border-radius: 16px;
