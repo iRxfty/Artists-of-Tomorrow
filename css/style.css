@@ -2252,7 +2252,7 @@ footer::before {
 .carousel-track {
     position: relative;
     display: flex;
-    gap: clamp(16px, 4vw, 24px);
+    gap: clamp(16px, 4vw, 24px);<<<<<< codex/fix-image-spacing-for-landscape-and-portrait
     align-items: center;
     overflow-x: auto;
     padding: clamp(20px, 4vw, 32px);
@@ -2280,6 +2280,9 @@ footer::before {
     scroll-snap-align: center;
     display: grid;
     place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: clamp(18px, 4vw, 28px);
     margin: 0;
     background: var(--white);
