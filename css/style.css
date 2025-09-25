@@ -2293,6 +2293,7 @@ footer::before {
 
 .carousel-item[data-orientation="square"] {
     min-height: clamp(300px, 48vw, 600px);
+    min-height: clamp(320px, 52vw, 640px);
 }
 
 .carousel-item img {
@@ -2301,6 +2302,7 @@ footer::before {
     max-width: 100%;
     height: auto;
     max-height: min(68vh, 660px);
+    max-height: min(70vh, 680px);
     object-fit: contain;
     cursor: zoom-in;
     border-radius: clamp(14px, 3.5vw, 24px);
