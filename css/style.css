@@ -2250,7 +2250,7 @@ footer::before {
 .carousel-track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(320px, min(48vw, 560px));
+    grid-auto-columns: minmax(400px, min(60vw, 720px));
     gap: 24px;
     overflow-x: auto;
     padding: 16px 0 16px 16px;
@@ -2504,7 +2504,7 @@ footer::before {
     }
 
     .carousel-track {
-        grid-auto-columns: minmax(200px, 72%);
+        grid-auto-columns: minmax(260px, 82%);
         padding: 12px 0;
     }
 
@@ -2524,7 +2524,7 @@ footer::before {
     }
 
     .carousel-track {
-        grid-auto-columns: minmax(180px, 86%);
+        grid-auto-columns: minmax(220px, 88%);
         gap: 14px;
     }
 }

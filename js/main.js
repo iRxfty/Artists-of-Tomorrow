@@ -483,8 +483,9 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryModalImage.alt = currentItem.alt || '';
 
         if (galleryModalCaption) {
-            if (currentItem.alt) {
-                galleryModalCaption.textContent = currentItem.alt;
+            const { caption } = currentItem;
+            if (caption) {
+                galleryModalCaption.textContent = caption;
                 galleryModalCaption.style.display = '';
             } else {
                 galleryModalCaption.textContent = '';
@@ -514,6 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (galleryModalCaption) {
             galleryModalCaption.textContent = '';
+            galleryModalCaption.style.display = 'none';
         }
 
         const { previousFocus } = galleryModalState;
@@ -633,7 +635,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const image = item.querySelector('img');
             const src = image ? image.getAttribute('src') || image.currentSrc || '' : '';
             const alt = image ? image.getAttribute('alt') || '' : '';
-            return { element: item, image, src, alt };
+            const caption = item.dataset.caption || (image ? image.dataset.caption || '' : '');
+            return { element: item, image, src, alt, caption };
         });
 
         const goToIndex = index => {
@@ -711,7 +714,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCurrentIndex();
 
         if (galleryModalElement) {
-            const modalData = modalItems.map(({ src, alt }) => ({ src, alt }));
+            const modalData = modalItems.map(({ src, alt, caption }) => ({ src, alt, caption }));
 
             modalItems.forEach((itemData, index) => {
                 const { element, alt } = itemData;
