@@ -2258,6 +2258,8 @@ footer::before {
     padding: clamp(18px, 4vw, 28px) 0;
     scroll-padding: 0;
     scroll-padding-inline: 0;
+    padding: clamp(18px, 4vw, 28px) 24px;
+    scroll-padding: 0 24px;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
     scroll-behavior: smooth;
@@ -2478,6 +2480,8 @@ footer::before {
         padding: clamp(16px, 5vw, 22px) 0;
         scroll-padding: 0;
         scroll-padding-inline: 0;
+        padding: clamp(16px, 5vw, 22px) clamp(20px, 6vw, 32px);
+        scroll-padding: 0 clamp(20px, 6vw, 32px);
     }
 
     .gallery-modal__inner {
@@ -2525,6 +2529,8 @@ footer::before {
         padding: clamp(14px, 5vw, 20px) 0;
         scroll-padding: 0;
         scroll-padding-inline: 0;
+        padding: clamp(14px, 5vw, 20px) clamp(18px, 6vw, 24px);
+        scroll-padding: 0 clamp(18px, 6vw, 24px);
     }
 
     .carousel-item {
@@ -2550,6 +2556,8 @@ footer::before {
         padding: clamp(12px, 6vw, 18px) 0;
         scroll-padding: 0;
         scroll-padding-inline: 0;
+        padding: clamp(12px, 6vw, 18px) clamp(16px, 7vw, 22px);
+        scroll-padding: 0 clamp(16px, 7vw, 22px);
     }
 
     .carousel-item {
