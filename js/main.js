@@ -456,9 +456,262 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     };
-    
+
     enhancePrizes();
-    
+
+    // Photo carousel controls with infinite scroll and lightbox
+    const carouselLightbox = (() => {
+        const overlay = document.createElement('div');
+        overlay.className = 'lightbox';
+        overlay.innerHTML = `
+            <figure class="lightbox__figure">
+                <button class="lightbox__close" type="button" aria-label="Close image preview">&times;</button>
+                <img class="lightbox__image" alt="">
+            </figure>
+        `;
+        document.body.appendChild(overlay);
+
+        const closeButton = overlay.querySelector('.lightbox__close');
+        const image = overlay.querySelector('.lightbox__image');
+        let lastFocusedElement = null;
+
+        const close = () => {
+            overlay.classList.remove('is-active');
+            document.body.classList.remove('lightbox-open');
+            image.src = '';
+            image.alt = '';
+            if (lastFocusedElement) {
+                lastFocusedElement.focus({ preventScroll: true });
+                lastFocusedElement = null;
+            }
+        };
+
+        const open = (src, alt, trigger) => {
+            if (!src) {
+                return;
+            }
+            lastFocusedElement = trigger || null;
+            image.src = src;
+            image.alt = alt || '';
+            overlay.classList.add('is-active');
+            document.body.classList.add('lightbox-open');
+            closeButton.focus({ preventScroll: true });
+        };
+
+        closeButton.addEventListener('click', close);
+        overlay.addEventListener('click', event => {
+            if (event.target === overlay) {
+                close();
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && overlay.classList.contains('is-active')) {
+                close();
+            }
+        });
+
+        return { open, close };
+    })();
+
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+        const track = carousel.querySelector('[data-carousel-track]');
+        if (!track) {
+            return;
+        }
+
+        const prevButton = carousel.querySelector('[data-carousel-prev]');
+        const nextButton = carousel.querySelector('[data-carousel-next]');
+
+        let metrics = { itemWidth: 0, gap: 0 };
+        let wrapWidth = 0;
+        let initialScroll = 0;
+        let isJumping = false;
+
+        const computeMetrics = () => {
+            const firstItem = track.querySelector('.carousel-item');
+            if (!firstItem) {
+                return { itemWidth: 0, gap: 0 };
+            }
+            const styles = window.getComputedStyle(track);
+            const gapValue = parseFloat(styles.columnGap || styles.gridColumnGap || styles.gap || '0') || 0;
+            const width = firstItem.getBoundingClientRect().width;
+            return { itemWidth: width, gap: gapValue };
+        };
+
+        const ensureTabbableItems = () => {
+            track.querySelectorAll('.carousel-item').forEach(item => {
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('role', 'button');
+                const img = item.querySelector('img');
+                const label = img && img.alt ? `Expand ${img.alt}` : 'Expand competition photo';
+                item.setAttribute('aria-label', label);
+            });
+        };
+
+        const setupCarousel = (attempt = 0) => {
+            wrapWidth = 0;
+            initialScroll = 0;
+            isJumping = false;
+
+            const originalMarkup = track.dataset.originalMarkup;
+            if (!originalMarkup) {
+                track.dataset.originalMarkup = track.innerHTML;
+            } else {
+                track.innerHTML = originalMarkup;
+            }
+
+            const originalItems = Array.from(track.children).filter(child => child.classList.contains('carousel-item'));
+            if (!originalItems.length) {
+                return;
+            }
+
+            metrics = computeMetrics();
+            if (metrics.itemWidth === 0 && attempt < 5) {
+                setTimeout(() => setupCarousel(attempt + 1), 150);
+                return;
+            }
+
+            const spacing = (metrics.itemWidth + metrics.gap) || track.clientWidth;
+            let clonesPerSide = Math.ceil(track.clientWidth / spacing) + 1;
+            clonesPerSide = Math.min(clonesPerSide, originalItems.length);
+
+            const beforeFragment = document.createDocumentFragment();
+            const afterFragment = document.createDocumentFragment();
+
+            for (let i = 0; i < clonesPerSide; i++) {
+                const afterClone = originalItems[i].cloneNode(true);
+                afterClone.dataset.clone = 'after';
+                afterFragment.appendChild(afterClone);
+
+                const beforeClone = originalItems[originalItems.length - 1 - i].cloneNode(true);
+                beforeClone.dataset.clone = 'before';
+                beforeFragment.insertBefore(beforeClone, beforeFragment.firstChild);
+            }
+
+            track.insertBefore(beforeFragment, track.firstChild);
+            track.appendChild(afterFragment);
+
+            ensureTabbableItems();
+
+            metrics = computeMetrics();
+
+            const firstOriginal = track.querySelector('.carousel-item:not([data-clone])');
+            const firstAfterClone = track.querySelector('.carousel-item[data-clone="after"]');
+
+            if (!firstOriginal || !firstAfterClone) {
+                return;
+            }
+
+            initialScroll = firstOriginal.offsetLeft;
+            wrapWidth = firstAfterClone.offsetLeft - initialScroll;
+            if (wrapWidth <= 0) {
+                wrapWidth = 0;
+                return;
+            }
+
+            isJumping = true;
+            requestAnimationFrame(() => {
+                track.scrollLeft = initialScroll;
+                requestAnimationFrame(() => {
+                    isJumping = false;
+                });
+            });
+        };
+
+        const getScrollStep = () => {
+            const baseStep = track.clientWidth * 0.8;
+            const itemStep = metrics.itemWidth + metrics.gap;
+            return Math.max(baseStep, itemStep || baseStep);
+        };
+
+        const scrollByAmount = direction => {
+            track.scrollBy({
+                left: direction * getScrollStep(),
+                behavior: reduceMotion ? 'auto' : 'smooth'
+            });
+        };
+
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                scrollByAmount(-1);
+            });
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                scrollByAmount(1);
+            });
+        }
+
+        track.addEventListener('scroll', () => {
+            if (!wrapWidth || isJumping) {
+                return;
+            }
+
+            const maxPosition = initialScroll + wrapWidth;
+            const minPosition = initialScroll - wrapWidth;
+            const tolerance = 2;
+
+            if (track.scrollLeft >= (maxPosition - tolerance)) {
+                isJumping = true;
+                track.scrollLeft -= wrapWidth;
+                requestAnimationFrame(() => {
+                    isJumping = false;
+                });
+            } else if (track.scrollLeft <= (minPosition + tolerance)) {
+                isJumping = true;
+                track.scrollLeft += wrapWidth;
+                requestAnimationFrame(() => {
+                    isJumping = false;
+                });
+            }
+        }, { passive: true });
+
+        track.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                scrollByAmount(-1);
+                return;
+            }
+
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                scrollByAmount(1);
+                return;
+            }
+
+            if ((event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') && event.target.classList.contains('carousel-item')) {
+                event.preventDefault();
+                const img = event.target.querySelector('img');
+                if (img) {
+                    carouselLightbox.open(img.currentSrc || img.src, img.alt, event.target);
+                }
+            }
+        });
+
+        track.addEventListener('click', event => {
+            const item = event.target.closest('.carousel-item');
+            if (!item) {
+                return;
+            }
+            const img = item.querySelector('img');
+            if (img) {
+                carouselLightbox.open(img.currentSrc || img.src, img.alt, item);
+            }
+        });
+
+        const debouncedSetup = () => {
+            clearTimeout(track._carouselResizeTimer);
+            track._carouselResizeTimer = setTimeout(() => {
+                setupCarousel();
+            }, 200);
+        };
+
+        window.addEventListener('resize', debouncedSetup);
+        setupCarousel();
+    });
+
     // Add particle effect to buttons
     const addButtonEffects = function() {
         const buttons = document.querySelectorAll('.cta-button, .secondary-button');
