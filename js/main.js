@@ -655,15 +655,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const applyOrientation = () => {
                 const { naturalWidth = 0, naturalHeight = 0 } = image;
-                const isLandscape = naturalWidth >= naturalHeight && naturalWidth > 0;
+                const hasDimensions = naturalWidth > 0 && naturalHeight > 0;
+                const isLandscape = hasDimensions ? naturalWidth >= naturalHeight : item.classList.contains('carousel-item--landscape');
+
+                const aspectRatio = (() => {
+                    if (!hasDimensions) {
+                        return isLandscape ? 3 / 2 : 3 / 4;
+                    }
+                    const rawRatio = naturalWidth / naturalHeight;
+                    const minRatio = isLandscape ? 1 : 0.55;
+                    const maxRatio = isLandscape ? 2.4 : 1.15;
+                    return Math.min(Math.max(rawRatio, minRatio), maxRatio);
+                })();
+
+                const maxWidthValue = isLandscape ? 'min(92vw, 880px)' : 'min(78vw, 560px)';
+                const paddingValue = isLandscape ? 'clamp(12px, 3vw, 20px)' : 'clamp(18px, 4vw, 28px)';
+
+                const applyCustomProperties = target => {
+                    target.style.setProperty('--carousel-aspect', String(aspectRatio));
+                    target.style.setProperty('--carousel-max-visual-width', maxWidthValue);
+                    target.style.setProperty('--carousel-frame-padding', paddingValue);
+                };
+
                 item.classList.toggle('carousel-item--landscape', isLandscape);
                 item.classList.toggle('carousel-item--portrait', !isLandscape);
+                applyCustomProperties(item);
 
                 const clonesForItem = cloneRegistry.get(item);
                 if (clonesForItem && clonesForItem.length) {
                     clonesForItem.forEach(cloneItem => {
                         cloneItem.classList.toggle('carousel-item--landscape', isLandscape);
                         cloneItem.classList.toggle('carousel-item--portrait', !isLandscape);
+                        applyCustomProperties(cloneItem);
                     });
                 }
             };
