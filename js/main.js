@@ -630,46 +630,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
 
-        const orientationThreshold = 0.08;
-
-        const setItemOrientation = (item, image) => {
-            if (!item || !image) {
-                return;
-            }
-
-            const { naturalWidth, naturalHeight } = image;
-            if (!naturalWidth || !naturalHeight) {
-                return;
-            }
-
-            let orientation = 'square';
-            const ratio = naturalWidth / naturalHeight;
-            if (ratio > 1 + orientationThreshold) {
-                orientation = 'landscape';
-            } else if (ratio < 1 - orientationThreshold) {
-                orientation = 'portrait';
-            }
-
-            item.dataset.orientation = orientation;
-        };
-
-        const prepareItemOrientation = item => {
-            const image = item.querySelector('img');
-            if (!image) {
-                return;
-            }
-
-            const updateOrientation = () => setItemOrientation(item, image);
-
-            if (image.complete && image.naturalWidth && image.naturalHeight) {
-                updateOrientation();
-            } else {
-                image.addEventListener('load', updateOrientation, { once: true });
-            }
-        };
-
-        carouselItems.forEach(prepareItemOrientation);
-
         let currentIndex = 0;
         let scrollFrame = null;
         let trackPaddingLeft = 0;
