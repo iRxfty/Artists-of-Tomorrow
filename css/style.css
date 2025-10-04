@@ -336,8 +336,6 @@ section {
 
 /* Email Address Styles */
 .email-address {
-    word-break: break-all;
-    overflow-wrap: break-word;
     max-width: 100%;
 }
 
@@ -1956,13 +1954,14 @@ footer::before {
 }
 
 .contact-methods {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     justify-content: center;
-    flex-wrap: wrap;
     gap: 30px;
     margin: 20px auto 0;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    align-items: stretch;
 }
 
 .contact-method {
@@ -1971,11 +1970,18 @@ footer::before {
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    flex: 1 1 300px;
-    max-width: 350px;
+    width: 100%;
+    max-width: none;
     text-align: center;
     margin: 0;
     border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-method--email {
+    align-self: stretch;
 }
 
 .contact-method:hover {
@@ -2012,11 +2018,22 @@ footer::before {
 }
 
 .contact-method .email-address {
-    font-size: 1.1rem;
-    word-break: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: clamp(0.5rem, 0.34rem + 0.8vw, 0.95rem);
     color: var(--primary-color);
     font-weight: 500;
     transition: color 0.3s ease;
+    line-height: 1.2;
+}
+
+.contact-method .email-address a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .contact-method .email-address:hover {
@@ -2059,20 +2076,30 @@ footer::before {
     .contact-info {
         padding: 40px 0;
     }
-    
+
     .contact-details h2 {
         font-size: 2.2rem;
     }
-    
+
     .contact-methods {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
         gap: 20px;
+        justify-items: stretch;
     }
-    
+
     .contact-method {
         width: 100%;
         max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-method {
+        padding: 20px 12px;
+    }
+
+    .contact-method .email-address {
+        gap: 0.5rem;
     }
 }
 
