@@ -1955,12 +1955,14 @@ footer::before {
 
 .contact-methods {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     justify-content: center;
     gap: 30px;
     margin: 20px auto 0;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    align-items: stretch;
 }
 
 .contact-method {
@@ -1970,10 +1972,18 @@ footer::before {
     box-shadow: var(--box-shadow);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     width: 100%;
+    max-width: none;
     max-width: 350px;
     text-align: center;
     margin: 0;
     border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-method--email {
+    align-self: stretch;
 }
 
 .contact-method--email {
