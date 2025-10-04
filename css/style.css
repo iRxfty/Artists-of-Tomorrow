@@ -2012,6 +2012,13 @@ footer::before {
 }
 
 .contact-method .email-list {
+    display: grid;
+    gap: 12px;
+}
+
+.contact-method .email-chip {
+    display: inline-flex;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -2047,6 +2054,15 @@ footer::before {
     font-weight: 600;
     text-decoration: none;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+    white-space: nowrap;
+}
+
+.contact-method .email-chip span[aria-hidden="true"] {
+    font-size: 1rem;
+}
+
+.contact-method .email-chip:hover,
+.contact-method .email-chip:focus {
     word-break: normal;
 }
 
