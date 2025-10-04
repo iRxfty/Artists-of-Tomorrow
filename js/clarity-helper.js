@@ -95,7 +95,6 @@
                             } else {
                                 node.href = '';
                             }
-                            console.log('Blocked font loading:', node.href);
                         }
                     }
                 }
@@ -114,9 +113,6 @@
         const fontPatterns = ['fabric-icons', 'segoeui', 'leelawadeeui', '.woff', '.woff2', '.ttf', '.eot'];
         if (fontPatterns.some(pattern => link.href.includes(pattern))) {
             link.href = '';
-            console.log('Removed existing font link:', link);
         }
     });
-    
-    console.log('Enhanced font blocker initialized');
 })();

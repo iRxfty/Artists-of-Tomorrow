@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
     } catch (error) {
-        console.warn('Cookie consent banner could not access localStorage.', error);
+        return;
     }
 
     const banner = document.createElement('div');
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             localStorage.setItem(COOKIE_CONSENT_KEY, status);
         } catch (error) {
-            console.warn('Unable to persist cookie consent choice.', error);
+            return;
         }
 
         banner.classList.remove('cookie-consent--visible');

@@ -24,9 +24,8 @@
 }
 
 @keyframes shimmerPulse {
-    0% { opacity: 0.45; transform: scale(0.9); }
-    50% { opacity: 0.7; transform: scale(1); }
-    100% { opacity: 0.45; transform: scale(0.9); }
+    0%, 100% { opacity: 0.5; transform: scale(0.95); }
+    50% { opacity: 0.65; transform: scale(1); }
 }
 
 @keyframes quickLinkGlow {
@@ -129,11 +128,11 @@ body::after {
     height: clamp(320px, 40vw, 460px);
     border-radius: 50%;
     z-index: -1;
-    background: radial-gradient(circle at 30% 30%, rgba(229, 157, 131, 0.28) 0%, transparent 65%);
-    filter: blur(0px);
-    opacity: 0.6;
+    background: radial-gradient(circle at 30% 30%, rgba(229, 157, 131, 0.22) 0%, transparent 65%);
+    opacity: 0.5;
     pointer-events: none;
-    animation: drift 22s ease-in-out infinite;
+    will-change: transform;
+    animation: drift 28s ease-in-out infinite;
 }
 
 body::before {
@@ -144,8 +143,8 @@ body::before {
 body::after {
     bottom: -180px;
     right: -140px;
-    animation-delay: 6s;
-    background: radial-gradient(circle at 70% 70%, rgba(122, 184, 204, 0.25) 0%, transparent 60%);
+    animation-delay: 8s;
+    background: radial-gradient(circle at 70% 70%, rgba(122, 184, 204, 0.2) 0%, transparent 60%);
 }
 
 .page-content {
@@ -204,12 +203,12 @@ body::after {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    margin: 1.5em 0 0.8em;
+    margin: 0 0 1rem;
     color: var(--dark-color);
     line-height: var(--heading-line-height);
     font-weight: 600;
@@ -227,7 +226,7 @@ h2 {
     font-size: 2.8rem;
     position: relative;
     padding-bottom: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
 h2:after {
@@ -257,7 +256,7 @@ h3 {
 }
 
 p {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     line-height: 1.8;
 }
 
@@ -273,8 +272,8 @@ a:hover {
 }
 
 ul, ol {
-    margin-bottom: 20px;
-    padding-left: 20px;
+    margin-bottom: 1.25rem;
+    padding-left: 2rem;
 }
 
 img {
@@ -283,7 +282,7 @@ img {
 }
 
 section {
-    padding: 80px 0;
+    padding: 5rem 0;
     position: relative;
     isolation: isolate;
 }
@@ -684,19 +683,6 @@ nav ul li .submenu a.active {
 /* Hero Section */
 .hero {
     background:
-        radial-gradient(circle at 18% 22%, rgba(236, 225, 255, 0.9) 0%, rgba(236, 225, 255, 0) 58%),
-        radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--blue-bright) 72%, transparent) 0%, transparent 60%),
-        linear-gradient(128deg,
-            color-mix(in srgb, var(--purple-bright) 78%, var(--white) 22%) 0%,
-            color-mix(in srgb, var(--pink-bright) 80%, var(--white) 20%) 44%,
-            color-mix(in srgb, var(--blue-bright) 82%, var(--white) 18%) 100%);
-        radial-gradient(circle at 18% 22%, rgba(255, 246, 230, 0.9) 0%, rgba(255, 246, 230, 0) 58%),
-        radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--yellow-bright) 72%, transparent) 0%, transparent 60%),
-        linear-gradient(128deg,
-            color-mix(in srgb, var(--salmon-bright) 72%, var(--white) 28%) 0%,
-            color-mix(in srgb, var(--gold) 78%, var(--white) 22%) 42%,
-            color-mix(in srgb, #ffb86b 82%, var(--white) 18%) 70%,
-            color-mix(in srgb, #ff9248 86%, var(--white) 14%) 100%);
         radial-gradient(circle at 18% 22%, rgba(255, 243, 237, 0.86) 0%, rgba(255, 243, 237, 0) 58%),
         radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--yellow-bright) 60%, transparent) 0%, transparent 60%),
         linear-gradient(128deg,
@@ -831,22 +817,12 @@ nav ul li .submenu a.active {
     width: clamp(80px, 14vw, 160px);
     height: clamp(80px, 14vw, 160px);
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--purple-bright) 32%, transparent));
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), color-mix(in srgb, var(--purple-bright) 30%, transparent));
     box-shadow:
-        0 18px 32px color-mix(in srgb, var(--purple) 28%, transparent),
-        0 20px 46px color-mix(in srgb, var(--blue-bright) 26%, transparent);
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--salmon-bright) 32%, transparent));
-    box-shadow:
-        0 18px 32px color-mix(in srgb, var(--salmon-bright) 28%, transparent),
-        0 20px 46px color-mix(in srgb, #ffba59 22%, transparent);
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), color-mix(in srgb, var(--pink-bright) 22%, transparent));
-    box-shadow:
-        0 18px 32px rgba(167, 139, 250, 0.28),
-        0 20px 46px rgba(99, 197, 245, 0.24);
-    box-shadow:
-        0 18px 32px color-mix(in srgb, var(--purple-bright) 26%, transparent),
-        0 20px 46px color-mix(in srgb, var(--blue-bright) 22%, transparent);
-    animation: shimmerPulse 9s ease-in-out infinite;
+        0 12px 24px color-mix(in srgb, var(--purple-bright) 20%, transparent),
+        0 16px 32px color-mix(in srgb, var(--blue-bright) 18%, transparent);
+    will-change: opacity, transform;
+    animation: shimmerPulse 10s ease-in-out infinite;
 }
 
 .hero-orb.orb-one {
@@ -858,8 +834,6 @@ nav ul li .submenu a.active {
 .hero-orb.orb-two {
     justify-self: center;
     animation-delay: 2.5s;
-    background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--pink-bright) 76%, transparent), rgba(240, 210, 248, 0));
-    background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--yellow-bright) 76%, transparent), rgba(252, 240, 160, 0));
     background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--yellow-bright) 68%, transparent), rgba(252, 240, 160, 0));
 }
 
@@ -867,8 +841,6 @@ nav ul li .submenu a.active {
     justify-self: end;
     margin-right: clamp(12px, 6vw, 80px);
     animation-delay: 4.5s;
-    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--blue-bright) 70%, transparent), rgba(200, 225, 255, 0));
-    background: radial-gradient(circle at 60% 40%, color-mix(in srgb, #ffad51 70%, transparent), rgba(255, 204, 153, 0));
     background: radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--blue-bright) 72%, transparent), rgba(122, 184, 204, 0));
 }
 
@@ -926,16 +898,13 @@ nav ul li .submenu a.active {
 .cta-button {
     background-color: var(--salmon-bright);
     color: var(--white);
-    box-shadow: 0 10px 26px rgba(255, 139, 104, 0.45);
     box-shadow: 0 10px 26px color-mix(in srgb, var(--salmon-bright) 45%, transparent);
 }
 
 .cta-button:hover {
-    background-color: rgba(214, 122, 243, 0.95);
     background-color: color-mix(in srgb, var(--salmon-bright) 82%, var(--purple-bright));
     color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px rgba(167, 139, 250, 0.35);
+    transform: translateY(-2px);
     box-shadow: 0 14px 28px color-mix(in srgb, var(--purple-bright) 35%, transparent);
 }
 
@@ -943,16 +912,13 @@ nav ul li .submenu a.active {
     background-color: transparent;
     color: var(--blue-bright);
     border: 2px solid var(--blue-bright);
-    box-shadow: 0 4px 18px rgba(99, 197, 245, 0.25);
     box-shadow: 0 4px 18px color-mix(in srgb, var(--blue-bright) 25%, transparent);
 }
 
 .secondary-button:hover {
-    background-color: rgba(99, 197, 245, 0.95);
     background-color: var(--blue-bright);
     color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(99, 197, 245, 0.32);
+    transform: translateY(-2px);
     box-shadow: 0 8px 24px color-mix(in srgb, var(--blue-bright) 32%, transparent);
 }
 
@@ -997,7 +963,7 @@ nav ul li .submenu a.active {
     text-align: center;
     position: relative;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 6rem 0;
 }
 
 .mission::after {
@@ -1008,8 +974,8 @@ nav ul li .submenu a.active {
     top: -50%;
     left: -50%;
     background: radial-gradient(circle, transparent 30%, var(--light-color) 70%);
-    opacity: 0.4;
-    animation: rotateBg 60s linear infinite;
+    opacity: 0.3;
+    animation: rotateBg 80s linear infinite;
 }
 
 @keyframes rotateBg {
@@ -1038,7 +1004,7 @@ nav ul li .submenu a.active {
 /* Prompts Section */
 .prompts {
     text-align: center;
-    padding: 100px 0;
+    padding: 6rem 0;
     background: var(--white);
 }
 
@@ -1118,7 +1084,7 @@ nav ul li .submenu a.active {
     background: linear-gradient(180deg, var(--light-color) 0%, var(--white) 100%);
     position: relative;
     overflow: hidden;
-    padding: 90px 0;
+    padding: 6rem 0;
 }
 
 .prizes::before,
@@ -3508,5 +3474,86 @@ footer::before {
     .cookie-consent,
     .cookie-consent__button {
         transition: none;
+    }
+}
+
+/* Additional Mobile Responsive Improvements */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    .mission,
+    .prompts,
+    .prizes {
+        padding: 3.5rem 0;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .cta-button,
+    .secondary-button {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        padding: clamp(90px, 18vh, 130px) 0 clamp(70px, 15vh, 110px);
+    }
+
+    .hero h2 {
+        font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+        margin-bottom: 24px;
+    }
+
+    .email-address a {
+        word-break: break-word;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    section {
+        padding: 2.5rem 0;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .card {
+        padding: 25px 20px;
     }
 }
