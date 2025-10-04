@@ -2011,16 +2011,51 @@ footer::before {
     line-height: 1.6;
 }
 
-.contact-method .email-address {
-    font-size: 1.1rem;
-    word-break: break-word;
-    color: var(--primary-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
+.contact-method .email-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
 }
 
-.contact-method .email-address:hover {
+.contact-method .email-list li {
+    display: flex;
+}
+
+.contact-method .email-list li::before {
+    content: '\2709';
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-right: 10px;
+    align-self: center;
+}
+
+.contact-method .email-list li a {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background: linear-gradient(90deg, rgba(229, 157, 131, 0.12), rgba(122, 184, 204, 0.12));
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 1rem;
     color: var(--primary-dark);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+    word-break: normal;
+}
+
+.contact-method .email-list li a:hover,
+.contact-method .email-list li a:focus {
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(229, 157, 131, 0.25);
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
 .social-row {
