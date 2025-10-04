@@ -2011,16 +2011,36 @@ footer::before {
     line-height: 1.6;
 }
 
-.contact-method .email-address {
-    font-size: 1.1rem;
-    word-break: break-word;
-    color: var(--primary-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
+.contact-method .email-list {
+    display: grid;
+    gap: 12px;
 }
 
-.contact-method .email-address:hover {
+.contact-method .email-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, rgba(229, 157, 131, 0.12), rgba(122, 184, 204, 0.12));
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 1rem;
     color: var(--primary-dark);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+    white-space: nowrap;
+}
+
+.contact-method .email-chip span[aria-hidden="true"] {
+    font-size: 1rem;
+}
+
+.contact-method .email-chip:hover,
+.contact-method .email-chip:focus {
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(229, 157, 131, 0.25);
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
 .social-row {
