@@ -24,8 +24,7 @@ There are two CSS files loaded in order on every page:
 | File | Purpose |
 |------|---------|
 | `css/normalize.css` | HTML5 reset only — do not modify |
-| `css/style.css` | All base styles (~3,500 lines). Contains CSS custom properties, component styles, and all responsive breakpoints. |
-| `css/artistic.css` | Artistic enhancement layer loaded after `style.css`. Overrides and extends specific selectors for animations, gradients, and painterly effects. |
+| `css/style.css` | All base styles (~3,500 lines). Contains CSS custom properties, component styles, and all responsive breakpoints. ||
 
 **CSS variables** are declared in `:root` inside `style.css`. The brand palette is:
 - `--salmon` / `--salmon-bright` / `--salmon-dark` — primary coral colour
