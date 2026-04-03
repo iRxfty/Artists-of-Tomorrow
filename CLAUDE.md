@@ -34,7 +34,7 @@ There are two CSS files loaded in order on every page:
 - `--font-heading`: `Playfair Display` (serif, for headings)
 - `--font-body`: `Plus Jakarta Sans` (sans-serif, for body copy)
 
-When adding new styles, prefer `artistic.css` for visual/aesthetic overrides and `style.css` for structural/layout rules.
+When adding new styles, use `style.css` for all rules — there is no separate override file.
 
 ## JavaScript Architecture
 
@@ -59,7 +59,6 @@ Every page links stylesheets in this order and the three JS files at the bottom 
 ```html
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/artistic.css">
 ...
 <script src="js/main.js"></script>
 <script src="js/privacy-notice.js"></script>
@@ -70,10 +69,43 @@ Scroll-reveal: add `data-animate` to any element that should fade+rise in on scr
 
 Page-specific headers use `.page-header > h1`; the homepage uses `.hero` with `.hero-title-word--artists/--of/--tomorrow` spans for per-word colour styling.
 
+**Lazy loading:** All `<img>` tags below the fold carry `loading="lazy"`. The sole exception is the `<img>` inside `<header>` (the nav logo) which must remain eager. Do not add `loading="lazy"` to header images and do not remove it from any other `<img>` tag.
+
 ## Content Security Policy
 
 The CSP is set globally in `staticwebapp.config.json` (not in HTML meta tags). Any new third-party scripts, styles, or frames must be explicitly allow-listed there before they will load in production.
 
+## Caching
+
+`staticwebapp.config.json` sets `Cache-Control` headers via the `routes` array:
+
+| Route | Header | TTL |
+|-------|--------|-----|
+| `/images/*` | `public, max-age=31536000, immutable` | 1 year |
+| `/css/*` | `public, max-age=86400` | 1 day |
+| `/js/*` | `public, max-age=86400` | 1 day |
+
+Images are cached for 1 year because their filenames don't change unless the file is replaced (which acts as natural cache-busting). If you replace an image and keep the same filename, existing visitors will serve a stale cached version until the TTL expires — rename the file to force a cache bust.
+
 ## Images
 
-Images live in `images/` with subdirectories for `winners/`, event photos, founder portraits, and social icons. The logo is `images/logo.svg` (1080×1080, used at 40px in the header).
+Images live in `images/` with subdirectories for `compnathupur/` (event photos used in the carousels) and root-level files for portraits, winner artwork, and social icons.
+
+- **Logo:** `images/logo.svg` — used in the header `<img>` and footer on every page.
+- **Favicon:** `images/logo-favicon.png` (64×64 PNG, ~12KB) — linked via `<link rel="icon">` on every page. Do not revert this to the SVG; the SVG is 2.5MB and would be fetched separately for every browser tab.
+- **Portraits:** JPEG format. `mishika.jpg` (not `.png`).
+
+**Adding new images:** compress before committing. Use macOS `sips`:
+
+```bash
+# Resize to max 1200px, JPEG quality 82 (portraits/event photos)
+sips -s format jpeg -s formatOptions 82 -Z 1200 input.jpg --out output.jpg
+
+# Resize to max 1600px, JPEG quality 85 (artwork/winner images)
+sips -s format jpeg -s formatOptions 85 -Z 1600 input.jpg --out output.jpg
+
+# Convert PNG → JPEG (for photos — do not do this for logos or graphics with transparency)
+sips -s format jpeg -s formatOptions 82 input.png --out output.jpg
+```
+
+All images in `images/` are served with a 1-year browser cache. See the [Caching](#caching) section for implications when replacing files.
