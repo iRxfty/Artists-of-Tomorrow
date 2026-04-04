@@ -38,26 +38,36 @@
     </script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-sister-site">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.svg" alt="Artists of Tomorrow Logo">
-                        <span>Artists of Tomorrow</span>
-                    </a>
-                </div>
-                <span class="header-sister-divider" aria-hidden="true">|</span>
-                <a href="leaders-of-tomorrow.html" class="header-lot-link" aria-label="Leaders of Tomorrow – Toastmasters Chapter">
-                    <img src="images/Toastmasters_2011.png" alt="Toastmasters" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:2px;"> <span class="header-lot-link-text">Leaders of Tomorrow</span>
+    <header class="lot-site-header">
+        <div class="lot-site-header-inner">
+            <!-- AOT Logo Link -->
+            <a href="index.html" class="lot-back-link" aria-label="Artists of Tomorrow">
+                <img src="images/logo.svg" alt="Artists of Tomorrow Logo" style="height: 40px; width: auto; object-fit: contain; margin-right: 6px;">
+                <span class="lot-back-link-text">Artists of Tomorrow</span>
+            </a>
+
+            <span class="lot-header-divider" aria-hidden="true">|</span>
+
+            <!-- LOT Logo Link -->
+            <div class="lot-brand">
+                <a href="leaders-of-tomorrow.html" aria-label="Leaders of Tomorrow">
+                    <span class="lot-brand-icon" aria-hidden="true">
+                        <img src="images/Toastmasters_2011.png" alt="Toastmasters Logo"
+                            style="width:42px;height:42px;object-fit:contain;">
+                    </span>
+                    <span class="lot-brand-text">Leaders of Tomorrow</span>
                 </a>
             </div>
-            <div class="nav-toggle" id="navToggle">
+
+            <!-- Mobile Toggle — three lines for dropdown -->
+            <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <nav id="mainNav" class="collapsed">
+
+            <!-- AOT Main Navigation -->
+            <nav id="mainNav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -157,7 +167,7 @@
                     <h4>Contact Us</h4>
                     <div class="social-links">
                     <a href="mailto:info.artistsoftomorrow@gmail.com" target="_blank" rel="noopener noreferrer" data-animate>
-                        <img src="images/logo.svg" alt="Artists of Tomorrow Logo" class="social-icon" loading="lazy"> info.artistsoftomorrow@gmail.com
+                        <img src="images/logo.svg" alt="Artists of Tomorrow Logo" class="social-icon" loading="lazy" style="background:#fff;padding:2px;"> info.artistsoftomorrow@gmail.com
                     </a>
                     <a href="https://www.instagram.com/artists.0f.tomorrow/" target="_blank" rel="noopener noreferrer" data-animate>
                         <img src="images/instagram-icon.png" alt="Instagram" class="social-icon" loading="lazy"> Instagram
@@ -166,7 +176,7 @@
                         <img src="images/tiktok-icon.png" alt="TikTok" class="social-icon" loading="lazy"> TikTok
                     </a>
                     <a href="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow" target="_blank" rel="noopener noreferrer" data-animate>
-                        <img src="images/gofundme-icon.png" alt="GoFundMe" class="social-icon" loading="lazy"> Support Us
+                        <img src="images/gofundme-icon.png" alt="GoFundMe" class="social-icon" loading="lazy" style="background:#fff;padding:2px;"> Support Us
                     </a>
                     </div>
                 </div>

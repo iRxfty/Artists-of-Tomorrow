@@ -450,8 +450,10 @@ header .container {
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
-    min-height: 64px;
-    flex-wrap: wrap;
+    height: 80px;
+    /* Increased height for better visibility */
+    flex-wrap: nowrap;
+    /* Prevent wrapping on desktop */
     position: relative;
     gap: 20px;
 }
@@ -596,13 +598,16 @@ header .container {
     justify-content: center;
     gap: 6px;
     width: 34px;
-    height: 28px;
+    height: 34px;
+    /* Matches logo height better */
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
     z-index: 1001;
     position: relative;
+    margin-left: auto;
+    /* Push to the right */
 }
 
 .nav-toggle span {
