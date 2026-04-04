@@ -518,14 +518,14 @@ header .container {
 .header-sister-site {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 20px;
     flex-shrink: 0;
 }
 
 .header-sister-divider {
     color: rgba(0, 0, 0, 0.25);
     font-size: 1.1rem;
-    margin: 0 10px;
+    margin: 0 2px;
     line-height: 1;
     user-select: none;
 }
@@ -538,18 +538,31 @@ header .container {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 700;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.header-lot-link img {
+    transition: transform 0.3s ease;
+}
+
+.header-lot-link:hover img {
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.header-lot-link-text {
     background: linear-gradient(90deg, #1e6fa5 0%, #2a8bbf 30%, #5ab4d6 55%, #c8952a 80%, #d4a843 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    padding-bottom: 5px;
+    display: inline-block;
     position: relative;
+    padding-bottom: 5px;
+    line-height: 1.2;
 }
 
-.header-lot-link:after {
+.header-lot-link-text:after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -562,14 +575,14 @@ header .container {
     transition: transform 0.3s ease;
 }
 
-.header-lot-link:hover:after {
+.header-lot-link:hover .header-lot-link-text:after {
     transform: scaleX(1);
     transform-origin: left;
 }
 
 .header-lot-link:hover {
     opacity: 0.82;
-    transform: translateX(2px);
+    transform: translateX(3px);
 }
 
 .header-lot-badge {
@@ -937,43 +950,16 @@ nav ul li.nav-lot-item>a.nav-lot-link .lot-nav-badge {
     font-size: clamp(2.7rem, 6.5vw, 4.4rem);
     line-height: 1.05;
     margin-bottom: 24px;
-    display: inline-flex;
-    gap: 0.2em;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: inline-block;
     position: relative;
     padding: 0.28em 0.6em;
-    background: linear-gradient(135deg, #E59D83 0%, #C4B5ED 100%);
+    background: linear-gradient(90deg, #E59D83 0%, #C4B5ED 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-.hero h1 .hero-title-word {
-    display: inline-block;
-    position: relative;
-    padding: 0 0.05em;
-    color: inherit;
-    -webkit-text-fill-color: currentColor;
-    text-shadow: none;
-}
-
-.hero h1 .hero-title-word--artists {
-    -webkit-text-fill-color: inherit;
-    text-shadow: none;
-}
-
-.hero h1 .hero-title-word--of {
-    -webkit-text-fill-color: inherit;
-    text-shadow: none;
-}
-
-.hero h1 .hero-title-word--tomorrow {
-    -webkit-text-fill-color: inherit;
-    text-shadow: none;
 }
 
 /* Remove glow behind hero title for cleaner presentation */
@@ -3398,15 +3384,15 @@ footer::before {
     gap: 6px;
     text-decoration: none;
     flex-shrink: 0;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.2s, transform 0.3s ease;
 }
 
-.lot-back-link svg {
-    width: 14px;
-    height: 14px;
-    color: rgba(30, 50, 80, 0.5);
-    flex-shrink: 0;
-    transition: color 0.2s;
+.lot-back-link img {
+    transition: transform 0.3s ease;
+}
+
+.lot-back-link:hover img {
+    transform: rotate(-5deg) scale(1.05);
 }
 
 /* The 'Artists of Tomorrow' text uses the same colorful brand gradient */
@@ -3421,17 +3407,34 @@ footer::before {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
+    position: relative;
+    padding-bottom: 5px;
+    line-height: 1.2;
     letter-spacing: 0.4px;
     white-space: nowrap;
 }
 
-.lot-back-link:hover {
-    opacity: 0.82;
-    transform: translateX(-2px);
+.lot-back-link-text:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #E59D83, #C4B5ED);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
 }
 
-.lot-back-link:hover svg {
-    color: rgba(255, 255, 255, 0.7);
+.lot-back-link:hover .lot-back-link-text:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.lot-back-link:hover {
+    opacity: 0.82;
+    transform: translateX(3px);
 }
 
 /* Vertical divider between back-link and brand */
@@ -3450,6 +3453,19 @@ footer::before {
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.lot-brand a:hover {
+    transform: translateX(3px);
+}
+
+.lot-brand a img {
+    transition: transform 0.3s ease;
+}
+
+.lot-brand a:hover img {
+    transform: rotate(-5deg) scale(1.05);
 }
 
 .lot-brand-icon {
@@ -3469,8 +3485,30 @@ footer::before {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 5px;
+    line-height: 1.2;
     letter-spacing: 0.01em;
     white-space: nowrap;
+}
+
+.lot-brand-text:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #1e6fa5, #d4a843);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.lot-brand a:hover .lot-brand-text:after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 /* LOT Nav */
