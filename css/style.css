@@ -596,9 +596,9 @@ header .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
-    width: 34px;
-    height: 34px;
+    gap: 8px;
+    width: 44px;
+    height: 44px;
     /* Matches logo height better */
     background: transparent;
     border: none;
@@ -613,7 +613,7 @@ header .container {
 .nav-toggle span {
     display: block;
     width: 100%;
-    height: 3px;
+    height: 4px;
     background-color: var(--dark-color);
     border-radius: 999px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -626,7 +626,7 @@ header .container {
 }
 
 .nav-toggle.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(12px) rotate(45deg);
     background-color: var(--primary-color);
 }
 
@@ -635,7 +635,7 @@ header .container {
 }
 
 .nav-toggle.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-12px) rotate(-45deg);
     background-color: var(--primary-color);
 }
 
@@ -3378,7 +3378,19 @@ footer::before {
 }
 
 body:not(.lot-site) .lot-site-header {
-    border-bottom-width: 6px;
+    border-bottom: none;
+}
+
+body:not(.lot-site) .lot-site-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #d4a843, #f5d98a, #d4a843, #e8c86e, #d4a843);
+    background-size: 300% auto;
+    animation: lotGradientSlide 4s linear infinite;
 }
 
 .lot-site-header-inner {
@@ -4343,6 +4355,12 @@ body:not(.lot-site) .lot-site-header {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .lot-site-header-inner {
+        flex-wrap: wrap;
+        position: relative;
+        gap: 20px 0;
+    }
+
     .nav-toggle {
         display: flex;
     }
@@ -4403,7 +4421,7 @@ body:not(.lot-site) .lot-site-header {
     }
 
     .nav-toggle.active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+        transform: translateY(12px) rotate(45deg);
     }
 
     .nav-toggle.active span:nth-child(2) {
@@ -4411,7 +4429,7 @@ body:not(.lot-site) .lot-site-header {
     }
 
     .nav-toggle.active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+        transform: translateY(-12px) rotate(-45deg);
     }
 
     h1 {
