@@ -596,10 +596,10 @@ header .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    width: 64px;
-    height: 64px;
-    /* Matches logo height better */
+    align-items: center;
+    gap: 8px;
+    width: 44px;
+    height: 44px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -607,13 +607,13 @@ header .container {
     z-index: 1001;
     position: relative;
     margin-left: auto;
-    /* Push to the right */
+    flex-shrink: 0;
 }
 
 .nav-toggle span {
     display: block;
-    width: 100%;
-    height: 6px;
+    width: 28px;
+    height: 3px;
     background-color: var(--dark-color);
     border-radius: 999px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -626,7 +626,7 @@ header .container {
 }
 
 .nav-toggle.active span:nth-child(1) {
-    transform: translateY(17px) rotate(45deg);
+    transform: translateY(11px) rotate(45deg);
     background-color: var(--primary-color);
 }
 
@@ -635,7 +635,7 @@ header .container {
 }
 
 .nav-toggle.active span:nth-child(3) {
-    transform: translateY(-17px) rotate(-45deg);
+    transform: translateY(-11px) rotate(-45deg);
     background-color: var(--primary-color);
 }
 
@@ -647,17 +647,18 @@ header .container {
 }
 
 nav {
-    flex-basis: 100%;
-    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.3s ease;
-    order: 3;
     padding: 0;
     margin: 0;
     pointer-events: none;
     opacity: 0;
-    z-index: 1002;
+    z-index: 999;
 }
 
 nav.collapsed {
@@ -669,9 +670,8 @@ nav.expanded {
     animation: menuExpand 0.5s ease;
     padding: 12px 10px 18px;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    margin: 14px 0 0;
     background: rgba(255, 255, 255, 0.98);
-    border-radius: 16px;
+    border-radius: 0 0 16px 16px;
     box-shadow: 0 18px 28px -18px rgba(0, 0, 0, 0.35);
     pointer-events: auto;
     opacity: 1;
@@ -3377,23 +3377,14 @@ footer::before {
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
- .lot-site-header::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: #d4a843;
-}
-
+/* Animated gold bar — AOT pages only (LOT page uses lot-hero::after instead) */
 body:not(.lot-site) .lot-site-header::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 6px;
+    height: 4px;
     background: linear-gradient(90deg, #d4a843, #f5d98a, #d4a843, #e8c86e, #d4a843);
     background-size: 300% auto;
     animation: lotGradientSlide 4s linear infinite;
@@ -3407,6 +3398,7 @@ body:not(.lot-site) .lot-site-header::after {
     align-items: center;
     height: 64px;
     gap: 20px;
+    position: relative;
 }
 
 .lot-back-link {
@@ -3470,8 +3462,8 @@ body:not(.lot-site) .lot-site-header::after {
 
 /* Vertical divider between back-link and brand */
 .lot-header-divider {
-    color: rgba(30, 50, 80, 0.25);
-    font-size: 1.2rem;
+    color: rgba(30, 50, 80, 0.4);
+    font-size: 2rem;
     line-height: 1;
     margin: 0 2px;
     user-select: none;
@@ -3593,26 +3585,28 @@ body:not(.lot-site) .lot-site-header::after {
     display: none;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    width: 64px;
-    height: 64px;
+    align-items: center;
+    gap: 8px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     padding: 0;
     margin-left: auto;
+    flex-shrink: 0;
     z-index: 10;
 }
 
 .lot-nav-toggle span {
     display: block;
-    width: 100%;
-    height: 6px;
+    width: 28px;
+    height: 3px;
     background: var(--lot-navy);
     border-radius: 999px;
     transition: transform 0.3s, opacity 0.3s;
 }
 
 .lot-nav-toggle--active span:nth-child(1) {
-    transform: translateY(17px) rotate(45deg);
+    transform: translateY(11px) rotate(45deg);
 }
 
 .lot-nav-toggle--active span:nth-child(2) {
@@ -3620,7 +3614,7 @@ body:not(.lot-site) .lot-site-header::after {
 }
 
 .lot-nav-toggle--active span:nth-child(3) {
-    transform: translateY(-17px) rotate(-45deg);
+    transform: translateY(-11px) rotate(-45deg);
 }
 
 /* ---- LOT Hero ---- */
@@ -3964,8 +3958,9 @@ body:not(.lot-site) .lot-site-header::after {
 
 .lot-speech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 320px));
     gap: 22px;
+    justify-content: center;
 }
 
 .lot-speech-card {
@@ -4314,8 +4309,23 @@ body:not(.lot-site) .lot-site-header::after {
         font-size: 0.75rem;
     }
 
+    /* Mobile: hide text, show logos only — "logo | logo" layout */
+    .lot-back-link-text,
     .lot-brand-text {
-        font-size: 1.05rem;
+        display: none;
+    }
+
+    .lot-back-link img {
+        margin-right: 0;
+    }
+
+    .lot-header-divider {
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .lot-site-header-inner {
+        gap: 10px;
     }
 
     .lot-hero {
@@ -4362,9 +4372,9 @@ body:not(.lot-site) .lot-site-header::after {
 /* Responsive Design */
 @media (max-width: 768px) {
     .lot-site-header-inner {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         position: relative;
-        gap: 20px 0;
+        gap: 10px;
     }
 
     .lot-site-header-inner>.nav-toggle,
@@ -4434,7 +4444,7 @@ body:not(.lot-site) .lot-site-header::after {
     }
 
     .nav-toggle.active span:nth-child(1) {
-        transform: translateY(17px) rotate(45deg);
+        transform: translateY(11px) rotate(45deg);
     }
 
     .nav-toggle.active span:nth-child(2) {
@@ -4442,7 +4452,7 @@ body:not(.lot-site) .lot-site-header::after {
     }
 
     .nav-toggle.active span:nth-child(3) {
-        transform: translateY(-17px) rotate(-45deg);
+        transform: translateY(-11px) rotate(-45deg);
     }
 
     h1 {
