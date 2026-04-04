@@ -3377,6 +3377,10 @@ footer::before {
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
+body:not(.lot-site) .lot-site-header {
+    border-bottom-width: 6px;
+}
+
 .lot-site-header-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -3406,7 +3410,7 @@ footer::before {
 
 /* The 'Artists of Tomorrow' text uses the same colorful brand gradient */
 .lot-back-link-text {
-    font-family: var(--lot-font-heading);
+    font-family: var(--lot-font-heading, var(--font-heading));
     font-size: 1.5rem;
     font-weight: 700;
     background: linear-gradient(135deg,
@@ -3487,7 +3491,7 @@ footer::before {
 }
 
 .lot-brand-text {
-    font-family: var(--lot-font-heading);
+    font-family: var(--lot-font-heading, var(--font-heading));
     font-size: 1.5rem;
     font-weight: 700;
     background: linear-gradient(90deg, #1e6fa5 0%, #2a8bbf 30%, #5ab4d6 55%, #c8952a 80%, #d4a843 100%);
@@ -3570,24 +3574,27 @@ footer::before {
 .lot-nav-toggle {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 34px;
     cursor: pointer;
-    padding: 6px;
+    padding: 0;
     margin-left: auto;
     z-index: 10;
 }
 
 .lot-nav-toggle span {
     display: block;
-    width: 24px;
-    height: 2.5px;
+    width: 100%;
+    height: 3px;
     background: var(--lot-navy);
-    border-radius: 2px;
+    border-radius: 999px;
     transition: transform 0.3s, opacity 0.3s;
 }
 
 .lot-nav-toggle--active span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
 }
 
 .lot-nav-toggle--active span:nth-child(2) {
@@ -3595,7 +3602,7 @@ footer::before {
 }
 
 .lot-nav-toggle--active span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg);
 }
 
 /* ---- LOT Hero ---- */
