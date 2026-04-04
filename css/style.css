@@ -453,7 +453,7 @@ header .container {
     min-height: 64px;
     flex-wrap: wrap;
     position: relative;
-    gap: 0;
+    gap: 20px;
 }
 
 /* Updated Logo Styles for 1080px x 1080px logo - CIRCULAR */
@@ -1683,6 +1683,7 @@ footer::before {
     align-items: center;
     color: var(--light-color);
     transition: all var(--transition-medium);
+    white-space: nowrap;
 }
 
 .social-links a:hover {
@@ -1696,6 +1697,8 @@ footer::before {
     margin-right: 10px;
     opacity: 0.8;
     transition: all var(--transition-medium);
+    border-radius: 0;
+    object-fit: contain;
 }
 
 .social-links a:hover .social-icon {
@@ -2301,6 +2304,7 @@ footer::before {
     width: 24px;
     height: 24px;
     transition: transform 0.3s ease;
+    border-radius: 0;
 }
 
 .social-row a {
@@ -4334,7 +4338,7 @@ footer::before {
     header .container {
         flex-wrap: wrap;
         position: relative;
-        gap: 6px 0;
+        gap: 20px 0;
     }
 
     nav.expanded {
@@ -4458,6 +4462,17 @@ footer::before {
     }
 }
 
+@media (max-width: 640px) {
+    /* Hide header text labels on narrow screens to keep header height compact */
+    .logo span {
+        display: none;
+    }
+
+    .header-lot-link-text {
+        display: none;
+    }
+}
+
 @media (max-width: 480px) {
     section {
         padding: 50px 0;
@@ -4521,9 +4536,7 @@ footer::before {
     }
 
     .logo span {
-        font-size: 1.3rem;
-        white-space: normal;
-        /* Allow logo text to wrap */
+        display: none;
     }
 
     .footer-logo img {
