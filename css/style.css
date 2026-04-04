@@ -4202,7 +4202,7 @@ footer::before {
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
-    word-break: break-all;
+    white-space: nowrap;
 }
 
 .lot-footer-contact-row:hover {
