@@ -4463,6 +4463,7 @@ footer::before {
 }
 
 @media (max-width: 640px) {
+
     /* Hide header text labels on narrow screens to keep header height compact */
     .logo span {
         display: none;
