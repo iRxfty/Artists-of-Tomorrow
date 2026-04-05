@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Workflow Rule
+
+After completing any feature or significant change, update the relevant sections of this file to reflect what changed — new CSS classes, HTML conventions, page structure decisions, etc.
+
 ## Previewing the Site
 
 No build step — the site is plain HTML/CSS/JS. Serve it locally with:
@@ -34,6 +38,11 @@ There are two CSS files loaded in order on every page:
 - `--font-heading`: `Playfair Display` (serif, for headings)
 - `--font-body`: `Plus Jakarta Sans` (sans-serif, for body copy)
 
+**LOT-specific variables** (scoped to `.lot-site` body class, declared in the same `:root`):
+- `--lot-gold` / `--lot-gold-light` / `--lot-gold-muted` — gold accent palette
+- `--lot-font-heading`: `Playfair Display` (same as AOT heading font)
+- `--lot-white` — off-white for LOT text
+
 When adding new styles, use `style.css` for all rules — there is no separate override file.
 
 ## JavaScript Architecture
@@ -51,6 +60,31 @@ All interactive behaviour lives in `js/main.js` (single `DOMContentLoaded` liste
 
 `js/privacy-notice.js` manages the cookie-consent banner (`.cookie-consent`).  
 `js/clarity-helper.js` wraps Microsoft Clarity event tracking.
+
+## Shared Header
+
+Both AOT and LOT pages use the same `.lot-site-header` / `.lot-site-header-inner` markup. Key implementation notes:
+
+- **`nav` is absolutely positioned** (`position: absolute; top: 100%`) — it is out of the flex row entirely so the hamburger always sits at the far right via `margin-left: auto` on `.nav-toggle`. Do not change `nav` back to a flex member.
+- **Animated gold bar** — rendered via `body:not(.lot-site) .lot-site-header::after` (4px, animated gradient). LOT pages get no header bar; they use `.lot-hero::after` instead. Do not add a generic `.lot-site-header::after` rule or it will double-stack on AOT pages.
+- **Mobile (≤768px)** — `.lot-back-link-text` and `.lot-brand-text` are hidden (`display: none`); only logos and the hamburger show. `.lot-site-header-inner` uses `flex-wrap: nowrap`.
+- **Hamburger dimensions** — `.nav-toggle` / `.lot-nav-toggle`: 44×44px, gap 8px, bars 28×3px. X-animation offsets are `translateY(±11px)` (bar height 3px + gap 8px = 11px).
+
+## Shared Footer (AOT pages)
+
+All AOT pages share an identical footer structure. Key conventions:
+
+- **Quick Links** use class `footer-links` (not `footer-nav`) with a child `<ul class="quick-links-list" data-animate-group>`. Each `<li><a>` carries `data-animate` to pick up the `quickLinkGlow` stagger animation.
+- **"Leaders of Tomorrow" is intentionally absent** from the Quick Links on all AOT pages. Do not re-add it.
+- **Contact section** (`footer-contact` > `social-links`) lists: AOT logo email → Instagram → TikTok → GoFundMe (Support Us). TikTok goes between Instagram and GoFundMe.
+
+## LOT Footer
+
+The `leaders-of-tomorrow.html` footer uses `.lot-site-footer` > `.lot-footer-grid` (4-column). Key conventions:
+
+- **Brand block** uses `images/Toastmasters_2011.png` (48×48px) — not the SVG icon. Do not revert to the inline SVG.
+- **Brand text** (`.lot-footer-brand strong`) is gold (`var(--lot-gold)`), Playfair Display. The tagline (`span`) is 65% white opacity, semibold.
+- **Footer links and contact links** use `var(--lot-font-heading)` (Playfair Display) at 0.92rem, 75% white opacity for a less generic appearance.
 
 ## HTML Page Conventions
 
@@ -109,3 +143,13 @@ sips -s format jpeg -s formatOptions 82 input.png --out output.jpg
 ```
 
 All images in `images/` are served with a 1-year browser cache. See the [Caching](#caching) section for implications when replacing files.
+
+## Leaders of Tomorrow Page
+
+`leaders-of-tomorrow.html` is a separate branded sub-site. Its `<body>` carries class `lot-site`, which scopes all LOT-specific CSS.
+
+**Content decisions (do not revert):**
+- Club Roles cards have no emoji icons — they were removed by design.
+- Speech Categories shows 3 cards only: Impromptu Speaking, Prepared Speech, Table Topics. "Professional Speaking" and "Structured Debate" were removed.
+- Speech grid uses `grid-template-columns: repeat(3, minmax(0, 320px)); justify-content: center` to keep 3 cards centered.
+- "Get in Touch" CTA links to the Google Form (`https://docs.google.com/forms/u/3/d/1w3z-RkzNxWh7RVfrivAXPrXs49yjSOq4Xjlmeb5bdyM/edit`), opens in a new tab.
