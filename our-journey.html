@@ -26,6 +26,12 @@
 
       gtag('config', 'G-K8P4HJ9KY3');
     </script>
+
+    <!-- Leaflet.js 1.9.4 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
     <header class="lot-site-header">
@@ -85,6 +91,42 @@
         <section class="page-header">
             <div class="container" data-animate>
                 <h1>Our Journey in Nathupur</h1>
+            </div>
+        </section>
+
+        <section id="global-map-section" class="global-map-section">
+            <div class="container">
+                <div class="global-map-header" data-animate>
+                    <h2>Our Global Reach</h2>
+                    <p>Currently active in <strong>2 schools</strong> in Nathupur, India &mdash; with <strong>59 partner schools</strong> across Latin America coming soon.</p>
+                </div>
+                <div id="map" role="region" aria-label="Global impact map showing school locations"></div>
+                <div class="map-legend" data-animate>
+                    <span class="map-legend-item map-legend-active">
+                        <img src="images/logo-favicon.png" width="18" height="18" alt="" loading="lazy"> Currently Active (2 schools)
+                    </span>
+                    <span class="map-legend-item map-legend-soon">
+                        <span class="map-legend-dot"></span> Coming Soon (59 schools)
+                    </span>
+                </div>
+                <div class="impact-stats" data-animate>
+                    <div class="impact-stat">
+                        <span class="impact-stat-number">61</span>
+                        <span class="impact-stat-label">Partner Schools</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-stat-number">8</span>
+                        <span class="impact-stat-label">Countries</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-stat-number">2</span>
+                        <span class="impact-stat-label">Active Programs</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-stat-number">500+</span>
+                        <span class="impact-stat-label">Students Impacted</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -446,5 +488,6 @@
     <script src="js/main.js"></script>
     <script src="js/privacy-notice.js"></script>
     <script src="js/clarity-helper.js"></script>
+    <script src="js/map-init.js"></script>
 </body>
 </html>

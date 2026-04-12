@@ -4949,3 +4949,249 @@ body:not(.lot-site) .lot-site-header::after {
         padding: 25px 20px;
     }
 }
+
+/* ============================================================
+   Global Impact Map Section
+   ============================================================ */
+
+.global-map-section {
+    padding: 80px 0;
+    background: var(--peach-light);
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.global-map-header {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    text-align: center;
+}
+
+.global-map-header h2 {
+    margin-bottom: 12px;
+    font-family: var(--font-heading);
+    color: var(--dark-color);
+}
+
+.global-map-header p {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-strong);
+    border: 1px solid var(--light-gray);
+    position: relative;
+    z-index: 0;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.map-legend-dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #aaaaaa;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #aaaaaa;
+    flex-shrink: 0;
+}
+
+/* Leaflet popup — match site typography */
+.leaflet-popup-content-wrapper {
+    background: var(--peach);
+    color: var(--dark-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    font-family: var(--font-body);
+    border: 1px solid var(--light-gray);
+    padding: 0;
+}
+
+.leaflet-popup-content {
+    margin: 14px 18px;
+}
+
+.leaflet-popup-tip {
+    background: var(--peach);
+}
+
+.map-popup-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin: 0 0 6px;
+    line-height: 1.3;
+}
+
+.map-popup-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--salmon-dark);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: var(--font-body);
+    transition: color var(--transition-fast);
+}
+
+.map-popup-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.map-popup-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--light-gray);
+    color: var(--gray);
+    padding: 2px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.leaflet-marker-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Golden accent underline for map section heading — inspired by Stitch design system */
+.global-map-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--salmon), var(--salmon-dark));
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+/* Impact Statistics Bar */
+.impact-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.impact-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 32px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(229, 157, 131, 0.1);
+    min-width: 150px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.impact-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.impact-stat-number {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    line-height: 1.1;
+    letter-spacing: var(--letter-spacing-heading);
+}
+
+.impact-stat-label {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .global-map-section {
+        padding: 60px 0;
+    }
+
+    #map {
+        height: 380px;
+    }
+
+    .map-legend {
+        gap: 16px;
+    }
+
+    .impact-stats {
+        gap: 16px;
+    }
+
+    .impact-stat {
+        padding: 20px 24px;
+        min-width: 130px;
+    }
+
+    .impact-stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #map {
+        height: 300px;
+        border-radius: 8px;
+    }
+
+    .global-map-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .map-legend {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .impact-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .impact-stat {
+        padding: 16px 12px;
+        min-width: 0;
+    }
+
+    .impact-stat-number {
+        font-size: 1.6rem;
+    }
+
+    .impact-stat-label {
+        font-size: 0.75rem;
+    }
+}
