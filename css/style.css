@@ -299,20 +299,19 @@ h2 {
     margin-bottom: 2rem;
 }
 
-h2:after {
+h2:after,
+.section-header h2:after,
+.support-cta h2:after,
+h2.text-center:after {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%;
     bottom: 0;
+    transform: translateX(-50%);
     width: 60px;
     height: 3px;
     background-color: var(--primary-color);
     transition: width var(--transition-medium);
-}
-
-h2.text-center:after {
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 h2:hover:after {
@@ -1517,11 +1516,13 @@ footer::before {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 30px;
 }
 
 /* Updated Footer Logo for circular logo */
 .footer-logo {
+    flex: 1;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -1548,6 +1549,30 @@ footer::before {
     letter-spacing: 0.02em;
 }
 
+.footer-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-contact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 40px;
+}
+
+.footer-contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: fit-content;
+}
+
 .footer-links h4,
 .footer-contact h4 {
     color: var(--white);
@@ -1559,7 +1584,18 @@ footer::before {
     font-weight: 600;
 }
 
-.footer-links h4::after,
+.footer-links h4::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-medium);
+}
+
 .footer-contact h4::after {
     content: '';
     position: absolute;
@@ -1679,6 +1715,7 @@ footer::before {
 .social-links {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
     margin-top: 15px;
 }
