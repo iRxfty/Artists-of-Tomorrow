@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey | Artists of Tomorrow</title>
+    <meta name="description" content="Discover how Artists of Tomorrow partners with schools in Nathupur to uplift young artists.">
+    <link rel="icon" href="images/logo-favicon.png" type="image/png">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Newsreader:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap">
+
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "scsvrz0zyk");
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K8P4HJ9KY3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K8P4HJ9KY3');
+    </script>
+
+    <!-- Leaflet.js 1.9.4 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <header class="lot-site-header">
+        <div class="lot-site-header-inner">
+            <!-- AOT Logo Link -->
+            <a href="index.html" class="lot-back-link" aria-label="Artists of Tomorrow">
+                <img src="images/logo.svg" alt="Artists of Tomorrow Logo" style="height: 40px; width: auto; object-fit: contain; margin-right: 6px;">
+                <span class="lot-back-link-text">Artists of Tomorrow</span>
+            </a>
+
+            <span class="lot-header-divider" aria-hidden="true">|</span>
+
+            <!-- LOT Logo Link -->
+            <div class="lot-brand">
+                <a href="leaders-of-tomorrow.html" aria-label="Leaders of Tomorrow">
+                    <span class="lot-brand-icon" aria-hidden="true">
+                        <img src="images/Toastmasters_2011.png" alt="Toastmasters Logo"
+                            style="width:42px;height:42px;object-fit:contain;">
+                    </span>
+                    <span class="lot-brand-text">Leaders of Tomorrow</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle — three lines for dropdown -->
+            <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- AOT Main Navigation -->
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="our-journey.html" class="active">Our Journey</a></li>
+                    <li><a href="competition.html">Competition</a></li>
+                    <li><a href="founders.html">Founders</a></li>
+                    <li><a href="support.html">Support Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <section class="page-header">
+            <div class="container" data-animate>
+                <h1>Our Journey in Nathupur</h1>
+            </div>
+        </section>
+
+        <section id="global-map-section" class="global-map-section">
+            <div class="container">
+                <div class="global-map-header editorial-header" data-animate>
+                    <h2>Our Global Reach</h2>
+                    <p>Currently active in <strong>2 schools</strong> in Nathupur, India &mdash; with <strong>59 partner schools</strong> across Latin America coming soon.</p>
+                </div>
+                <div id="map" role="region" aria-label="Global impact map showing school locations"></div>
+                <div class="map-legend" data-animate>
+                    <span class="map-legend-item map-legend-active">
+                        <img src="images/logo-favicon.png" width="18" height="18" alt="" loading="lazy"> Currently Active (2 schools)
+                    </span>
+                    <span class="map-legend-item map-legend-soon">
+                        <span class="map-legend-dot"></span> Coming Soon (59 schools)
+                    </span>
+                </div>
+                <div class="impact-stats" data-animate>
+                    <div class="impact-stat editorial-layer">
+                        <span class="impact-stat-number">61</span>
+                        <span class="impact-stat-label">Partner Schools</span>
+                    </div>
+                    <div class="impact-stat editorial-layer">
+                        <span class="impact-stat-number">8</span>
+                        <span class="impact-stat-label">Countries</span>
+                    </div>
+                    <div class="impact-stat editorial-layer">
+                        <span class="impact-stat-number">2</span>
+                        <span class="impact-stat-label">Active Programs</span>
+                    </div>
+                    <div class="impact-stat editorial-layer">
+                        <span class="impact-stat-number">500+</span>
+                        <span class="impact-stat-label">Students Impacted</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey-intro">
+            <div class="container" data-animate>
+                <p>Artists of Tomorrow partners with schools in Nathupur to create vibrant, student-centered art programs. Together with educators, community leaders, and volunteers, we design spaces where every young person can explore creativity, practice storytelling, and feel seen.</p>
+            </div>
+        </section>
+
+        <section class="journey-section" id="middle-school">
+            <div class="container">
+                <div class="journey-header editorial-header" data-animate>
+                    <h2>Government Senior Secondary School, Nathupur &mdash; Middle School</h2>
+                    <p>The middle school partnership focuses on giving emerging artists the confidence to experiment, reflect, and share their unique perspectives.</p>
+                </div>
+                
+                <div class="journey-subsection journey-subsection--team" data-animate>
+                    <h3>Competition Team</h3>
+                    <p class="journey-subsection-lead">Meet the competition organizer and judges championing the middle school division.</p>
+                    <div class="team-grid" data-animate-group>
+                        <article class="team-card coordinator editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/poonam.jpeg" alt="Photo of Poonam Yadav" loading="lazy">
+                            </div>
+                            <h4>Poonam Yadav</h4>
+                            <p class="team-role">Competition Organizer &middot; Middle School Division</p>
+                            <p>Poonam Yadav is a Gurugram-based artist and art teacher who has practiced for 15 years. She works to merge emotion with vibrant colours on her own canvases and in her students' work, guided by the influence of folk and contemporary art.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/vandanakothari.jpeg" alt="Photo of Vandana Kothari" loading="lazy">
+                            </div>
+                            <h4>Vandana Kothari</h4>
+                            <p class="team-role">Judge &middot; Middle School Panel</p>
+                            <p>Vandana Kothari (b. 1978) is an Indian artist based in Gurgaon. Holding a Master's in History of Art from Visva-Bharati, Santiniketan, and a Bachelor's in Painting from the University of Rajasthan, she explores questions of identity, belonging, and visual language through abstraction and symbolic form.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/deepak.jpeg" alt="Photo of Deepak" loading="lazy">
+                            </div>
+                            <h4>Deepak</h4>
+                            <p class="team-role">Judge &middot; Middle School Panel</p>
+                            <p>Deepak is an enthusiastic and passionate TGT art teacher from GSSS Nathupur in Gurugram, Haryana. He believes in art and culture and aims to preserve the essence of Haryanvi culture and art forms with the young generation.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/shweta.jpeg" alt="Photo of Shweta" loading="lazy">
+                            </div>
+                            <h4>Shweta</h4>
+                            <p class="team-role">Judge &middot; Middle School Panel</p>
+                            <p>Shweta is a fine art lecturer in Gurugram. An art lover and educator, she nurtures creativity among students, stays actively involved in creative projects, and feels happy witnessing the talent of young artists.</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="journey-subsection journey-subsection--winners" data-animate>
+                    <h3>Winner Gallery</h3>
+                    <div class="winner-grid" data-animate-group>
+                        <article class="winner-card first-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/1stPlaceMiddleSchool.jpg" alt="Artwork by the 1st place middle school winner" loading="lazy">
+                            </div>
+                            <h4>1st Place</h4>
+                        </article>
+                        <article class="winner-card second-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/2ndPlaceMiddleSchool.jpeg" alt="Artwork by the 2nd place middle school winner" loading="lazy">
+                            </div>
+                            <h4>2nd Place</h4>
+                        </article>
+                        <article class="winner-card third-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/3rdPlaceMiddleSchool.jpg" alt="Artwork by the 3rd place middle school winner" loading="lazy">
+                            </div>
+                            <h4>3rd Place</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/1stHonorableMentionMiddleSchool.jpeg" alt="Artwork recognized with honorable mention in the middle school competition" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 1</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/2ndHonorableMentionMiddleSchool.jpeg" alt="Artwork highlighted as an honorable mention in the middle school competition" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 2</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/3rdHonorableMentionMiddleSchool.jpeg" alt="Artwork earning honorable mention recognition in the middle school competition" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 3</h4>
+                        </article>
+                    </div>
+                    <div class="photo-gallery" data-animate>
+                        <h4>Photo Gallery</h4>
+                        <div class="photo-carousel" data-carousel>
+                            <button class="carousel-control carousel-control--prev" type="button" aria-label="Scroll to previous middle school photos" data-carousel-prev>
+                                <span aria-hidden="true">&#10094;</span>
+                            </button>
+                            <div class="carousel-track" data-carousel-track tabindex="0" aria-label="Middle school competition photo gallery">
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/1stHonorableMentionHighSchoolDisplay.jpeg" alt="Competition photo 1 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/1stHonorableMentionMiddleSchoolDisplay.jpeg" alt="Competition photo 2 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/1stPlaceHighSchoolDisplay.jpeg" alt="Competition photo 3 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/1stPlaceMiddleSchoolDisplay.jpg" alt="Competition photo 4 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/2ndHonorableMentionHighSchoolDisplay.jpeg" alt="Competition photo 5 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/2ndHonorableMentionMiddleSchoolDisplay.jpeg" alt="Competition photo 6 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/2ndPlaceHighSchoolDisplay.jpeg" alt="Competition photo 7 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/2ndPlaceMiddleSchoolDisplay.jpeg" alt="Competition photo 8 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/3rdHonorableMentionHighSchoolDisplay.jpeg" alt="Competition photo 9 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/3rdHonorableMentionMiddleSchoolDisplay.jpeg" alt="Competition photo 10 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/3rdPlaceHighSchoolDisplay.jpeg" alt="Competition photo 11 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/3rdPlaceMiddleSchoolDisplay.jpg" alt="Competition photo 12 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-19-27.jpg" alt="Competition photo 13 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-19-28.jpg" alt="Competition photo 14 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-19.jpg" alt="Competition photo 15 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-20%202.jpg" alt="Competition photo 16 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-20%203.jpg" alt="Competition photo 17 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-20.jpg" alt="Competition photo 18 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-21%202.jpg" alt="Competition photo 19 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-21.jpg" alt="Competition photo 20 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-22%202.jpg" alt="Competition photo 21 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-22%203.jpg" alt="Competition photo 22 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-22.jpg" alt="Competition photo 23 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-23%202.jpg" alt="Competition photo 24 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-23%203.jpg" alt="Competition photo 25 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-23.jpg" alt="Competition photo 26 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-24.jpg" alt="Competition photo 27 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-25.jpg" alt="Competition photo 28 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-26%202.jpg" alt="Competition photo 29 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-26%203.jpg" alt="Competition photo 30 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-26.jpg" alt="Competition photo 31 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-27%202.jpg" alt="Competition photo 32 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-27%203.jpg" alt="Competition photo 33 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-27.jpg" alt="Competition photo 34 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-56-28.jpg" alt="Competition photo 35 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-06-57-22.jpg" alt="Competition photo 36 from Nathupur event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-53-22.jpg" alt="Competition photo 37 from Nathupur event" loading="lazy"></figure>
+                            </div>
+                            <button class="carousel-control carousel-control--next" type="button" aria-label="Scroll to next middle school photos" data-carousel-next>
+                                <span aria-hidden="true">&#10095;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey-section journey-section--alt" id="high-school">
+            <div class="container">
+                <div class="journey-header editorial-header" data-animate>
+                    <h2>Government Senior Secondary School, Nathupur &mdash; High School</h2>
+                    <p>The high school program builds on early confidence to help students develop portfolios, leadership skills, and future-ready opportunities.</p>
+                </div>
+                
+                <div class="journey-subsection journey-subsection--team" data-animate>
+                    <h3>Competition Team</h3>
+                    <p class="journey-subsection-lead">Get to know the competition organizer and judges supporting our high school artists.</p>
+                    <div class="team-grid" data-animate-group>
+                        <article class="team-card coordinator editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/poonam.jpeg" alt="Photo of Poonam Yadav" loading="lazy">
+                            </div>
+                            <h4>Poonam Yadav</h4>
+                            <p class="team-role">Competition Organizer &middot; High School Division</p>
+                            <p>Poonam Yadav is a Gurugram-based artist and art teacher who has practiced for 15 years. She works to merge emotion with vibrant colours on her own canvases and in her students' work, guided by the influence of folk and contemporary art.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/vandanakothari.jpeg" alt="Photo of Vandana Kothari" loading="lazy">
+                            </div>
+                            <h4>Vandana Kothari</h4>
+                            <p class="team-role">Judge &middot; High School Panel</p>
+                            <p>Vandana Kothari (b. 1978) is an Indian artist based in Gurgaon. She holds a Master's in History of Art from Visva-Bharati, Santiniketan, and a Bachelor's in Painting from the University of Rajasthan. Her practice examines identity, belonging, and visual language, supported by exhibitions at Nature Morte, recognition as a Glenfiddich Emerging Artist finalist (2017), the WADE India Artists Award (2016), and her role as Professor of Art at the School of Planning and Architecture, New Delhi.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/deepak.jpeg" alt="Photo of Deepak" loading="lazy">
+                            </div>
+                            <h4>Deepak</h4>
+                            <p class="team-role">Judge &middot; High School Panel</p>
+                            <p>Deepak is an enthusiastic and passionate TGT art teacher from GSSS Nathupur in Gurugram, Haryana. He believes in art and culture and aims to preserve the essence of Haryanvi culture and art forms with the young generation.</p>
+                        </article>
+                        <article class="team-card judge editorial-layer" data-animate>
+                            <div class="team-photo">
+                                <img src="images/shweta.jpeg" alt="Photo of Shweta" loading="lazy">
+                            </div>
+                            <h4>Shweta</h4>
+                            <p class="team-role">Judge &middot; High School Panel</p>
+                            <p>Shweta is a fine art lecturer in Gurugram. An art lover and educator, she nurtures creativity among students, stays actively involved in creative projects, and feels happy witnessing the talent of young artists.</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="journey-subsection journey-subsection--winners" data-animate>
+                    <h3>Winner Gallery</h3>
+                    <div class="winner-grid" data-animate-group>
+                        <article class="winner-card first-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/1stPlaceHighSchool.jpeg" alt="Artwork from the first-place high school winner" loading="lazy">
+                            </div>
+                            <h4>1st Place</h4>
+                        </article>
+                        <article class="winner-card second-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/2ndPlaceHighSchool.jpeg" alt="Artwork from the second-place high school winner" loading="lazy">
+                            </div>
+                            <h4>2nd Place</h4>
+                        </article>
+                        <article class="winner-card third-place editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/3rdPlaceHighSchool.jpeg" alt="Artwork from the third-place high school winner" loading="lazy">
+                            </div>
+                            <h4>3rd Place</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/1stHonorableMentionHighSchool.jpeg" alt="Artwork from the honorable mention high school artist" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 1</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/2ndHonorableMentionHighSchool.jpeg" alt="Artwork from the second honorable mention high school artist" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 2</h4>
+                        </article>
+                        <article class="winner-card honorable-mention editorial-layer" data-animate>
+                            <div class="winner-image">
+                                <img src="images/3rdHonorableMentionHighSchool.jpeg" alt="Artwork from the third honorable mention high school artist" loading="lazy">
+                            </div>
+                            <h4>Honorable Mention 3</h4>
+                        </article>
+                    </div>
+                    <div class="photo-gallery" data-animate>
+                        <h4>Photo Gallery</h4>
+                        <div class="photo-carousel" data-carousel>
+                            <button class="carousel-control carousel-control--prev" type="button" aria-label="Scroll to previous high school photos" data-carousel-prev>
+                                <span aria-hidden="true">&#10094;</span>
+                            </button>
+                            <div class="carousel-track" data-carousel-track tabindex="0" aria-label="High school competition photo gallery">
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-53-23%202.jpg" alt="Competition photo 1 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-53-23.jpg" alt="Competition photo 2 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-20%202.jpg" alt="Competition photo 3 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-20.jpg" alt="Competition photo 4 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-21%202.jpg" alt="Competition photo 5 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-21%203.jpg" alt="Competition photo 6 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-21.jpg" alt="Competition photo 7 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-32%202.jpg" alt="Competition photo 8 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-32.jpg" alt="Competition photo 9 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-33%202.jpg" alt="Competition photo 10 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-33%203.jpg" alt="Competition photo 11 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-33.jpg" alt="Competition photo 12 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-34%202.jpg" alt="Competition photo 13 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-34.jpg" alt="Competition photo 14 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-35%202.jpg" alt="Competition photo 15 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-35%203.jpg" alt="Competition photo 16 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-35.jpg" alt="Competition photo 17 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-36%202.jpg" alt="Competition photo 18 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-36%203.jpg" alt="Competition photo 19 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-36.jpg" alt="Competition photo 20 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-37%202.jpg" alt="Competition photo 21 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-37%203.jpg" alt="Competition photo 22 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-37.jpg" alt="Competition photo 23 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-38%203.jpg" alt="Competition photo 24 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-39%202.jpg" alt="Competition photo 25 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-39.jpg" alt="Competition photo 26 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-40%202.jpg" alt="Competition photo 27 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-40%203.jpg" alt="Competition photo 28 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-09-55-40.jpg" alt="Competition photo 29 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-10-12-31.jpg" alt="Competition photo 30 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-10-43-01.jpg" alt="Competition photo 31 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-11-47-13.jpg" alt="Competition photo 32 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-11-47-14%202.jpg" alt="Competition photo 33 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-11-47-14.jpg" alt="Competition photo 34 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-11-47-15.jpg" alt="Competition photo 35 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-12-34-54.jpg" alt="Competition photo 36 from Nathupur high school event" loading="lazy"></figure>
+                                <figure class="carousel-item archival-card"><img src="images/compnathupur/PHOTO-2025-09-24-12-35-11.jpg" alt="Competition photo 37 from Nathupur high school event" loading="lazy"></figure>
+                            </div>
+                            <button class="carousel-control carousel-control--next" type="button" aria-label="Scroll to next high school photos" data-carousel-next>
+                                <span aria-hidden="true">&#10095;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="journey-callout" data-animate>
+                    <p>Help us continue this journey by supporting classroom resources and celebrating student achievements.</p>
+                    <div class="journey-actions">
+                        <a href="support.html" class="cta-button">Support Us</a>
+                        <a href="competition.html" class="secondary-button">Explore the Competition</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="gallery-modal" data-gallery-modal aria-hidden="true">
+        <div class="gallery-modal__overlay" data-gallery-close></div>
+        <div class="gallery-modal__inner" role="dialog" aria-modal="true" aria-label="Enlarged gallery image">
+            <button class="gallery-modal__close" type="button" data-gallery-close aria-label="Close gallery view">&times;</button>
+            <button class="gallery-modal__nav gallery-modal__nav--prev" type="button" data-gallery-prev aria-label="View previous photo">
+                <span aria-hidden="true">&#10094;</span>
+            </button>
+            <figure class="gallery-modal__figure">
+                <img src="" alt="" data-gallery-image>
+                <figcaption data-gallery-caption></figcaption>
+            </figure>
+            <button class="gallery-modal__nav gallery-modal__nav--next" type="button" data-gallery-next aria-label="View next photo">
+                <span aria-hidden="true">&#10095;</span>
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content" data-animate-group>
+                <div class="footer-logo" data-animate>
+                    <img src="images/logo.svg" alt="Artists of Tomorrow Logo" loading="lazy">
+                    <span>Artists of Tomorrow</span>
+                </div>
+                <div class="footer-links" data-animate>
+                    <h4>Quick Links</h4>
+                    <ul class="quick-links-list" data-animate-group>
+                        <li><a href="index.html" data-animate>Home</a></li>
+                        <li><a href="about.html" data-animate>About</a></li>
+                        <li><a href="our-journey.html" data-animate>Our Journey</a></li>
+                        <li><a href="competition.html" data-animate>Competition</a></li>
+                        <li><a href="founders.html" data-animate>Founders</a></li>
+                        <li><a href="support.html" data-animate>Support Us</a></li>
+                        <li><a href="contact.html" data-animate>Contact</a></li>
+                        <li><a href="privacy.html" data-animate>Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact" data-animate>
+                    <div class="footer-contact-wrapper">
+                        <h4>Contact Us</h4>
+                        <div class="social-links">
+                            <a href="mailto:info.artistsoftomorrow@gmail.com" target="_blank" rel="noopener noreferrer" data-animate>
+                                <img src="images/logo.svg" alt="Artists of Tomorrow Logo" class="social-icon" loading="lazy" style="background:#fff;padding:2px;"> info.artistsoftomorrow@gmail.com
+                            </a>
+                            <a href="https://www.instagram.com/artists.0f.tomorrow/" target="_blank" rel="noopener noreferrer" data-animate>
+                                <img src="images/instagram-icon.png" alt="Instagram" class="social-icon" loading="lazy"> Instagram
+                            </a>
+                            <a href="https://www.tiktok.com/@artists.of.tomorrow" target="_blank" rel="noopener noreferrer" data-animate>
+                                <img src="images/tiktok-icon.png" alt="TikTok" class="social-icon" loading="lazy"> TikTok
+                            </a>
+                            <a href="https://www.gofundme.com/f/myzxfn-artists-of-tomorrow" target="_blank" rel="noopener noreferrer" data-animate>
+                                <img src="images/gofundme-icon.png" alt="GoFundMe" class="social-icon" loading="lazy" style="background:#fff;padding:2px;"> Support Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Artists of Tomorrow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/privacy-notice.js"></script>
+    <script src="js/clarity-helper.js"></script>
+    <script src="js/map-init.js"></script>
+</body>
+</html>
