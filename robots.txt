@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and config files
+Disallow: /.github/
+Disallow: /.agents/
+Disallow: /.claude/
+
+Sitemap: https://artistsoftomorrow.org/sitemap.xml
