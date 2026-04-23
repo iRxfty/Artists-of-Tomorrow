@@ -4996,42 +4996,160 @@ body:not(.lot-site) .lot-site-header::after {
 }
 
 .map-legend-item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-family: var(--font-body);
     font-size: 0.85rem;
-    color: var(--gray);
+    color: var(--dark-color);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--light-gray);
+}
+
+/* Active legend item — show a mini version of the new active marker */
+.map-legend-active img {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    padding: 2px;
+    background: #fff;
+    box-shadow: 0 0 0 2px var(--salmon, #E59D83);
 }
 
 .map-legend-dot {
     display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #E59D83;
+    /* AOT coral */
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1.5px #E59D83;
+    flex-shrink: 0;
+}
+
+/* ── Active marker (divIcon) ─────────────────────────────────────────── */
+.aot-active-marker {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    pointer-events: auto;
+}
+
+.aot-active-marker__dot {
+    position: absolute;
+    inset: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(143, 63, 38, 0.35), 0 0 0 2px #E59D83;
+    z-index: 3;
+    transition: transform 160ms ease;
+}
+
+.aot-active-marker__dot img {
     width: 14px;
     height: 14px;
+    object-fit: contain;
+    display: block;
+}
+
+.aot-active-marker__ring {
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
-    background: #aaaaaa;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #aaaaaa;
-    flex-shrink: 0;
+    border: 2px solid rgba(229, 157, 131, 0.55);
+    z-index: 2;
+}
+
+.aot-active-marker__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(229, 157, 131, 0.55);
+    z-index: 1;
+    animation: aot-marker-pulse 2.4s ease-out infinite;
+}
+
+@keyframes aot-marker-pulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.7;
+    }
+
+    80% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+.aot-active-marker:hover .aot-active-marker__dot {
+    transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aot-active-marker__pulse {
+        animation: none;
+    }
+}
+
+/* Cluster halos — faint coral wash behind dense country clusters */
+.aot-cluster-halo {
+    mix-blend-mode: multiply;
+}
+
+/* Coming-soon circleMarker transition feel */
+.leaflet-interactive {
+    transition: fill 160ms ease, stroke 160ms ease;
 }
 
 /* Leaflet popup — match site typography */
 .leaflet-popup-content-wrapper {
-    background: var(--peach);
+    background: #fff;
     color: var(--dark-color);
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(143, 63, 38, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
     font-family: var(--font-body);
-    border: 1px solid var(--light-gray);
+    border: 1px solid rgba(229, 157, 131, 0.35);
     padding: 0;
+    overflow: hidden;
 }
 
 .leaflet-popup-content {
-    margin: 14px 18px;
+    margin: 14px 16px 14px;
+    min-width: 200px;
 }
 
 .leaflet-popup-tip {
-    background: var(--peach);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(143, 63, 38, 0.12);
+}
+
+.map-popup-eyebrow,
+.map-popup-country {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--salmon-dark, #B86A4E);
+    margin-bottom: 6px;
+}
+
+.map-popup-country {
+    color: var(--gray);
 }
 
 .map-popup-title {
@@ -5039,8 +5157,21 @@ body:not(.lot-site) .lot-site-header::after {
     font-size: 1rem;
     font-weight: 700;
     color: var(--dark-color);
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     line-height: 1.3;
+}
+
+.map-popup-image {
+    margin: 4px 0 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(229, 157, 131, 0.25);
+}
+
+.map-popup-image img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .map-popup-link {
@@ -5064,18 +5195,49 @@ body:not(.lot-site) .lot-site-header::after {
 
 .map-popup-badge {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: var(--light-gray);
-    color: var(--gray);
-    padding: 2px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(229, 157, 131, 0.15);
+    color: var(--salmon-dark, #B86A4E);
+    border: 1px solid rgba(229, 157, 131, 0.35);
+    padding: 3px 10px;
     border-radius: 100px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
-.leaflet-marker-icon {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+.map-popup-link {
+    margin-top: 4px;
+}
+
+/* Zoom control — match site rounded/soft aesthetic */
+.leaflet-bar a,
+.leaflet-bar a:hover {
+    background: #fff;
+    color: var(--dark-color);
+    border-bottom: 1px solid rgba(229, 157, 131, 0.25);
+}
+
+.leaflet-bar a:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.leaflet-bar a:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom: none;
+}
+
+.leaflet-bar {
+    box-shadow: 0 4px 12px rgba(143, 63, 38, 0.15);
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.leaflet-bar a:hover {
+    color: var(--salmon-dark, #B86A4E);
 }
 
 /* Golden accent underline for map section heading — inspired by Stitch design system */
@@ -5205,18 +5367,22 @@ body:not(.lot-site) .lot-site-header::after {
 
 .editorial-layer {
     background-color: var(--white);
-    box-shadow: 0px 12px 32px rgba(137, 79, 58, 0.08); /* Sunlit shadow */
+    box-shadow: 0px 12px 32px rgba(137, 79, 58, 0.08);
+    /* Sunlit shadow */
     border: none !important;
-    border-radius: 16px 24px 16px 24px; /* Asymmetric corners for organic feel */
+    border-radius: 16px 24px 16px 24px;
+    /* Asymmetric corners for organic feel */
 }
 
 /* Overriding old rigid borders */
-.team-card.editorial-layer, .winner-card.editorial-layer {
+.team-card.editorial-layer,
+.winner-card.editorial-layer {
     background: #ffffff;
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 }
 
-.team-card.editorial-layer:hover, .winner-card.editorial-layer:hover {
+.team-card.editorial-layer:hover,
+.winner-card.editorial-layer:hover {
     transform: translateY(-8px);
     box-shadow: 0px 20px 40px rgba(137, 79, 58, 0.15);
 }
@@ -5237,7 +5403,8 @@ body:not(.lot-site) .lot-site-header::after {
 
 .editorial-header h2:after {
     height: 4px;
-    background-color: #D4A853; /* Golden accent */
+    background-color: #D4A853;
+    /* Golden accent */
     border-radius: 2px;
 }
 
@@ -5253,9 +5420,12 @@ body:not(.lot-site) .lot-site-header::after {
 
 .archival-card {
     background-color: #ffffff;
-    padding: 16px; /* Archival museum-mount border effect */
-    border-radius: 32px 0px 32px 0px; /* Asymmetrical print roundness */
-    box-shadow: 0px 16px 40px rgba(137, 79, 58, 0.08); /* Soft Sunlit shadow */
+    padding: 16px;
+    /* Archival museum-mount border effect */
+    border-radius: 32px 0px 32px 0px;
+    /* Asymmetrical print roundness */
+    box-shadow: 0px 16px 40px rgba(137, 79, 58, 0.08);
+    /* Soft Sunlit shadow */
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
     overflow: hidden;
     position: relative;
@@ -5279,7 +5449,8 @@ body:not(.lot-site) .lot-site-header::after {
 
 .archival-card:hover img {
     filter: grayscale(0%);
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05);
+    /* Slight zoom on hover */
 }
 
 /* Adjust the native carousel track for spacing */
